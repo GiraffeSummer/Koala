@@ -1,6 +1,8 @@
 import { BaseCommandInteraction, Client } from "discord.js";
-import { Command } from "../src/Command";
+import { Command } from "../../src/Command";
 
+
+//just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
     name: "hello",
     description: "Returns a greeting",
