@@ -29,7 +29,7 @@ export default {
         if (attachment == null) return;
 
         const postData = FileInfo(attachment.url);
-        console.log(postData)
+
         const body: any = (await fetch('https://www.betafaceapi.com/api/v2/media', {
             method: METHODS.POST,
             //@ts-ignore
