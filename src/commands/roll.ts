@@ -22,7 +22,7 @@ export default {
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const dice = interaction.options.get('d')?.value as number || null
         const amount = interaction.options.get('amount')?.value as number || 1
-        let out: any = { multi: amount > 1 }
+        let out: any = { multi: (amount > 1) }
 
         if (out.multi) {
             let results = []
@@ -30,10 +30,10 @@ export default {
                 results.push(RandomNum(dice, 1));
             }
 
-            out = { result: results, total: results.reduce((a, b) => a + b, 0) };
+            out = { ...out, result: results, total: results.reduce((a, b) => a + b, 0) };
         } else {
             let result = RandomNum(dice, 1);
-            out = { result, total: result };
+            out = { ...out, result, total: result };
         }
         out.roll = { amount, dice };
 
