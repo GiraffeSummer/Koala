@@ -1,6 +1,6 @@
 import { BaseCommandInteraction, Client } from "discord.js";
 import { Command } from "../../src/Command";
-
+import Embed from '../lib/Embed'
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
@@ -13,7 +13,8 @@ export default {
         description: 'What food do you like?'
     }],
     run: async (client: Client, interaction: BaseCommandInteraction) => {
-        const content = "Hello there!" + ` ${interaction.options.get('food')?.value || ''}`;
+        const value = interaction.options.get('define')?.value as string || null
+        const content = "Hello there!" + ` ${value}`;
 
         await interaction.followUp({
             ephemeral: true,
