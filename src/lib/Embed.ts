@@ -50,6 +50,11 @@ export default class Embed {
         return this;
     }
 
+    setColorRaw(col: number) {
+        this.color = col;
+        return this;
+    }
+
     setAuthor(name: string,
         url: string,
         icon_url: string) {

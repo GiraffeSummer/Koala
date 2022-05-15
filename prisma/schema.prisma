@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model aboutus {
+  id       String  @id @db.VarChar(20)
+  nickname String? @db.VarChar(100)
+  order    Int?    @default(999)
+  jobs     String? @db.VarChar(100)
+  details  String? @db.VarChar(255)
+}
+
+model badge_inventory {
+  id      Int     @id @default(autoincrement())
+  userid  String? @db.VarChar(45)
+  badgeid Int?
+}
+
+model badges {
+  id          Int     @id @default(autoincrement())
+  name        String? @db.VarChar(100)
+  badge       String? @db.VarChar(100)
+  description String? @db.VarChar(255)
+}
+
+model commandlog {
+  id          String    @id @db.VarChar(45)
+  serverid    String    @db.VarChar(45)
+  channelid   String    @db.VarChar(45)
+  userid      String    @db.VarChar(45)
+  channelname String?   @db.VarChar(100)
+  message     String?   @db.LongText
+  timestamp   DateTime? @db.DateTime(0)
+  attachments String?   @db.LongText
+}
+
+model commands {
+  id            Int      @id @default(autoincrement()) @map("_id")
+  active        Boolean? @default(true)
+  command       String?  @db.VarChar(100)
+  description   String?  @db.Text
+  command_usage String?  @db.Text
+  nsfw          Boolean? @default(false)
+  admin         Boolean? @default(false)
+  serveradmin   Boolean? @default(false)
+  aliases       String?  @db.VarChar(200)
+}
+
+model fortune {
+  id           Int     @id @default(autoincrement())
+  fortune_line String? @db.VarChar(255)
+}
+
+model item_inventory {
+  id     Int     @id @default(autoincrement())
+  userid String? @db.VarChar(45)
+  itemid Int?
+  amount Int?
+}
+
+model items {
+  id     Int     @id @default(autoincrement())
+  name   String? @db.VarChar(100)
+  symbol String? @db.VarChar(100)
+}
+
+model magic8 {
+  id      Int     @id @default(autoincrement())
+  message String? @db.VarChar(100)
+}
+
+model pickup {
+  id          Int      @id @default(autoincrement())
+  pickup      String?  @db.Text
+  includename Boolean? @default(false)
+}
+
+model servers {
+  id                  String   @id @db.VarChar(45)
+  name                String?  @db.LongText
+  prefix              String?  @default("!") @db.VarChar(45)
+  lvlmessages         Boolean? @default(true)
+  levelchannel        String?  @db.VarChar(45)
+  repTimeout          Int?     @default(72000)
+  joinLeaveMsg        Boolean? @default(false)
+  joinLeaveChannel    String?  @db.VarChar(45)
+  adminLogging        Boolean? @default(false)
+  adminLoggingChannel String?  @db.VarChar(45)
+  autorole            String?  @db.VarChar(45)
+  censorlvlmessage    Boolean? @default(false)
+  warnkick            Boolean? @default(false)
+  warnkicks           Int?     @default(3)
+  muterole            String?  @db.VarChar(45)
+}
+
+model topics {
+  id    Int     @id @default(autoincrement())
+  topic String? @db.VarChar(250)
+}
+
+model users {
+  uid           String  @id @db.VarChar(45)
+  name          String? @db.LongText
+  discriminator String? @default("0") @db.VarChar(4)
+  lvl           Int?    @default(0)
+  reputation    Int?    @default(0)
+  toLvl         Int?    @default(11)
+  married       Int?    @default(0) @db.TinyInt
+  partner       String? @default("no one") @db.VarChar(45)
+  admin         Int?    @default(0) @db.TinyInt
+  status        String? @db.LongText
+  timestamp     Int?    @default(0)
+  lvlMessage    String? @db.LongText
+  bot           Int?    @default(0) @db.TinyInt
+  selectedBadge Int?
+  balance       BigInt? @default(1000)
+}
+
+model warnings {
+  id      Int     @id @default(autoincrement())
+  userid  String? @db.VarChar(45)
+  guildid String? @db.VarChar(45)
+  admin   String? @db.VarChar(45)
+  reason  String? @db.Text
+}

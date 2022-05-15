@@ -1,13 +1,3 @@
-function getUserAvatar(avatar: string, userid: string, discriminator: number): string {
-    if (avatar === undefined) {
-        const index = discriminator % 5;
-        return `https://cdn.discordapp.com/embed/avatars/${index}.png`
-    } else {
-        const animated = avatar.startsWith('a_');
-        return `https://cdn.discordapp.com/avatars/${userid}/${avatar}.${(animated) ? 'gif' : 'png'}`;
-    }
-}
-
 import { BaseCommandInteraction, Client } from "discord.js";
 import { Command } from "../../src/Command";
 import Embed from '../lib/Embed'
@@ -34,3 +24,13 @@ export default {
         });
     }
 } as Command;
+
+function getUserAvatar(avatar: string, userid: string, discriminator: number): string {
+    if (avatar === undefined) {
+        const index = discriminator % 5;
+        return `https://cdn.discordapp.com/embed/avatars/${index}.png`
+    } else {
+        const animated = avatar.startsWith('a_');
+        return `https://cdn.discordapp.com/avatars/${userid}/${avatar}.${(animated) ? 'gif' : 'png'}`;
+    }
+}
