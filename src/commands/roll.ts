@@ -22,25 +22,26 @@ export default {
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const dice = interaction.options.get('d')?.value as number || null
         const amount = interaction.options.get('amount')?.value as number || 1
-        let out: any = {}
+        let out: any = { multi: amount > 1 }
 
-        if (amount > 1) {
+        if (out.multi) {
             let results = []
             for (let i = 0; i < amount; i++) {
-                results.push(RandomNum(dice, 1))
+                results.push(RandomNum(dice, 1));
             }
 
-            out = { success: true, multi: true, result: results, total: results.reduce((a, b) => a + b, 0), roll: { amount, dice } }
+            out = { result: results, total: results.reduce((a, b) => a + b, 0) };
         } else {
             let result = RandomNum(dice, 1);
-            out = { success: true, multi: false, result, total: result, roll: { amount, dice } }
+            out = { result, total: result };
         }
-
+        out.roll = { amount, dice };
 
         const embed = new Embed(`Result: ${out.total}:game_die:`)
             .setColor('4169e1')
             .setAuthor(interaction.user.username, '', interaction.user.avatarURL({ dynamic: true }))
             .setDescription(`${(out.multi) ? `\`${out.result.join(', ')}\`` : ""}`)
+
         await interaction.followUp({
             ephemeral: true,
             embeds: embed.get()
