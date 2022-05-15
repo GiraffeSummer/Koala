@@ -1,7 +1,7 @@
 "# Hikage-v3" 
 
 
-TODO:
+### TODO:
  - setstatus
  - level system
  - profile
@@ -29,3 +29,16 @@ maybe:
  - google
  - googleimage
  -
+
+
+### DB TODO
+- pickup
+- magic8
+- topics
+- fortune
+- users
+
+Lower priority:
+- badges
+- badges_inventory
+- servers
