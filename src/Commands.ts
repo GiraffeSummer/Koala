@@ -3,7 +3,6 @@ import fs from "fs";
 
 let commands: Command[] = [];
 
-
 export async function LoadCommands() {
     try {
         const files = fs.readdirSync("./src/commands/")
@@ -26,6 +25,4 @@ export async function LoadCommands() {
 }
 
 export default commands;
-
-
 //export const Commands: Command[] = [Hello, Gif];

@@ -18,7 +18,7 @@ interface Footer {
 }
 
 export default class Embed {
-    title: string;
+    title: string | null;
     image: Image | null;
     thumbnail: Image | null;
     description: string | null;
@@ -32,7 +32,7 @@ export default class Embed {
 
     fields: Field[] | null = [];
 
-    constructor(title: string) {
+    constructor(title: string = null) {
         this.title = title;
     }
 
@@ -72,7 +72,7 @@ export default class Embed {
         return this;
     }
 
-    addFooter(text: string, icon_url: string | null = null) {
+    setFooter(text: string, icon_url: string | null = null) {
         this.footer = { text, icon_url }
         return this;
     }

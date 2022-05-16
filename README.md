@@ -1,6 +1,8 @@
 "# Hikage-v3" 
 
 
+check if `ephemeral` should be false
+
 ### TODO:
  - setstatus
  - level system
