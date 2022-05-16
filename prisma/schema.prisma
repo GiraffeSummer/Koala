@@ -34,6 +34,8 @@ model User {
   item_inventory  item_inventory[]
   Item            Item?             @relation(fields: [itemId], references: [id])
   itemId          Int?
+
+  commands commandLog[]
 }
 
 model badge_inventory {
@@ -140,13 +142,25 @@ model warnings {
   reason  String? @db.Text
 }
 
-model commandlog {
-  id          String    @id @db.VarChar(45)
-  serverid    String    @db.VarChar(45)
-  channelid   String    @db.VarChar(45)
-  userid      String    @db.VarChar(45)
-  channelname String?   @db.VarChar(100)
-  message     String?   @db.LongText
-  timestamp   DateTime? @db.DateTime(0)
-  attachments String?   @db.LongText
+//model commandlog {
+//  id          String    @id @db.VarChar(45)
+//  serverid    String    @db.VarChar(45)
+//  channelid   String    @db.VarChar(45)
+//  userid      String    @db.VarChar(45)
+//  channelname String?   @db.VarChar(100)
+//  message     String?   @db.LongText
+//  timestamp   DateTime? @db.DateTime(0)
+//  attachments String?   @db.LongText
+//}
+
+model commandLog {
+  id        Int      @id @default(autoincrement())
+  command String
+
+  user   User   @relation(fields: [userId], references: [uid])
+  userId String
+
+  options String? @db.LongText
+  
+  timestamp DateTime @default(now())
 }
