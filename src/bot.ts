@@ -11,7 +11,7 @@ const client = new Client({
     intents: []
 });
 LoadCommands().then((commands) => {
-    console.log('Commands: ' +commands.map(x => x.name).join(', '))
+    console.log('Commands: ' + commands.map(x => x.name).join(', '))
 });
 
 ready(client);

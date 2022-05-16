@@ -20,7 +20,7 @@ export default {
 
         const profile = await prisma.users.findFirst(where({ uid: user.id }));
 
-        console.log(profile)
+        //console.log(profile)
 
         let mess = "";
 
@@ -29,20 +29,20 @@ export default {
             let badge = await prisma.badges.findFirst(where({ id: profile.selectedBadge }))
             badgeT = `\n**Badge:** ${badge.badge} _${badge.name}_`
         }
-        if (profile.married == 1) {
+        if (profile.married == true) {
             mess += '\n**Married with**: <@' + profile.partner + "> 💍";
         } else { mess += '\n**Married**: ' + 'No'; }
 
         const embed = new Embed('')
             .setColorRaw(user.accentColor)
             .setThumb(user.avatarURL({ dynamic: true }))
-            .addFooter(interaction.user.username, interaction.user.avatarURL({ dynamic: true }))
+            .setFooter(interaction.user.username, interaction.user.avatarURL({ dynamic: true }))
             .setDescription("**Username: **" + profile.name +
                 `${badgeT}
                 \n**Status:** ` + profile.status +
                 '\n**Level:** ' + profile.lvl +
-                '\n**To levelup:** ' + profile.toLvl +
-                // ` messages${admintxt}` +
+                '\n**To levelup:** ' + profile.toLvl + ' messages' +
+                // `${admintxt}` +
                 //'\n**Balance:** $' + profile.balance +
                 //'\n**Levelup message:** ' + profile.lvlMessage
                 mess +

@@ -104,21 +104,21 @@ model topics {
 }
 
 model users {
-  uid           String  @id @db.VarChar(45)
-  name          String? @db.LongText
-  discriminator String? @default("0") @db.VarChar(4)
-  lvl           Int?    @default(0)
-  reputation    Int?    @default(0)
-  toLvl         Int?    @default(11)
-  married       Int?    @default(0) @db.TinyInt
-  partner       String? @default("no one") @db.VarChar(45)
-  admin         Int?    @default(0) @db.TinyInt
-  status        String? @db.LongText
-  timestamp     Int?    @default(0)
-  lvlMessage    String? @db.LongText
-  bot           Int?    @default(0) @db.TinyInt
+  uid           String   @id @db.VarChar(45)
+  name          String?  @db.LongText
+  discriminator String?  @default("0") @db.VarChar(4)
+  lvl           Int?     @default(0)
+  reputation    Int?     @default(0)
+  toLvl         Int?     @default(11)
+  married       Boolean? @default(false)
+  partner       String?  @db.VarChar(45)
+  admin         Boolean? @default(false)
+  status        String?  @db.LongText
+  timestamp     Int?     @default(0)
+  lvlMessage    String?  @db.LongText
+  bot           Boolean? @default(false)
   selectedBadge Int?
-  balance       BigInt? @default(1000)
+  balance       BigInt?  @default(1000)
 }
 
 model warnings {
