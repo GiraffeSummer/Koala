@@ -1,6 +1,6 @@
 import { BaseCommandInteraction, Client } from "discord.js";
 import { Command } from "../../src/Command";
-import prisma, { where, User } from "../lib/db";
+import prisma, { where, FindOrCreateUser } from "../lib/db";
 import Embed from '../lib/Embed'
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
@@ -18,19 +18,18 @@ export default {
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
 
-        const profile = await prisma.users.findFirst(where({ uid: user.id }));
-
+        const profile = await FindOrCreateUser(user);
         //console.log(profile)
 
         let mess = "";
 
         let badgeT = ""
         if (profile.selectedBadge) {
-            let badge = await prisma.badges.findFirst(where({ id: profile.selectedBadge }))
+            let badge = await prisma.badge.findFirst({ where: { id: profile.selectedBadge }})
             badgeT = `\n**Badge:** ${badge.badge} _${badge.name}_`
         }
         if (profile.married == true) {
-            mess += '\n**Married with**: <@' + profile.partner + "> 💍";
+            mess += '\n**Married with**: <@' + profile.partnerId + "> 💍";
         } else { mess += '\n**Married**: ' + 'No'; }
 
         const embed = new Embed('')

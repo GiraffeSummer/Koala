@@ -18,7 +18,15 @@ export default {
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const status = interaction.options.get('status')?.value as string || null
 
-        const line = (await prisma.users.update({ where: { uid: interaction.user.id }, data: { status } }));
+        const line = (await prisma.user.upsert({
+            where: { uid: interaction.user.id },
+            update: { status },
+            create: {
+                status,
+                uid: interaction.user.id,
+                name: interaction.user.username
+            },
+        }));
 
         await interaction.followUp({
             ephemeral: true,
