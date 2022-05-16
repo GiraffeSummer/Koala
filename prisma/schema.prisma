@@ -7,36 +7,78 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  uid           String   @id @db.VarChar(45)
+  name          String?  @db.LongText
+  discriminator String?  @default("0") @db.VarChar(4)
+  lvl           Int?     @default(0)
+  reputation    Int?     @default(0)
+  toLvl         Int?     @default(11)
+  married       Boolean? @default(false)
+  admin         Boolean? @default(false)
+  status        String?  @default("Hey there!") @db.LongText
+  timestamp     Int?     @default(0)
+  lvlMessage    String?  @default("") @db.LongText
+  bot           Boolean? @default(false)
+  selectedBadge Int?     @default(0)
+  balance       BigInt?  @default(1000)
+
+
+  partnerId String?
+  partner   User?   @relation("parent", fields: [partnerId], references: [uid])
+  users     User[]  @relation("parent")
+
+  badge_inventory badge_inventory[]
+  Badge           Badge?            @relation(fields: [badgeId], references: [id])
+  badgeId         Int?
+  item_inventory  item_inventory[]
+  Item            Item?             @relation(fields: [itemId], references: [id])
+  itemId          Int?
+}
+
+model badge_inventory {
+  userid  String
+  badgeid Int
+
+  user  User  @relation(fields: [userid], references: [uid])
+  badge Badge @relation(fields: [badgeid], references: [id])
+  @@id([userid, badgeid])
+}
+
+model Badge {
+  id              Int               @id @default(autoincrement())
+  name            String?           @db.VarChar(100)
+  badge           String?           @db.VarChar(100)
+  description     String?           @db.VarChar(255)
+  User            User[]
+  badge_inventory badge_inventory[]
+}
+
+model item_inventory {
+  userid String
+  itemid Int
+  amount Int?
+
+  user User @relation(fields: [userid], references: [uid])
+  item Item @relation(fields: [itemid], references: [id])
+  @@id([userid, itemid])
+}
+
+model Item {
+  id     Int     @id @default(autoincrement())
+  name   String? @db.VarChar(100)
+  symbol String? @db.VarChar(100)
+
+  User           User[]
+  item_inventory item_inventory[]
+}
+
 model aboutus {
   id       String  @id @db.VarChar(20)
   nickname String? @db.VarChar(100)
   order    Int?    @default(999)
   jobs     String? @db.VarChar(100)
   details  String? @db.VarChar(255)
-}
-
-model badge_inventory {
-  id      Int     @id @default(autoincrement())
-  userid  String? @db.VarChar(45)
-  badgeid Int?
-}
-
-model badges {
-  id          Int     @id @default(autoincrement())
-  name        String? @db.VarChar(100)
-  badge       String? @db.VarChar(100)
-  description String? @db.VarChar(255)
-}
-
-model commandlog {
-  id          String    @id @db.VarChar(45)
-  serverid    String    @db.VarChar(45)
-  channelid   String    @db.VarChar(45)
-  userid      String    @db.VarChar(45)
-  channelname String?   @db.VarChar(100)
-  message     String?   @db.LongText
-  timestamp   DateTime? @db.DateTime(0)
-  attachments String?   @db.LongText
 }
 
 model commands {
@@ -54,19 +96,6 @@ model commands {
 model fortune {
   id           Int     @id @default(autoincrement())
   fortune_line String? @db.VarChar(255)
-}
-
-model item_inventory {
-  id     Int     @id @default(autoincrement())
-  userid String? @db.VarChar(45)
-  itemid Int?
-  amount Int?
-}
-
-model items {
-  id     Int     @id @default(autoincrement())
-  name   String? @db.VarChar(100)
-  symbol String? @db.VarChar(100)
 }
 
 model magic8 {
@@ -103,28 +132,21 @@ model topics {
   topic String? @db.VarChar(250)
 }
 
-model users {
-  uid           String   @id @db.VarChar(45)
-  name          String?  @db.LongText
-  discriminator String?  @default("0") @db.VarChar(4)
-  lvl           Int?     @default(0)
-  reputation    Int?     @default(0)
-  toLvl         Int?     @default(11)
-  married       Boolean? @default(false)
-  partner       String?  @db.VarChar(45)
-  admin         Boolean? @default(false)
-  status        String?  @db.LongText
-  timestamp     Int?     @default(0)
-  lvlMessage    String?  @db.LongText
-  bot           Boolean? @default(false)
-  selectedBadge Int?
-  balance       BigInt?  @default(1000)
-}
-
 model warnings {
   id      Int     @id @default(autoincrement())
   userid  String? @db.VarChar(45)
   guildid String? @db.VarChar(45)
   admin   String? @db.VarChar(45)
   reason  String? @db.Text
+}
+
+model commandlog {
+  id          String    @id @db.VarChar(45)
+  serverid    String    @db.VarChar(45)
+  channelid   String    @db.VarChar(45)
+  userid      String    @db.VarChar(45)
+  channelname String?   @db.VarChar(100)
+  message     String?   @db.LongText
+  timestamp   DateTime? @db.DateTime(0)
+  attachments String?   @db.LongText
 }
