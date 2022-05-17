@@ -82,7 +82,9 @@ export default {
 
                 const channel = await client.channels.fetch(interaction.channelId) as TextChannel;
                 const collector = channel.createMessageComponentCollector({
-                    filter: () => true,
+                    filter: (int) => {
+                        return user.id === int.user.id;
+                    },
                     componentType: "SELECT_MENU",
                     max: 1,
                     time: 300 * 1000
@@ -90,9 +92,11 @@ export default {
 
                 collector.on('end', async (collection) => {
                     collection.forEach(async click => {
-                        const newBadge = profile.badges[click.values[0]].badge;
-                        await prisma.user.update({ where: { uid: interaction.user.id }, data: { selectedBadge: newBadge.id } });
-                        await interaction.editReply({ content: `You selected badge: ${newBadge.badge} ${newBadge.name}!`, components: [] });
+                        if (click.customId == `select_badge`) {
+                            const newBadge = profile.badges[click.values[0]].badge;
+                            await prisma.user.update({ where: { uid: interaction.user.id }, data: { selectedBadge: newBadge.id } });
+                            await interaction.editReply({ content: `You selected badge: ${newBadge.badge} ${newBadge.name}!`, components: [] });
+                        }
                     })
                 })
 
