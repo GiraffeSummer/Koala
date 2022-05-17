@@ -1,9 +1,9 @@
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
-export async function addExp(userOb: any, exp: number = 1) {
+export async function addExp(interaction: any, exp: number = 1, userOb: any = null) {
     let leveled = false;
 
-    let user = await FindOrCreateUser(userOb);
+    let user = await FindOrCreateUser(userOb || interaction.user);
 
     let newExp = user.toLvl - exp;
     if (newExp <= 0) {
@@ -17,6 +17,17 @@ export async function addExp(userOb: any, exp: number = 1) {
             toLvl: newExp
         }
     })
+
+    if (leveled) {
+        interaction.followUp({
+            ephemeral: true,
+            embeds: [{
+                color: 0x0000ff,
+                description: `You levelled up to level: **${user.lvl}**!`,
+                title: "**LEVEL UP**"
+            }]
+        })
+    }
 
     return { user, leveled }
 }

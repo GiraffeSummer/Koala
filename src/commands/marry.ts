@@ -3,6 +3,7 @@ import { Command } from "../../src/Command";
 import { RandomNum } from "../lib/Functions";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import Embed from '../lib/Embed'
+import { addExp } from '../lib/LevelSystem'
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
@@ -78,6 +79,8 @@ export default {
                             await interaction.followUp({
                                 embeds: [{ color: 0xffb6c1, description: `:tada: CONGRATULATIONS! :tada:\n <@${partner.uid}>,  got married with <@${profile.uid}> :ring:!`, }],
                             })
+
+                            await addExp(interaction, 1, user);
                         }
                         break;
                     case 'marry_no':
