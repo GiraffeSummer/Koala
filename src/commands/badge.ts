@@ -32,6 +32,7 @@ export default {
         type: 'SUB_COMMAND',
         name: 'select',
         description: 'set selected badge',
+        choices:[],
         options: [{
             type: 'STRING',
             name: 'badge',
