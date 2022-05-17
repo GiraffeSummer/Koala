@@ -24,7 +24,6 @@ export default {
             line = (await prisma.pickup.findFirst(where({ pickup: { contains: find }, includename: false }))).pickup;
         }
         await interaction.followUp({
-            ephemeral: true,
             content: line
         });
     }

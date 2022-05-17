@@ -15,7 +15,6 @@ export default {
         const fortune: string = (await prisma.fortune.findMany())[RandomNum(count)].fortune_line;
 
         await interaction.followUp({
-            ephemeral: true,
             content: fortune
         });
     }

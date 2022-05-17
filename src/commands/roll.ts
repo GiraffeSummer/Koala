@@ -43,7 +43,6 @@ export default {
             .setDescription(`${(out.multi) ? `\`${out.result.join(', ')}\`` : ""}`)
 
         await interaction.followUp({
-            ephemeral: true,
             embeds: embed.get()
         });
     }

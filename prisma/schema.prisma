@@ -20,7 +20,6 @@ model User {
   timestamp     Int?     @default(0)
   lvlMessage    String?  @default("") @db.LongText
   bot           Boolean? @default(false)
-  selectedBadge Int?     @default(0)
   balance       BigInt?  @default(1000)
 
 
@@ -28,12 +27,12 @@ model User {
   partner   User?   @relation("parent", fields: [partnerId], references: [uid])
   users     User[]  @relation("parent")
 
-  badge_inventory badge_inventory[]
-  Badge           Badge?            @relation(fields: [badgeId], references: [id])
-  badgeId         Int?
-  item_inventory  item_inventory[]
-  Item            Item?             @relation(fields: [itemId], references: [id])
-  itemId          Int?
+  badges        badge_inventory[]
+  Badge         Badge?            @relation(fields: [selectedBadge], references: [id])
+  selectedBadge Int?
+  items         item_inventory[]
+  Item          Item?             @relation(fields: [itemId], references: [id])
+  itemId        Int?
 
   commands commandLog[]
 }
@@ -154,13 +153,13 @@ model warnings {
 //}
 
 model commandLog {
-  id        Int      @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   command String
 
   user   User   @relation(fields: [userId], references: [uid])
   userId String
 
   options String? @db.LongText
-  
+
   timestamp DateTime @default(now())
 }

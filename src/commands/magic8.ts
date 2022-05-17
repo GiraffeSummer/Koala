@@ -23,7 +23,6 @@ export default {
         const content: string = (await prisma.magic8.findMany())[RandomNum(count)].message;
 
         await interaction.followUp({
-            ephemeral: true,
             content
         });
     }

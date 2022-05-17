@@ -25,7 +25,7 @@ export default {
 
         let badgeT = ""
         if (profile.selectedBadge) {
-            let badge = await prisma.badge.findFirst({ where: { id: profile.selectedBadge }})
+            let badge = await prisma.badge.findFirst({ where: { id: profile.selectedBadge } })
             badgeT = `\n**Badge:** ${badge.badge} _${badge.name}_`
         }
         if (profile.married == true) {
@@ -48,7 +48,6 @@ export default {
                 '');
 
         await interaction.followUp({
-            ephemeral: true,
             embeds: embed.get()
         });
     }

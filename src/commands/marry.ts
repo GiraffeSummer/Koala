@@ -9,6 +9,7 @@ export default {
     name: "marry",
     description: "Marry someone",
     type: "CHAT_INPUT",
+    exp: 2,
     options: [{
         type: 'USER',
         name: 'user',

@@ -19,7 +19,6 @@ export default {
         await prisma.user.update({ where: { uid: interaction.user.id }, data: { partner: undefined, married: false } })
 
         await interaction.followUp({
-            ephemeral: true,
             content: `You and <@${partner.uid}> got divorced! 💔`
         });
     }

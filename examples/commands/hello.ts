@@ -17,7 +17,6 @@ export default {
         const content = "Hello there!" + ` ${value}`;
 
         await interaction.followUp({
-            ephemeral: true,
             content
         });
     }

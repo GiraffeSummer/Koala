@@ -7,6 +7,7 @@ export default {
     name: "support",
     description: "Support Hikage",
     type: "CHAT_INPUT",
+    exp: 2,
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const botName = client.user.username
 

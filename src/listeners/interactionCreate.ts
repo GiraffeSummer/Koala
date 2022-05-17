@@ -1,5 +1,6 @@
 import { BaseCommandInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction } from "discord.js";
 import { logCommand } from '../lib/Log'
+import { addExp } from '../lib/LevelSystem'
 import Commands from "../Commands";
 
 export default (client: Client): void => {
@@ -19,10 +20,22 @@ const handleSlashCommand = async (client: Client, interaction: BaseCommandIntera
 
     try {
         logCommand(interaction.user.id, interaction.commandName, (interaction.options['_hoistedOptions'].length > 0) ? interaction.options['_hoistedOptions'] : null)
-    } catch (error) {
-    }
+    } catch (error) { }
+
+    const levelUp = await addExp(interaction.user, slashCommand?.exp || 1);
 
     await interaction.deferReply();
+
+    if (levelUp.leveled) {
+        interaction.followUp({
+            ephemeral: true,
+            embeds: [{
+                color: 0x0000ff,
+                description: `You levelled up to level: **${levelUp.user.lvl}**!`,
+                title: "**LEVEL UP**"
+            }]
+        })
+    }
 
     slashCommand.run(client, interaction);
 };

@@ -38,7 +38,6 @@ export default {
 
                 return await interaction.followUp(
                     {
-                        ephemeral: true,
                         embeds: embed.get()
                     });
             }

@@ -68,7 +68,6 @@ export default {
                 .setColor('4169e1').setDescription(desc).setThumb('attachment://file.jpg')//attachment.url)
 
             await interaction.followUp({
-                ephemeral: true,
                 embeds: embed.get(),
                 files: [new MessageAttachment(canvas.toBuffer())]
             });

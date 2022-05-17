@@ -15,7 +15,6 @@ export default {
         const topic: string = (await prisma.topics.findMany())[RandomNum(count)].topic;
 
         await interaction.followUp({
-            ephemeral: true,
             content: topic
         });
     }

@@ -38,7 +38,6 @@ export default {
         const embed = new Embed(modString).setColor('4169e1').setDescription(`I rate **${modString}** a ${rng}/10!`)
 
         await interaction.followUp({
-            ephemeral: true,
             embeds: embed.get()
         });
     }
