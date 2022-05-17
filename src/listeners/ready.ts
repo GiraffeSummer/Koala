@@ -9,7 +9,7 @@ export default (client: Client): void => {
         }
 
         //register badges as choices to select command
-        await registerBadges();
+        //await registerBadges();
 
         await client.application.commands.set(Commands);
 

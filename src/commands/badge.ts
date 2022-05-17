@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Client } from "discord.js";
+import { BaseCommandInteraction, Client, MessageActionRow, MessageSelectMenu, TextChannel } from "discord.js";
 import { Command } from "../../src/Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
@@ -32,13 +32,8 @@ export default {
         type: 'SUB_COMMAND',
         name: 'select',
         description: 'set selected badge',
-        choices:[],
-        options: [{
-            type: 'STRING',
-            name: 'badge',
-            description: 'badge name',
-            required: true
-        }],
+        //choices: [],
+        //options: [{ type: 'STRING', name: 'badge', description: 'badge name', required: true }],
     }],
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const sub = interaction.options['_subcommand']
@@ -77,6 +72,32 @@ export default {
                 break;
 
             case 'select':
+                const row = new MessageActionRow()
+                    .addComponents(
+                        new MessageSelectMenu()
+                            .setCustomId('select_badge')
+                            .setPlaceholder('None')
+                            .addOptions(profile.badges.map((badge, i) => { return { label: badge.badge.name, value: `${i}`, description: badge.badge.description } })),
+                    );
+
+                const channel = await client.channels.fetch(interaction.channelId) as TextChannel;
+                const collector = channel.createMessageComponentCollector({
+                    filter: () => true,
+                    componentType: "SELECT_MENU",
+                    max: 1,
+                    time: 300 * 1000
+                })
+
+                collector.on('end', async (collection) => {
+                    collection.forEach(async click => {
+                        const newBadge = profile.badges[click.values[0]].badge;
+                        await prisma.user.update({ where: { uid: interaction.user.id }, data: { selectedBadge: newBadge.id } });
+                        await interaction.editReply({ content: `You selected badge: ${newBadge.badge} ${newBadge.name}!`, components: [] });
+                    })
+                })
+
+                await interaction.followUp({ ephemeral: true, content: 'Pick a badge!', components: [row] });
+                /*
                 //maybe make dropdown menu?
                 const badgeName = interaction.options.get('badge')?.value as string;
                 const attemptBadge = await prisma.badge.findFirst(where({ name: badgeName }));
@@ -97,6 +118,7 @@ export default {
                     ephemeral: true,
                     embeds: [{ description: `badge \`${badgeName}\` not found` }]
                 });
+                */
                 break;
             default:
                 break;
