@@ -18,10 +18,6 @@ const handleSlashCommand = async (client: Client, interaction: BaseCommandIntera
         return;
     }
 
-    try {
-        logCommand(interaction.user.id, interaction.commandName, (interaction.options['_hoistedOptions'].length > 0) ? interaction.options['_hoistedOptions'] : null)
-    } catch (error) { }
-
     const levelUp = await addExp(interaction.user, slashCommand?.exp || 1);
 
     await interaction.deferReply();
@@ -36,6 +32,10 @@ const handleSlashCommand = async (client: Client, interaction: BaseCommandIntera
             }]
         })
     }
+
+    try {
+        logCommand(interaction.user.id, interaction.commandName, (interaction.options['_hoistedOptions'].length > 0) ? interaction.options['_hoistedOptions'] : null)
+    } catch (error) { }
 
     slashCommand.run(client, interaction);
 };
