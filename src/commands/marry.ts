@@ -96,6 +96,5 @@ export default {
             })
         })
 
-
     }
 } as Command;
