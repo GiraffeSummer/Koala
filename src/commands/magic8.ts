@@ -20,7 +20,7 @@ export default {
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const question = interaction.options.get('question')?.value as string || null
         const count: number = await prisma.magic8.count();
-        const content: string = (await prisma.magic8.findMany())[RandomNum(count)].message;
+        const content: string = (await prisma.magic8.findFirst({ skip: RandomNum(count), take: 1 })).message;
 
         await interaction.followUp({
             content

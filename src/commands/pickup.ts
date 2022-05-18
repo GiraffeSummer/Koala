@@ -19,7 +19,7 @@ export default {
         let line = ''
         if (find == null) {
             const count: number = await prisma.pickup.count();
-            line = (await prisma.pickup.findMany(where({ includename: false })))[RandomNum(count)].pickup;
+            line = (await prisma.pickup.findFirst({ skip: RandomNum(count), take: 1, where: { includename: false } })).pickup;
         } else {
             line = (await prisma.pickup.findFirst(where({ pickup: { contains: find }, includename: false }))).pickup;
         }

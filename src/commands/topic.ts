@@ -12,7 +12,7 @@ export default {
     options: [],
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const count: number = await prisma.topics.count();
-        const topic: string = (await prisma.topics.findMany())[RandomNum(count)].topic;
+        const topic: string = (await prisma.topics.findFirst({ skip: RandomNum(count), take: 1 })).topic;
 
         await interaction.followUp({
             content: topic
