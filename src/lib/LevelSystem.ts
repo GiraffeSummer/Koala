@@ -8,7 +8,7 @@ export async function addExp(interaction: any, exp: number = 1, userOb: any = nu
     let newExp = user.toLvl - exp;
     if (newExp <= 0) {
         leveled = true;
-        newExp = (user.lvl + 1) * 10 + 10 - (-newExp)
+        newExp = expNeeded(user.lvl) - (-newExp)
     }
 
     user = await prisma.user.update({
@@ -30,4 +30,8 @@ export async function addExp(interaction: any, exp: number = 1, userOb: any = nu
     }
 
     return { user, leveled }
+}
+
+export function expNeeded(lvl: number): number {
+    return (lvl + 1) * 10 + 10
 }
