@@ -18,7 +18,7 @@ const handleSlashCommand = async (client: Client, interaction: BaseCommandIntera
         return;
     }
 
-    await interaction.deferReply({ ephemeral: slashCommand.ephemeral || false });
+    await interaction.deferReply((slashCommand.ephemeral != null) ? { ephemeral: slashCommand.ephemeral || false } : undefined);
 
     const levelUp = await addExp(interaction, slashCommand?.exp || 1);
 
