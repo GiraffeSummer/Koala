@@ -19,7 +19,6 @@ export default {
         const embed = new Embed(user.username).setImage(avatarUrl).setColor('4169e1')
 
         await interaction.followUp({
-            ephemeral: true,
             embeds: embed.get()
         });
     }

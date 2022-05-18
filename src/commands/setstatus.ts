@@ -9,6 +9,7 @@ export default {
     name: "setstatus",
     description: "use a bad pickup line",
     type: "CHAT_INPUT",
+    ephemeral: true,
     options: [{
         type: 'STRING',
         name: 'status',

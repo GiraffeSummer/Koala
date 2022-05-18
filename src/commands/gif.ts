@@ -38,10 +38,13 @@ export default {
 
                 return await interaction.followUp(
                     {
+                        ephemeral: false,
                         embeds: embed.get()
                     });
             }
         }
+
+        await interaction.deleteReply();
         return await interaction.followUp(
             {
                 ephemeral: true,

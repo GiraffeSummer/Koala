@@ -6,6 +6,7 @@ export default {
     name: "rpc",
     description: "Play rock paper scissors",
     type: "CHAT_INPUT",
+    ephemeral: true,
     options: [{
         type: 'STRING',
         name: 'pick',

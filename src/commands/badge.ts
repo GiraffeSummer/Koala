@@ -8,6 +8,7 @@ export default {
     name: "badge",
     description: "badge commands",
     type: "CHAT_INPUT",
+    ephemeral: true,
     options: [{
         type: 'SUB_COMMAND',
         name: 'list',
@@ -101,28 +102,6 @@ export default {
                 })
 
                 await interaction.followUp({ ephemeral: true, content: 'Pick a badge!', components: [row] });
-                /*
-                //maybe make dropdown menu?
-                const badgeName = interaction.options.get('badge')?.value as string;
-                const attemptBadge = await prisma.badge.findFirst(where({ name: badgeName }));
-                if (attemptBadge) {
-                    const index = profile.badges.findIndex(x => x.badgeid === attemptBadge.id)
-                    if (index >= 0) {
-                        await prisma.user.update({ where: { uid: interaction.user.id }, data: { selectedBadge: attemptBadge.id } })
-                        return await interaction.followUp({
-                            ephemeral: true,
-                            embeds: [{ description: `Equipped badge \`${badgeName}\`.` }]
-                        });
-                    } else return await interaction.followUp({
-                        ephemeral: true,
-                        embeds: [{ description: `You do not have \`${badgeName}\` badge.` }]
-                    });
-                }
-                else return await interaction.followUp({
-                    ephemeral: true,
-                    embeds: [{ description: `badge \`${badgeName}\` not found` }]
-                });
-                */
                 break;
             default:
                 break;

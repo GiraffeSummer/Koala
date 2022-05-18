@@ -4,23 +4,23 @@
 check if `ephemeral` should be false
 
 ### TODO:
- - setstatus
- - level system
- - profile
+ + setstatus
+ + level system
+ + profile
  - userinfo
  - memberinfo
  - invite
  + avatar
- - roll
- - pickup
- - magic8
- - fortune
- - topic
+ + roll
+ + pickup
+ + magic8
+ + fortune
+ + topic
 
 not priority
  - guess (the number)
- - lvltop
- - badges
+ + lvltop
+ + badges
  - admin
 
 
@@ -34,13 +34,13 @@ maybe:
 
 
 ### DB TODO
-- pickup
-- magic8
-- topics
-- fortune
-- users
++ pickup
++ magic8
++ topics
++ fortune
++ users
 
 Lower priority:
-- badges
-- badges_inventory
++ badges
++ badges_inventory
 - servers
