@@ -27,7 +27,7 @@ export default {
 
         const canvas = new Canvas();
 
-        const img = parseInt(user.discriminator) % 4;
+        const img = parseInt(user.discriminator) % 4; //this number should be amount of images
         await canvas.setBackground(`./resources/bg${img}.png`);
 
         canvas.addBox(20, 20, 896, 242, "rgba(0,0,0,0.7)", 20);
