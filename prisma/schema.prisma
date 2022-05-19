@@ -8,19 +8,19 @@ datasource db {
 }
 
 model User {
-  uid           String   @id @db.VarChar(45)
-  name          String?  @db.LongText
-  discriminator String?  @default("0") @db.VarChar(4)
-  lvl           Int?     @default(0)
-  reputation    Int?     @default(0)
-  toLvl         Int?     @default(11)
-  married       Boolean? @default(false)
-  admin         Boolean? @default(false)
-  status        String?  @default("Hey there!") @db.LongText
-  timestamp     Int?     @default(0)
-  lvlMessage    String?  @default("") @db.LongText
-  bot           Boolean? @default(false)
-  balance       BigInt?  @default(1000)
+  uid           String    @id @db.VarChar(45)
+  name          String?   @db.LongText
+  discriminator String?   @default("0") @db.VarChar(4)
+  lvl           Int?      @default(0)
+  reputation    Int?      @default(0)
+  toLvl         Int?      @default(11)
+  married       Boolean?  @default(false)
+  admin         Boolean?  @default(false)
+  status        String?   @default("Hey there!") @db.LongText
+  timestamp     DateTime? @default(now())
+  lvlMessage    String?   @default("") @db.LongText
+  bot           Boolean?  @default(false)
+  balance       BigInt?   @default(1000)
 
 
   partnerId String?
@@ -34,7 +34,8 @@ model User {
   Item          Item?             @relation(fields: [itemId], references: [id])
   itemId        Int?
 
-  commands commandLog[]
+  commands  commandLog[]
+  createdAt DateTime?    @default(now())
 }
 
 model badge_inventory {
