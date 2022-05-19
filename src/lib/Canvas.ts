@@ -4,13 +4,9 @@ const Discord = require("discord.js");
 export default class DiscordCanvas {
     canvas: any;
     context: any;
-    width: number;
-    height: number;
     constructor(w: number = 936, h: number = 282) {
         w = w || 936;
         h = h || 282;
-        this.width = w;
-        this.height = h;
         //Canvas.registerFont("./resources/fonts/arial.ttf", { family: "Arial" });
         //Canvas.registerFont("./resources/fonts/ariblk.ttf", { family: "Arial Black" });
         this.canvas = Canvas.createCanvas(w, h);
