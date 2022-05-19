@@ -3,6 +3,9 @@
 
 check if `ephemeral` should be false
 
+## IMPORTANT TODO
+- make seeder for consistent data (badges,pronouns, topics etc)
+
 ### TODO:
  + setstatus
  + level system
