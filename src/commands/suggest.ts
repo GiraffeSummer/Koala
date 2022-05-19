@@ -1,4 +1,5 @@
 import { BaseCommandInteraction, Client, Modal, MessageActionRow, ModalActionRowComponent, TextInputComponent, TextChannel, ModalSubmitInteraction } from "discord.js";
+import { addExp } from "../lib/LevelSystem";
 import { Command } from "../../src/Command";
 import prisma, { where } from "../lib/db";
 
@@ -7,7 +8,6 @@ export default {
     name: "suggest",
     description: "Send in a suggestion",
     type: "CHAT_INPUT",
-    exp: 2,
     noDefer: true,
     run: async (client: Client, interaction: BaseCommandInteraction) => {
 
@@ -32,13 +32,21 @@ export default {
 
 
         await interaction.showModal(modal);
-        const submit: ModalSubmitInteraction = await interaction.awaitModalSubmit({
+        const submit = interaction.awaitModalSubmit({
             filter: (sub) => sub.customId == 'suggestion_modal',
             time: 500 * 1000
         })
-        const suggestion = { title: submit.fields.getField('title').value, suggestion: submit.fields.getField('suggestion').value }
-        await prisma.suggestions.create({ data: { userId: interaction.user.id, title: suggestion.title, suggestion: suggestion.suggestion } })
 
-        submit.reply({ ephemeral: true, content: 'Thanks for your suggestion, We will look into it!' })
+        submit
+            .then(async (submit) => {
+                const suggestion = { title: submit.fields.getField('title').value, suggestion: submit.fields.getField('suggestion').value }
+                await prisma.suggestions.create({ data: { userId: interaction.user.id, title: suggestion.title, suggestion: suggestion.suggestion } })
+
+                submit.reply({ ephemeral: true, content: 'Thanks for your suggestion, We will look into it!' });
+                await addExp(interaction, 2);
+            })
+            .catch((err) => {
+                interaction.followUp({ ephemeral: true, content: 'Your suggestion did not come through' });
+            })
     }
 } as Command;
