@@ -31,11 +31,11 @@ model User {
   Badge         Badge?            @relation(fields: [selectedBadge], references: [id])
   selectedBadge Int?
   items         item_inventory[]
-  Item          Item?             @relation(fields: [itemId], references: [id])
-  itemId        Int?
 
-  commands  commandLog[]
-  createdAt DateTime?    @default(now())
+  commands    commandLog[]
+  createdAt   DateTime?      @default(now())
+  suggestions suggestions[]
+  pronouns    pronoun_list[]
 }
 
 model badge_inventory {
@@ -71,7 +71,6 @@ model Item {
   name   String? @db.VarChar(100)
   symbol String? @db.VarChar(100)
 
-  User           User[]
   item_inventory item_inventory[]
 }
 
@@ -152,6 +151,33 @@ model warnings {
 //  timestamp   DateTime? @db.DateTime(0)
 //  attachments String?   @db.LongText
 //}
+
+model suggestions {
+  id         Int    @id @default(autoincrement())
+  suggestion String @db.LongText
+
+  user   User   @relation(fields: [userId], references: [uid])
+  userId String
+
+  timestamp DateTime @default(now())
+}
+
+model pronoun_list {
+  userid    String
+  pronounId Int
+
+  user     User     @relation(fields: [userid], references: [uid])
+  pronouns pronouns @relation(fields: [pronounId], references: [id])
+  @@id([userid, pronounId])
+}
+
+model pronouns {
+  id     Int     @id @default(autoincrement())
+  name   String? @db.VarChar(100)
+  symbol String? @db.VarChar(100)
+
+  list pronoun_list[]
+}
 
 model commandLog {
   id      Int    @id @default(autoincrement())
