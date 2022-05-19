@@ -3,5 +3,6 @@ import { BaseCommandInteraction, ChatInputApplicationCommandData, Client } from 
 export interface Command extends ChatInputApplicationCommandData {
     exp?: number;
     ephemeral?: boolean;
+    noDefer?: boolean
     run: (client: Client, interaction: BaseCommandInteraction) => void;
 }
