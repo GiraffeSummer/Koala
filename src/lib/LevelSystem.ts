@@ -1,5 +1,7 @@
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
+const levelMessages = false;
+
 export async function addExp(interaction: any, exp: number = 1, userOb: any = null) {
     let leveled = false;
 
@@ -18,7 +20,7 @@ export async function addExp(interaction: any, exp: number = 1, userOb: any = nu
         }
     })
 
-    if (leveled) {
+    if (leveled && levelMessages) {
         interaction.followUp({
             ephemeral: true,
             embeds: [{
