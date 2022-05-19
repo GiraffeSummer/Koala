@@ -10,7 +10,6 @@ export default {
     exp: 2,
     noDefer: true,
     run: async (client: Client, interaction: BaseCommandInteraction) => {
-        console.log('suggest')
 
         const modal = new Modal()
             .setCustomId('suggestion_modal')
