@@ -38,7 +38,7 @@ export default {
         //draw badge
         if (profile.selectedBadge != null) {
             const selectedBadge = await prisma.badge.findFirst({ where: { id: profile.selectedBadge } })
-            const badgeExt = 'png'//allow gif too
+            const badgeExt = (selectedBadge.badge[1] == 'a') ? 'gif' : 'png'//allow gif too
             const badgeId = selectedBadge.badge.split(':')[2].replace('>', '').trim()
             const badgeURl = `https://cdn.discordapp.com/emojis/${badgeId}.${badgeExt}`
             await canvas.addCircleImage(canvas.canvas.width - 150, 20, 90, badgeURl, 0, lineColor);
