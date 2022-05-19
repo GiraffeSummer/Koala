@@ -35,6 +35,15 @@ export default {
         //Draw avatar circle
         await canvas.addCircleImage(60, 40, 202, user.displayAvatarURL({ format: "jpg", size: 2048 }), 8, lineColor);
 
+        //draw badge
+        if (profile.selectedBadge != null) {
+            const selectedBadge = await prisma.badge.findFirst({ where: { id: profile.selectedBadge } })
+            const badgeExt = 'png'//allow gif too
+            const badgeId = selectedBadge.badge.split(':')[2].replace('>', '').trim()
+            const badgeURl = `https://cdn.discordapp.com/emojis/${badgeId}.${badgeExt}`
+            await canvas.addCircleImage(canvas.canvas.width - 150, 20, 90, badgeURl, 0, lineColor);
+        }
+
         //Draw progress bar
         canvas.addBox(306, 185, 570, 40, barColor, 10, 5, lineColor);
         canvas.addBar(306, 185, 570, 40, 10, lineColor, barValue);
