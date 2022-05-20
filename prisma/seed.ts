@@ -13,6 +13,9 @@ import topics from './data/topics.json';
 //@ts-ignore
 import pronouns from './data/pronouns.json';
 
+//@ts-ignore
+import items from './data/items.json';
+
 const prisma = new PrismaClient()
 
 async function main() {
@@ -52,6 +55,12 @@ async function main() {
     for (let i = 0; i < pronouns.length; i++) {
         const item = pronouns[i];
         await prisma.pronouns.upsert({ where: { id: item.id }, create: item, update: item })
+    }
+
+    console.log(`Seeding items.`)
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        await prisma.item.upsert({ where: { id: item.id }, create: item, update: item })
     }
 }
 

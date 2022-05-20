@@ -1,0 +1,77 @@
+[
+    {
+        "id": 1,
+        "name": "newspaper",
+        "symbol": "🗞️"
+    },
+    {
+        "id": 2,
+        "name": "rock",
+        "symbol": "🪨"
+    },
+    {
+        "id": 3,
+        "name": "plant",
+        "symbol": "🪴"
+    },
+    {
+        "id": 4,
+        "name": "bone",
+        "symbol": "🦴"
+    },
+    {
+        "id": 5,
+        "name": "yarn",
+        "symbol": "🧶"
+    },
+    {
+        "id": 6,
+        "name": "tulip",
+        "symbol": "🌷"
+    },
+    {
+        "id": 7,
+        "name": "banana",
+        "symbol": "🍌"
+    },
+    {
+        "id": 8,
+        "name": "garlic",
+        "symbol": "🧄"
+    },
+    {
+        "id": 9,
+        "name": "chocolate",
+        "symbol": "🍫"
+    },
+    {
+        "id": 10,
+        "name": "shoe",
+        "symbol": "👞"
+    },
+    {
+        "id": 11,
+        "name": "spoon",
+        "symbol": "🥄"
+    },
+    {
+        "id": 12,
+        "name": "yoyo",
+        "symbol": "🪀"
+    },
+    {
+        "id": 13,
+        "name": "fish",
+        "symbol": "🐟"
+    },
+    {
+        "id": 14,
+        "name": "brick",
+        "symbol": "🧱"
+    },
+    {
+        "id": 15,
+        "name": "paperclip",
+        "symbol": "📎"
+    }
+]

@@ -22,6 +22,8 @@ model User {
   bot           Boolean?  @default(false)
   balance       BigInt?   @default(1000)
 
+  lootTimer DateTime? @default(now())
+
 
   partnerId String?
   partner   User?   @relation("parent", fields: [partnerId], references: [uid])
