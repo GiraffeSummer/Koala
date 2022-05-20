@@ -8,6 +8,7 @@ export default {
     name: "suggest",
     description: "Send in a suggestion",
     type: "CHAT_INPUT",
+    exp: 0,
     noDefer: true,
     run: async (client: Client, interaction: BaseCommandInteraction) => {
 
