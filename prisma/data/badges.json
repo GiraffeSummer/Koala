@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Developer",
+        "badge": "<:dev_badge:700806780573188127>",
+        "description": "Developer of hikage"
+    },
+    {
+        "id": 3,
+        "name": "Hikage user",
+        "badge": "<:hikage_user_badge:702499592964538379>",
+        "description": "Hikage user, have Hikage in a server you own."
+    },
+    {
+        "id": 4,
+        "name": "Staff",
+        "badge": "<:mod_shield_badge:703541573333287053>",
+        "description": "For staff"
+    },
+    {
+        "id": 5,
+        "name": "Diamond",
+        "badge": "<a:diamond:653972457451159580>",
+        "description": "for testing, changing later"
+    },
+    {
+        "id": 6,
+        "name": "Pinger",
+        "badge": "<:hikageping:707495273877733376>",
+        "description": "Ping me when I ask you to. (Special badge)"
+    },
+    {
+        "id": 7,
+        "name": "Bug finder",
+        "badge": "<:bugcatcher_badge:714093053949771856>",
+        "description": "Find a bug in hikage and notify the developer."
+    },
+    {
+        "id": 8,
+        "name": "Number Guesser",
+        "badge": "<a:numberguesser_badge:720956835317678150>",
+        "description": "Really rare badge you get when you guess the right number with !guess"
+    },
+    {
+        "id": 9,
+        "name": "Patreon",
+        "badge": "<:patreon_badge:755358680265916456>",
+        "description": "Be a very helpful Patron for Hikage, thank you so much!"
+    },
+    {
+        "id": 10,
+        "name": "Pinger 2",
+        "badge": "<:hikageping2:773302677794324511>",
+        "description": "Ping me when I ask you to second serving. (Special badge)"
+    }
+]

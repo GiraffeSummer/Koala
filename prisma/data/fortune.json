@@ -1,0 +1,1430 @@
+[
+    {
+        "id": 1,
+        "fortune_line": "A beautiful, smart, and loving person will be coming into your life."
+    },
+    {
+        "id": 2,
+        "fortune_line": "A dubious friend may be an enemy in camouflage."
+    },
+    {
+        "id": 3,
+        "fortune_line": "A faithful friend is a strong defense."
+    },
+    {
+        "id": 4,
+        "fortune_line": "A feather in the hand is better than a bird in the air."
+    },
+    {
+        "id": 5,
+        "fortune_line": "A fresh start will put you on your way."
+    },
+    {
+        "id": 6,
+        "fortune_line": "A friend asks only for your time not your money."
+    },
+    {
+        "id": 7,
+        "fortune_line": "A friend is a present you give yourself."
+    },
+    {
+        "id": 8,
+        "fortune_line": "A gambler not only will lose what he has, but also will lose what he doesn’t have."
+    },
+    {
+        "id": 9,
+        "fortune_line": "A golden egg of opportunity falls into your lap this month."
+    },
+    {
+        "id": 10,
+        "fortune_line": "A good friendship is often more important than a passionate romance."
+    },
+    {
+        "id": 11,
+        "fortune_line": "A good time to finish up old tasks."
+    },
+    {
+        "id": 12,
+        "fortune_line": "A hunch is creativity trying to tell you something."
+    },
+    {
+        "id": 13,
+        "fortune_line": "A lifetime friend shall soon be made."
+    },
+    {
+        "id": 14,
+        "fortune_line": "A lifetime of happiness lies ahead of you."
+    },
+    {
+        "id": 15,
+        "fortune_line": "A light heart carries you through all the hard times."
+    },
+    {
+        "id": 16,
+        "fortune_line": "A new perspective will come with the new year."
+    },
+    {
+        "id": 17,
+        "fortune_line": "A person is never toold to learn."
+    },
+    {
+        "id": 18,
+        "fortune_line": "A person of words and not deeds is like a garden full of weeds."
+    },
+    {
+        "id": 19,
+        "fortune_line": "A pleasant surprise is waiting for you."
+    },
+    {
+        "id": 20,
+        "fortune_line": "A short pencil is usually better than a long memory any day."
+    },
+    {
+        "id": 21,
+        "fortune_line": "A small donation is call for. It’s the right thing to do."
+    },
+    {
+        "id": 22,
+        "fortune_line": "A smile is your personal welcome mat."
+    },
+    {
+        "id": 23,
+        "fortune_line": "A smooth long journey! Great expectations."
+    },
+    {
+        "id": 24,
+        "fortune_line": "A soft voice may be awfully persuasive."
+    },
+    {
+        "id": 25,
+        "fortune_line": "A truly rich life contains love and art in abundance."
+    },
+    {
+        "id": 26,
+        "fortune_line": "Accept something that you cannot change, and you will feel better."
+    },
+    {
+        "id": 27,
+        "fortune_line": "Adventure can be real happiness."
+    },
+    {
+        "id": 28,
+        "fortune_line": "Advice is like kissing. It costs nothing and is a pleasant thing to do."
+    },
+    {
+        "id": 29,
+        "fortune_line": "Advice, when most needed, is least heeded."
+    },
+    {
+        "id": 30,
+        "fortune_line": "All the effort you are making will ultimately pay off."
+    },
+    {
+        "id": 31,
+        "fortune_line": "All the troubles you have will pass away very quickly."
+    },
+    {
+        "id": 32,
+        "fortune_line": "All will go well with your new project."
+    },
+    {
+        "id": 33,
+        "fortune_line": "All your hard work will soon pay off."
+    },
+    {
+        "id": 34,
+        "fortune_line": "Allow compassion to guide your decisions."
+    },
+    {
+        "id": 35,
+        "fortune_line": "An acquaintance of the past will affect you in the near future."
+    },
+    {
+        "id": 36,
+        "fortune_line": "An agreeable romance might begin to take on the appearance."
+    },
+    {
+        "id": 37,
+        "fortune_line": "An important person will offer you support."
+    },
+    {
+        "id": 38,
+        "fortune_line": "An inch of time is an inch of gold."
+    },
+    {
+        "id": 39,
+        "fortune_line": "Any decision you have to make tomorrow is a good decision."
+    },
+    {
+        "id": 40,
+        "fortune_line": "At the touch of love, everyone becomes a poet."
+    },
+    {
+        "id": 41,
+        "fortune_line": "Be careful or you could fall for some tricks today."
+    },
+    {
+        "id": 42,
+        "fortune_line": "Beauty in its various forms appeals to you."
+    },
+    {
+        "id": 43,
+        "fortune_line": "Because you demand more from yourself, others respect you deeply."
+    },
+    {
+        "id": 44,
+        "fortune_line": "Believe in yourself and others will too."
+    },
+    {
+        "id": 45,
+        "fortune_line": "Believe it can be done."
+    },
+    {
+        "id": 46,
+        "fortune_line": "Better ask twice than lose yourself once."
+    },
+    {
+        "id": 47,
+        "fortune_line": "Bide your time, for success is near."
+    },
+    {
+        "id": 48,
+        "fortune_line": "Carve your name on your heart and not on marble."
+    },
+    {
+        "id": 49,
+        "fortune_line": "Change is happening in your life, so go with the flow!"
+    },
+    {
+        "id": 50,
+        "fortune_line": "Competence like yours is underrated."
+    },
+    {
+        "id": 51,
+        "fortune_line": "Congratulations! You are on your way."
+    },
+    {
+        "id": 52,
+        "fortune_line": "Could I get some directions to your heart?"
+    },
+    {
+        "id": 53,
+        "fortune_line": "Courtesy begins in the home."
+    },
+    {
+        "id": 54,
+        "fortune_line": "Courtesy is contagious."
+    },
+    {
+        "id": 55,
+        "fortune_line": "Curiosity kills boredom. Nothing can kill curiosity."
+    },
+    {
+        "id": 56,
+        "fortune_line": "Dedicate yourself with a calm mind to the task at hand."
+    },
+    {
+        "id": 57,
+        "fortune_line": "Depart not from the path which fate has you assigned."
+    },
+    {
+        "id": 58,
+        "fortune_line": "Determination is what you need now."
+    },
+    {
+        "id": 59,
+        "fortune_line": "Diligence and modesty can raise your social status."
+    },
+    {
+        "id": 60,
+        "fortune_line": "Disbelief destroys the magic."
+    },
+    {
+        "id": 61,
+        "fortune_line": "Distance yourself from the vain."
+    },
+    {
+        "id": 62,
+        "fortune_line": "Do not be intimidated by the eloquence of others."
+    },
+    {
+        "id": 63,
+        "fortune_line": "Do not demand for someone’s soul if you already got his heart."
+    },
+    {
+        "id": 64,
+        "fortune_line": "Do not let ambitions overshadow small success."
+    },
+    {
+        "id": 65,
+        "fortune_line": "Do not make extra work for yourself."
+    },
+    {
+        "id": 66,
+        "fortune_line": "Do not underestimate yourself. Human beings have unlimited potentials."
+    },
+    {
+        "id": 67,
+        "fortune_line": "Do you know that the busiest person has the largest amount of time?"
+    },
+    {
+        "id": 68,
+        "fortune_line": "Don’t be discouraged, because every wrong attempt discarded is another step forward."
+    },
+    {
+        "id": 69,
+        "fortune_line": "Don’t confuse recklessness with confidence."
+    },
+    {
+        "id": 70,
+        "fortune_line": "Don’t just spend time. Invest it."
+    },
+    {
+        "id": 71,
+        "fortune_line": "Don’t just think, act!"
+    },
+    {
+        "id": 72,
+        "fortune_line": "Don’t let friends impose on you, work calmly and silently."
+    },
+    {
+        "id": 73,
+        "fortune_line": "Don’t let the past and useless detail choke your existence."
+    },
+    {
+        "id": 74,
+        "fortune_line": "Don’t let your limitations overshadow your talents."
+    },
+    {
+        "id": 75,
+        "fortune_line": "Don’t worry; prosperity will knock on your door soon."
+    },
+    {
+        "id": 76,
+        "fortune_line": "Each day, compel yourself to do something you would rather not do."
+    },
+    {
+        "id": 77,
+        "fortune_line": "Education is the ability to meet life’s situations."
+    },
+    {
+        "id": 78,
+        "fortune_line": "Embrace this love relationship you have!"
+    },
+    {
+        "id": 79,
+        "fortune_line": "Emulate what you admire in your parents."
+    },
+    {
+        "id": 80,
+        "fortune_line": "Emulate what you respect in your friends."
+    },
+    {
+        "id": 81,
+        "fortune_line": "Every flower blooms in its own sweet time."
+    },
+    {
+        "id": 82,
+        "fortune_line": "Every wise man started out by asking many questions."
+    },
+    {
+        "id": 83,
+        "fortune_line": "Everyday in your life is a special occasion."
+    },
+    {
+        "id": 84,
+        "fortune_line": "Everywhere you choose to go, friendly faces will greet you."
+    },
+    {
+        "id": 85,
+        "fortune_line": "Expect much of yourself and little of others."
+    },
+    {
+        "id": 86,
+        "fortune_line": "Failure is the chance to do better next time."
+    },
+    {
+        "id": 87,
+        "fortune_line": "Failure is the path of lease persistence."
+    },
+    {
+        "id": 88,
+        "fortune_line": "Fear and desire – two sides of the same coin."
+    },
+    {
+        "id": 89,
+        "fortune_line": "Fearless courage is the foundation of victory."
+    },
+    {
+        "id": 90,
+        "fortune_line": "Feeding a cow with roses does not get extra appreciation."
+    },
+    {
+        "id": 91,
+        "fortune_line": "First think of what you want to do; then do what you have to do."
+    },
+    {
+        "id": 92,
+        "fortune_line": "Follow the middle path. Neither extreme will make you happy."
+    },
+    {
+        "id": 93,
+        "fortune_line": "For hate is never conquered by hate. Hate is conquered by love."
+    },
+    {
+        "id": 94,
+        "fortune_line": "For the things we have to learn before we can do them, we learn by doing them."
+    },
+    {
+        "id": 95,
+        "fortune_line": "Fortune Not Found: Abort, Retry, Ignore?"
+    },
+    {
+        "id": 96,
+        "fortune_line": "From listening comes wisdom and from speaking repentance."
+    },
+    {
+        "id": 97,
+        "fortune_line": "From now on your kindness will lead you to success."
+    },
+    {
+        "id": 98,
+        "fortune_line": "Get your mind set – confidence will lead you on."
+    },
+    {
+        "id": 99,
+        "fortune_line": "Get your mind set…confidence will lead you on."
+    },
+    {
+        "id": 100,
+        "fortune_line": "Go for the gold today! You’ll be the champion of whatever."
+    },
+    {
+        "id": 101,
+        "fortune_line": "Go take a rest; you deserve it."
+    },
+    {
+        "id": 102,
+        "fortune_line": "Good news will be brought to you by mail."
+    },
+    {
+        "id": 103,
+        "fortune_line": "Good news will come to you by mail."
+    },
+    {
+        "id": 104,
+        "fortune_line": "Good to begin well, better to end well."
+    },
+    {
+        "id": 105,
+        "fortune_line": "Happiness begins with facing life with a smile and a wink."
+    },
+    {
+        "id": 106,
+        "fortune_line": "Happiness will bring you good luck."
+    },
+    {
+        "id": 107,
+        "fortune_line": "Happy life is just in front of you."
+    },
+    {
+        "id": 108,
+        "fortune_line": "Hard words break no bones, fine words butter no parsnips."
+    },
+    {
+        "id": 109,
+        "fortune_line": "Have a beautiful day."
+    },
+    {
+        "id": 110,
+        "fortune_line": "He who expects no gratitude shall never be disappointed."
+    },
+    {
+        "id": 111,
+        "fortune_line": "He who knows he has enough is rich."
+    },
+    {
+        "id": 112,
+        "fortune_line": "He who knows others is wise. He who knows himself is enlightened."
+    },
+    {
+        "id": 113,
+        "fortune_line": "Help! I’m being held prisoner in a chinese bakery!"
+    },
+    {
+        "id": 114,
+        "fortune_line": "How many of you believe in psycho-kinesis? Raise my hand."
+    },
+    {
+        "id": 115,
+        "fortune_line": "How you look depends on where you go."
+    },
+    {
+        "id": 116,
+        "fortune_line": "I learn by going where I have to go."
+    },
+    {
+        "id": 117,
+        "fortune_line": "If a true sense of value is to be yours it must come through service."
+    },
+    {
+        "id": 118,
+        "fortune_line": "If certainty were truth, we would never be wrong."
+    },
+    {
+        "id": 119,
+        "fortune_line": "If you continually give, you will continually have."
+    },
+    {
+        "id": 120,
+        "fortune_line": "If you look in the right places, you can find some good offerings."
+    },
+    {
+        "id": 121,
+        "fortune_line": "If you think you can do a thing or think you can’t do a thing, you’re right."
+    },
+    {
+        "id": 122,
+        "fortune_line": "If you wish to see the best in others, show the best of yourself."
+    },
+    {
+        "id": 123,
+        "fortune_line": "If your desires are not extravagant, they will be granted."
+    },
+    {
+        "id": 124,
+        "fortune_line": "If your desires are not to extravagant they will be granted."
+    },
+    {
+        "id": 125,
+        "fortune_line": "If you’re feeling down, try throwing yourself into your work."
+    },
+    {
+        "id": 126,
+        "fortune_line": "Imagination rules the world."
+    },
+    {
+        "id": 127,
+        "fortune_line": "In order to take, one must first give."
+    },
+    {
+        "id": 128,
+        "fortune_line": "In the end all things will be known."
+    },
+    {
+        "id": 129,
+        "fortune_line": "In this world of contradiction, It’s [sic] better to be merry than wise."
+    },
+    {
+        "id": 130,
+        "fortune_line": "It could be better, but its[sic] good enough."
+    },
+    {
+        "id": 131,
+        "fortune_line": "It is better to be an optimist and proven a fool than to be a pessimist and be proven right."
+    },
+    {
+        "id": 132,
+        "fortune_line": "It is better to deal with problems before they arise."
+    },
+    {
+        "id": 133,
+        "fortune_line": "It is honorable to stand up for what is right, however unpopular it seems."
+    },
+    {
+        "id": 134,
+        "fortune_line": "It is worth reviewing some old lessons."
+    },
+    {
+        "id": 135,
+        "fortune_line": "It takes courage to admit fault."
+    },
+    {
+        "id": 136,
+        "fortune_line": "It’s not the amount of time you devote, but what you devote to the time that counts."
+    },
+    {
+        "id": 137,
+        "fortune_line": "It’s time to get moving. Your spirits will lift accordingly."
+    },
+    {
+        "id": 138,
+        "fortune_line": "Keep your face to the sunshine and you will never see shadows."
+    },
+    {
+        "id": 139,
+        "fortune_line": "Let the world be filled with tranquility and goodwill."
+    },
+    {
+        "id": 140,
+        "fortune_line": "Like the river flow into the sea. Something are just meant to be."
+    },
+    {
+        "id": 141,
+        "fortune_line": "Listen not to vain words of empty tongue."
+    },
+    {
+        "id": 142,
+        "fortune_line": "Listen to everyone. Ideas come from everywhere."
+    },
+    {
+        "id": 143,
+        "fortune_line": "Living with a commitment to excellence shall take you far."
+    },
+    {
+        "id": 144,
+        "fortune_line": "Long life is in store for you."
+    },
+    {
+        "id": 145,
+        "fortune_line": "Love is a warm fire to keep the soul warm."
+    },
+    {
+        "id": 146,
+        "fortune_line": "Love is like sweet medicine, good to the last drop."
+    },
+    {
+        "id": 147,
+        "fortune_line": "Love lights up the world."
+    },
+    {
+        "id": 148,
+        "fortune_line": "Love truth, but pardon error."
+    },
+    {
+        "id": 149,
+        "fortune_line": "Man is born to live and not prepared to live."
+    },
+    {
+        "id": 150,
+        "fortune_line": "Man’s mind, once stretched by a new idea, never regains it’s original dimensions."
+    },
+    {
+        "id": 151,
+        "fortune_line": "Many will travel to hear you speak."
+    },
+    {
+        "id": 152,
+        "fortune_line": "Meditation with an old enemy is advised."
+    },
+    {
+        "id": 153,
+        "fortune_line": "Miles are covered one step at a time."
+    },
+    {
+        "id": 154,
+        "fortune_line": "Nature, time and patience are the three great physicians."
+    },
+    {
+        "id": 155,
+        "fortune_line": "Never fear! The end of something marks the start of something new."
+    },
+    {
+        "id": 156,
+        "fortune_line": "New ideas could be profitable."
+    },
+    {
+        "id": 157,
+        "fortune_line": "New people will bring you new realizations, especially about big issues."
+    },
+    {
+        "id": 158,
+        "fortune_line": "No one can walk backwards into the future."
+    },
+    {
+        "id": 159,
+        "fortune_line": "Nothing is more difficult, and therefore more precious, than to be able to decide."
+    },
+    {
+        "id": 160,
+        "fortune_line": "Now is a good time to buy stock."
+    },
+    {
+        "id": 161,
+        "fortune_line": "Now is the time to go ahead and pursue that love interest!"
+    },
+    {
+        "id": 162,
+        "fortune_line": "Now is the time to try something new"
+    },
+    {
+        "id": 163,
+        "fortune_line": "Now is the time to try something new."
+    },
+    {
+        "id": 164,
+        "fortune_line": "Observe all men, but most of all yourself."
+    },
+    {
+        "id": 165,
+        "fortune_line": "One can never fill another’s shoes, rather he must outgrow the old shoes."
+    },
+    {
+        "id": 166,
+        "fortune_line": "One of the first things you should look for in a problem is its positive side."
+    },
+    {
+        "id": 167,
+        "fortune_line": "Others can help you now."
+    },
+    {
+        "id": 168,
+        "fortune_line": "Pennies from heaven find their way to your doorstep this year!"
+    },
+    {
+        "id": 169,
+        "fortune_line": "People are attracted by your Delicate[sic] features."
+    },
+    {
+        "id": 170,
+        "fortune_line": "People find it difficult to resist your persuasive manner."
+    },
+    {
+        "id": 171,
+        "fortune_line": "Perhaps you’ve been focusing too much on saving."
+    },
+    {
+        "id": 172,
+        "fortune_line": "Physical activity will dramatically improve your outlook today."
+    },
+    {
+        "id": 173,
+        "fortune_line": "Pick battles big enough to matter, small enough to win."
+    },
+    {
+        "id": 174,
+        "fortune_line": "Place special emphasis on old friendship."
+    },
+    {
+        "id": 175,
+        "fortune_line": "Please visit us at www.wontonfood.com"
+    },
+    {
+        "id": 176,
+        "fortune_line": "Po Says: Pandas like eating bamboo, but I prefer mine dipped in chocolate."
+    },
+    {
+        "id": 177,
+        "fortune_line": "Practice makes perfect."
+    },
+    {
+        "id": 178,
+        "fortune_line": "Protective measures will prevent costly disasters."
+    },
+    {
+        "id": 179,
+        "fortune_line": "Put your mind into planning today. Look into the future."
+    },
+    {
+        "id": 180,
+        "fortune_line": "Remember the birthday but never the age."
+    },
+    {
+        "id": 181,
+        "fortune_line": "Remember to share good fortune as well as bad with your friends."
+    },
+    {
+        "id": 182,
+        "fortune_line": "Rest has a peaceful effect on your physical and emotional health."
+    },
+    {
+        "id": 183,
+        "fortune_line": "Resting well is as important as working hard."
+    },
+    {
+        "id": 184,
+        "fortune_line": "Romance moves you in a new direction."
+    },
+    {
+        "id": 185,
+        "fortune_line": "Savor your freedom – it is precious."
+    },
+    {
+        "id": 186,
+        "fortune_line": "Say hello to others. You will have a happier day."
+    },
+    {
+        "id": 187,
+        "fortune_line": "Self-knowledge is a life long process."
+    },
+    {
+        "id": 188,
+        "fortune_line": "Share your joys and sorrows with your family."
+    },
+    {
+        "id": 189,
+        "fortune_line": "Sift through your past to get a better idea of the present."
+    },
+    {
+        "id": 190,
+        "fortune_line": "Sloth makes all things difficult; industry all easy."
+    },
+    {
+        "id": 191,
+        "fortune_line": "Small confidences mark the onset of a friendship."
+    },
+    {
+        "id": 192,
+        "fortune_line": "Society prepares the crime; the criminal commits it."
+    },
+    {
+        "id": 193,
+        "fortune_line": "Someone you care about seeks reconciliation."
+    },
+    {
+        "id": 194,
+        "fortune_line": "Soon life will become more interesting."
+    },
+    {
+        "id": 195,
+        "fortune_line": "Stand tall. Don’t look down upon yourself."
+    },
+    {
+        "id": 196,
+        "fortune_line": "Staying close to home is going to be best for your morale today"
+    },
+    {
+        "id": 197,
+        "fortune_line": "Stop searching forever, happiness is just next to you."
+    },
+    {
+        "id": 198,
+        "fortune_line": "Strong reasons make strong actions."
+    },
+    {
+        "id": 199,
+        "fortune_line": "Success is a journey, not a destination."
+    },
+    {
+        "id": 200,
+        "fortune_line": "Success is failure turned inside out."
+    },
+    {
+        "id": 201,
+        "fortune_line": "Success is going from failure to failure without loss of enthusiasm."
+    },
+    {
+        "id": 202,
+        "fortune_line": "Swimming is easy. Stay floating is hard."
+    },
+    {
+        "id": 203,
+        "fortune_line": "Take care and sensitivity you show towards others will return to you."
+    },
+    {
+        "id": 204,
+        "fortune_line": "Take the high road."
+    },
+    {
+        "id": 205,
+        "fortune_line": "Technology is the art of arranging the world so we do not notice it."
+    },
+    {
+        "id": 206,
+        "fortune_line": "The austerity you see around you covers the richness of life like a veil."
+    },
+    {
+        "id": 207,
+        "fortune_line": "The best prediction of future is the past."
+    },
+    {
+        "id": 208,
+        "fortune_line": "The change you started already have far-reaching effects. Be ready."
+    },
+    {
+        "id": 209,
+        "fortune_line": "The change you started already have far-reaching effects. Be ready."
+    },
+    {
+        "id": 210,
+        "fortune_line": "The first man gets the oyster, the second man gets the shell."
+    },
+    {
+        "id": 211,
+        "fortune_line": "The greatest achievement in life is to stand up again after falling."
+    },
+    {
+        "id": 212,
+        "fortune_line": "The harder you work, the luckier you get."
+    },
+    {
+        "id": 213,
+        "fortune_line": "The night life is for you."
+    },
+    {
+        "id": 214,
+        "fortune_line": "The one that recognizes the illusion does not act as if it is real."
+    },
+    {
+        "id": 215,
+        "fortune_line": "The only people who never fail are those who never try."
+    },
+    {
+        "id": 216,
+        "fortune_line": "The person who will not stand for something will fall for anything."
+    },
+    {
+        "id": 217,
+        "fortune_line": "The philosophy of one century is the common sense of the next."
+    },
+    {
+        "id": 218,
+        "fortune_line": "The saints are the sinners who keep on trying."
+    },
+    {
+        "id": 219,
+        "fortune_line": "The secret to good friends is no secret to you."
+    },
+    {
+        "id": 220,
+        "fortune_line": "The small courtesies sweeten life, the greater ennoble it."
+    },
+    {
+        "id": 221,
+        "fortune_line": "The smart thing to do is to begin trusting your intuitions."
+    },
+    {
+        "id": 222,
+        "fortune_line": "The strong person understands how to withstand substantial loss."
+    },
+    {
+        "id": 223,
+        "fortune_line": "The sure way to predict the future is to invent it."
+    },
+    {
+        "id": 224,
+        "fortune_line": "The truly generous share, even with the undeserving."
+    },
+    {
+        "id": 225,
+        "fortune_line": "The value lies not within any particular thing, but in the desire placed on that thing."
+    },
+    {
+        "id": 226,
+        "fortune_line": "The weather is wonderful."
+    },
+    {
+        "id": 227,
+        "fortune_line": "There is no mistake so great as that of being always right."
+    },
+    {
+        "id": 228,
+        "fortune_line": "There is no wisdom greater than kindness."
+    },
+    {
+        "id": 229,
+        "fortune_line": "There is not greater pleasure than seeing your livedones prosper."
+    },
+    {
+        "id": 230,
+        "fortune_line": "There’s no such thing as an ordinary cat."
+    },
+    {
+        "id": 231,
+        "fortune_line": "Things don’t just happen; they happen just."
+    },
+    {
+        "id": 232,
+        "fortune_line": "Those who care will make the effort."
+    },
+    {
+        "id": 233,
+        "fortune_line": "Time and patience are called for many surprises await you!."
+    },
+    {
+        "id": 234,
+        "fortune_line": "Time is precious, but truth is more precious than time"
+    },
+    {
+        "id": 235,
+        "fortune_line": "To know oneself, one should assert oneself."
+    },
+    {
+        "id": 236,
+        "fortune_line": "To the world you may be one person, but to one person you may be the world."
+    },
+    {
+        "id": 237,
+        "fortune_line": "Today is the conserve yourself, as things just won’t budge."
+    },
+    {
+        "id": 238,
+        "fortune_line": "Today, your mouth might be moving but no one is listening."
+    },
+    {
+        "id": 239,
+        "fortune_line": "Tonight you will be blinded by passion."
+    },
+    {
+        "id": 240,
+        "fortune_line": "Use your eloquence where it will do the most good."
+    },
+    {
+        "id": 241,
+        "fortune_line": "We first make our habits, and then our habits make us."
+    },
+    {
+        "id": 242,
+        "fortune_line": "Welcome change."
+    },
+    {
+        "id": 243,
+        "fortune_line": "“Welcome” is a powerful word."
+    },
+    {
+        "id": 244,
+        "fortune_line": "Well done is better than well said."
+    },
+    {
+        "id": 245,
+        "fortune_line": "What’s hidden in an empty box?"
+    },
+    {
+        "id": 246,
+        "fortune_line": "What’s yours in mine, and what’s mine is mine."
+    },
+    {
+        "id": 247,
+        "fortune_line": "When more become too much. It’s same as being not enough."
+    },
+    {
+        "id": 248,
+        "fortune_line": "When your heart is pure, your mind is clear."
+    },
+    {
+        "id": 249,
+        "fortune_line": "Wish you happiness."
+    },
+    {
+        "id": 250,
+        "fortune_line": "With age comes wisdom."
+    },
+    {
+        "id": 251,
+        "fortune_line": "You always bring others happiness."
+    },
+    {
+        "id": 252,
+        "fortune_line": "You are a person of another time."
+    },
+    {
+        "id": 253,
+        "fortune_line": "You are a talented storyteller."
+    },
+    {
+        "id": 254,
+        "fortune_line": "You are admired by everyone for your talent and ability."
+    },
+    {
+        "id": 255,
+        "fortune_line": "You are almost there."
+    },
+    {
+        "id": 256,
+        "fortune_line": "You are busy, but you are happy."
+    },
+    {
+        "id": 257,
+        "fortune_line": "You are generous to an extreme and always think of the other fellow."
+    },
+    {
+        "id": 258,
+        "fortune_line": "You are going to have some new clothes."
+    },
+    {
+        "id": 259,
+        "fortune_line": "You are in good hands this evening."
+    },
+    {
+        "id": 260,
+        "fortune_line": "You are interested in higher education, whether material or spiritual."
+    },
+    {
+        "id": 261,
+        "fortune_line": "You are modest and courteous."
+    },
+    {
+        "id": 262,
+        "fortune_line": "You are never selfish with your advice or your help."
+    },
+    {
+        "id": 263,
+        "fortune_line": "You are next in line for promotion in your firm."
+    },
+    {
+        "id": 264,
+        "fortune_line": "You are offered the dream of a lifetime. Say yes!"
+    },
+    {
+        "id": 265,
+        "fortune_line": "You are open-minded and quick to make new friends."
+    },
+    {
+        "id": 266,
+        "fortune_line": "You are solid and dependable."
+    },
+    {
+        "id": 267,
+        "fortune_line": "You are soon going to change your present line of work."
+    },
+    {
+        "id": 268,
+        "fortune_line": "You are talented in many ways."
+    },
+    {
+        "id": 269,
+        "fortune_line": "You are the master of every situation."
+    },
+    {
+        "id": 270,
+        "fortune_line": "You are very expressive and positive in words, act and feeling."
+    },
+    {
+        "id": 271,
+        "fortune_line": "You are working hard."
+    },
+    {
+        "id": 272,
+        "fortune_line": "You begin to appreciate how important it is to share your personal beliefs."
+    },
+    {
+        "id": 273,
+        "fortune_line": "You can keep a secret."
+    },
+    {
+        "id": 274,
+        "fortune_line": "You can see a lot just by looking."
+    },
+    {
+        "id": 275,
+        "fortune_line": "You can’t steal second base and keep your foot on first."
+    },
+    {
+        "id": 276,
+        "fortune_line": "You desire recognition and you will find it."
+    },
+    {
+        "id": 277,
+        "fortune_line": "You have a deep appreciation of the arts and music."
+    },
+    {
+        "id": 278,
+        "fortune_line": "You have a deep interest in all that is artistic."
+    },
+    {
+        "id": 279,
+        "fortune_line": "You have a friendly heart and are well admired."
+    },
+    {
+        "id": 280,
+        "fortune_line": "You have a shrewd knack for spotting insincerity."
+    },
+    {
+        "id": 281,
+        "fortune_line": "You have a yearning for perfection."
+    },
+    {
+        "id": 282,
+        "fortune_line": "You have an active mind and a keen imagination."
+    },
+    {
+        "id": 283,
+        "fortune_line": "You have an ambitious nature and may make a name for yourself."
+    },
+    {
+        "id": 284,
+        "fortune_line": "You have an unusual equipment for success, use it properly."
+    },
+    {
+        "id": 285,
+        "fortune_line": "You have exceeded what was expected."
+    },
+    {
+        "id": 286,
+        "fortune_line": "You have had a good start. Work harder!"
+    },
+    {
+        "id": 287,
+        "fortune_line": "You have the power to write your own fortune."
+    },
+    {
+        "id": 288,
+        "fortune_line": "You have yearning for perfection."
+    },
+    {
+        "id": 289,
+        "fortune_line": "You know where you are going and how to get there."
+    },
+    {
+        "id": 290,
+        "fortune_line": "You look pretty."
+    },
+    {
+        "id": 291,
+        "fortune_line": "You love challenge."
+    },
+    {
+        "id": 292,
+        "fortune_line": "You love chinese food."
+    },
+    {
+        "id": 293,
+        "fortune_line": "You make people realize that there exist other beauties in the world."
+    },
+    {
+        "id": 294,
+        "fortune_line": "You never hesitate to tackle the most difficult problems."
+    },
+    {
+        "id": 295,
+        "fortune_line": "You never know who you touch."
+    },
+    {
+        "id": 296,
+        "fortune_line": "You only treasure what you lost."
+    },
+    {
+        "id": 297,
+        "fortune_line": "You seek to shield those you love and like the role of provider."
+    },
+    {
+        "id": 298,
+        "fortune_line": "You should be able to make money and hold on to it."
+    },
+    {
+        "id": 299,
+        "fortune_line": "You should be able to undertake and complete anything."
+    },
+    {
+        "id": 300,
+        "fortune_line": "You should pay for this check. Be generous."
+    },
+    {
+        "id": 301,
+        "fortune_line": "You understand how to have fun with others and to enjoy your solitude."
+    },
+    {
+        "id": 302,
+        "fortune_line": "You will always be surrounded by true friends."
+    },
+    {
+        "id": 303,
+        "fortune_line": "You will always get what you want through your charm and personality."
+    },
+    {
+        "id": 304,
+        "fortune_line": "You will always have good luck in your personal affairs."
+    },
+    {
+        "id": 305,
+        "fortune_line": "You will be a great success both in the business world and society."
+    },
+    {
+        "id": 306,
+        "fortune_line": "You will be blessed with longevity."
+    },
+    {
+        "id": 307,
+        "fortune_line": "You will be pleasantly surprised tonight."
+    },
+    {
+        "id": 308,
+        "fortune_line": "You will be sharing great news with all the people you love."
+    },
+    {
+        "id": 309,
+        "fortune_line": "You will be successful in your work."
+    },
+    {
+        "id": 310,
+        "fortune_line": "You will be traveling and coming into a fortune."
+    },
+    {
+        "id": 311,
+        "fortune_line": "You will be unusually successful in business."
+    },
+    {
+        "id": 312,
+        "fortune_line": "You will become a great philanthropist in your later years."
+    },
+    {
+        "id": 313,
+        "fortune_line": "You will become more and more wealthy."
+    },
+    {
+        "id": 314,
+        "fortune_line": "You will enjoy good health."
+    },
+    {
+        "id": 315,
+        "fortune_line": "You will enjoy good health; you will be surrounded by luxury."
+    },
+    {
+        "id": 316,
+        "fortune_line": "You will find great contentment in the daily, routine activities."
+    },
+    {
+        "id": 317,
+        "fortune_line": "You will have a fine capacity for the enjoyment of life."
+    },
+    {
+        "id": 318,
+        "fortune_line": "You will have gold pieces by the bushel."
+    },
+    {
+        "id": 319,
+        "fortune_line": "You will inherit a large sum of money."
+    },
+    {
+        "id": 320,
+        "fortune_line": "You will make change for the better."
+    },
+    {
+        "id": 321,
+        "fortune_line": "You will soon be surrounded by good friends and laughter."
+    },
+    {
+        "id": 322,
+        "fortune_line": "You will take a chance in something in near future."
+    },
+    {
+        "id": 323,
+        "fortune_line": "You will travel far and wide, both pleasure and business."
+    },
+    {
+        "id": 324,
+        "fortune_line": "You will travel far and wide,both pleasure and business."
+    },
+    {
+        "id": 325,
+        "fortune_line": "Your abilities are unparalleled."
+    },
+    {
+        "id": 326,
+        "fortune_line": "Your ability is appreciated."
+    },
+    {
+        "id": 327,
+        "fortune_line": "Your ability to juggle many tasks will take you far."
+    },
+    {
+        "id": 328,
+        "fortune_line": "Your biggest virtue is your modesty."
+    },
+    {
+        "id": 329,
+        "fortune_line": "Your character can be described as natural and unrestrained."
+    },
+    {
+        "id": 330,
+        "fortune_line": "Your difficulties will strengthen you."
+    },
+    {
+        "id": 331,
+        "fortune_line": "Your dreams are never silly; depend on them to guide you."
+    },
+    {
+        "id": 332,
+        "fortune_line": "Your dreams are worth your best efforts to achieve them."
+    },
+    {
+        "id": 333,
+        "fortune_line": "Your energy returns and you get things done."
+    },
+    {
+        "id": 334,
+        "fortune_line": "Your family is young, gifted and attractive."
+    },
+    {
+        "id": 335,
+        "fortune_line": "Your first love has never forgotten you."
+    },
+    {
+        "id": 336,
+        "fortune_line": "Your goal will be reached very soon."
+    },
+    {
+        "id": 337,
+        "fortune_line": "Your happiness is before you, not behind you! Cherish it."
+    },
+    {
+        "id": 338,
+        "fortune_line": "Your hard work will payoff today."
+    },
+    {
+        "id": 339,
+        "fortune_line": "Your heart will always make itself known through your words."
+    },
+    {
+        "id": 340,
+        "fortune_line": "Your home is the center of great love."
+    },
+    {
+        "id": 341,
+        "fortune_line": "Your ideals are well within your reach."
+    },
+    {
+        "id": 342,
+        "fortune_line": "Your infinite capacity for patience will be rewarded sooner or later."
+    },
+    {
+        "id": 343,
+        "fortune_line": "Your leadership qualities will be tested and proven."
+    },
+    {
+        "id": 344,
+        "fortune_line": "Your life will be happy and peaceful."
+    },
+    {
+        "id": 345,
+        "fortune_line": "Your life will get more and more exciting."
+    },
+    {
+        "id": 346,
+        "fortune_line": "Your love life will be happy and harmonious."
+    },
+    {
+        "id": 347,
+        "fortune_line": "Your love of music will be an important part of your life."
+    },
+    {
+        "id": 348,
+        "fortune_line": "Your loyalty is a virtue, but not when it’s wedded with blind stubbornness."
+    },
+    {
+        "id": 349,
+        "fortune_line": "Your mentality is alert, practical, and analytical."
+    },
+    {
+        "id": 350,
+        "fortune_line": "Your mind is creative, original and alert."
+    },
+    {
+        "id": 351,
+        "fortune_line": "Your mind is your greatest asset."
+    },
+    {
+        "id": 352,
+        "fortune_line": "Your moods signal a period of change."
+    },
+    {
+        "id": 353,
+        "fortune_line": "Your quick wits will get you out of a tough situation."
+    },
+    {
+        "id": 354,
+        "fortune_line": "Your reputation is your wealth."
+    },
+    {
+        "id": 355,
+        "fortune_line": "Your success will astonish everyone."
+    },
+    {
+        "id": 356,
+        "fortune_line": "Your talents will be recognized and suitably rewarded."
+    },
+    {
+        "id": 357,
+        "fortune_line": "Your work interests can capture the highest status or prestige."
+    }
+]

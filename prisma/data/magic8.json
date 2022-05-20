@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "message": "Concentrate and ask again."
+    },
+    {
+        "id": 2,
+        "message": " Don’t count on it."
+    },
+    {
+        "id": 3,
+        "message": " It is certain."
+    },
+    {
+        "id": 4,
+        "message": " It is decidedly so."
+    },
+    {
+        "id": 5,
+        "message": " Most likely."
+    },
+    {
+        "id": 6,
+        "message": " My reply is no."
+    },
+    {
+        "id": 7,
+        "message": " My sources say no."
+    },
+    {
+        "id": 8,
+        "message": " Outlook not so good."
+    },
+    {
+        "id": 9,
+        "message": " Outlook good."
+    },
+    {
+        "id": 10,
+        "message": " Reply hazy, try again."
+    },
+    {
+        "id": 11,
+        "message": " Signs point to yes."
+    },
+    {
+        "id": 12,
+        "message": " Very doubtful."
+    },
+    {
+        "id": 13,
+        "message": " Without a doubt."
+    },
+    {
+        "id": 14,
+        "message": " Yes."
+    },
+    {
+        "id": 15,
+        "message": " Yes – definitely."
+    },
+    {
+        "id": 16,
+        "message": " You may rely on it."
+    }
+]
