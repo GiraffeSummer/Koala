@@ -18,8 +18,8 @@ export default {
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
 
-        const profile = await FindOrCreateUser(user);
-        //console.log(profile)
+        await FindOrCreateUser(user);
+        const profile = await prisma.user.findFirst({ where: { uid: user.id }, include: { pronouns: { include: { pronouns: true } } } })
 
         let mess = "";
 
@@ -37,6 +37,10 @@ export default {
             .setThumb(user.avatarURL({ dynamic: true }))
             .setFooter(interaction.user.username, interaction.user.avatarURL({ dynamic: true }))
             .setDescription("**Username: **" + profile.name +
+                `\n**Pronouns:** ${(profile.pronouns.length > 0) ?
+                    profile.pronouns.map(x => `${x.pronouns.symbol} ${x.pronouns.name}`).join(', ')
+                    : 'any/none set'
+                }` +
                 `${badgeT}
                 \n**Status:** ` + profile.status +
                 '\n**Level:** ' + profile.lvl +
