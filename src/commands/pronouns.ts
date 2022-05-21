@@ -2,7 +2,6 @@ import { BaseCommandInteraction, Client, MessageActionRow, MessageSelectMenu, Te
 import { Command } from "../../src/Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
-
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
     name: "pronouns",

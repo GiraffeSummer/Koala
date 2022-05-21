@@ -1,6 +1,5 @@
 import { BaseCommandInteraction, Client, MessageActionRow, MessageButton, ButtonInteraction, TextChannel } from "discord.js";
 import { Command } from "../../src/Command";
-import { RandomNum } from "../lib/Functions";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import Embed from '../lib/Embed'
 import { addExp } from '../lib/LevelSystem'

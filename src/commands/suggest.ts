@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Client, Modal, MessageActionRow, ModalActionRowComponent, TextInputComponent, TextChannel, ModalSubmitInteraction } from "discord.js";
+import { BaseCommandInteraction, Client, Modal, MessageActionRow, ModalActionRowComponent, TextInputComponent } from "discord.js";
 import { addExp } from "../lib/LevelSystem";
 import { Command } from "../../src/Command";
 import prisma, { where } from "../lib/db";

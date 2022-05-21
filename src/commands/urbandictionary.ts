@@ -3,7 +3,6 @@ import { Command } from "../../src/Command";
 import fetch, { METHODS } from '../lib/fetch';
 import Embed from '../lib/Embed';
 
-
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
     name: "urbandictionary",

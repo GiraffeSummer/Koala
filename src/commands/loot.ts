@@ -2,7 +2,6 @@ import { BaseCommandInteraction, Client, MessageActionRow, MessageButton, TextCh
 import { Command } from "../../src/Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import Prisma from '@prisma/client';
-import Embed from '../lib/Embed'
 import { RandomNum } from "../lib/Functions";
 
 const pickAmount = 5;
