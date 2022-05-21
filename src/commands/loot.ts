@@ -6,7 +6,7 @@ import { RandomNum } from "../lib/Functions";
 
 const pickAmount = 5;
 
-const timeAmount = 1//10 * 60 * 1000
+const timeAmount = 30 * 60 * 1000
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
