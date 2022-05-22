@@ -35,7 +35,7 @@ export default {
             const subList = profile.items.slice().splice(r * 5, 5)
             for (let i = 0; i < subList.length; i++) {
                 const { item, amount } = subList[i];
-                const itemId = 'itempick_' + item.id
+                const itemId = 'throwpick_' + item.id
                 itemMap[itemId] = { item, amount }
                 row.addComponents(new MessageButton()
                     .setCustomId(itemId)
