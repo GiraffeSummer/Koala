@@ -74,8 +74,7 @@ export default {
                         },
                         create: {
                             userid: interaction.user.id,
-                            itemid: item.id,
-                            amount: 1
+                            itemid: item.id
                         },
                         update: {
                             amount: { decrement: 1 }

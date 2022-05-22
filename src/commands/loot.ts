@@ -4,6 +4,8 @@ import prisma, { where, FindOrCreateUser } from "../lib/db";
 import Prisma from '@prisma/client';
 import { RandomNum } from "../lib/Functions";
 
+import { formatDistance } from 'date-fns'
+
 const pickAmount = 5;
 
 const timeAmount = 30 * 60 * 1000
@@ -18,8 +20,9 @@ export default {
         const profile = await FindOrCreateUser(interaction.user);
 
         const timeDif = new Date().getTime() - profile.lootTimer.getTime()
+        const readableDif = formatDistance(profile.lootTimer.getTime() + timeAmount, Date.now())
         if (timeAmount > timeDif) {
-            return await interaction.followUp({ ephemeral: true, components: [], content: "Wait a little longer!" })
+            return await interaction.followUp({ ephemeral: true, components: [], content: `You need to wait \`${readableDif}\` to do this again!` })
         }
 
         let picked = await PickItems()
@@ -87,4 +90,15 @@ async function PickItems(amount: number = pickAmount) {
             out.push(choice)
     }
     return out;
+}
+
+function formatTime(d: number) {
+    const h = Math.floor(d / 3600);
+    const m = Math.floor(d % 3600 / 60);
+    const s = Math.floor(d % 3600 % 60);
+
+    const hDisplay = h > 0 ? h : "";
+    const mDisplay = m > 0 ? m : "";
+    const sDisplay = s > 0 ? s : "";
+    return `${hDisplay} ${mDisplay} ${sDisplay}`;
 }
