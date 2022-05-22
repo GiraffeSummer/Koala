@@ -6,6 +6,9 @@ check if `ephemeral` should be false
 ## IMPORTANT TODO
 - make seeder for consistent data (badges,pronouns, topics etc)
 
+
+Put magic 8 ball results on image!
+
 ### TODO:
  + setstatus
  + level system
