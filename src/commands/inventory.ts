@@ -32,7 +32,7 @@ export default {
         for (let i = 0; i < profile.items.length; i++) {
             const { item, amount } = profile.items[i];
             if (i >= 24) break;
-            embed.addField(item.symbol, `**${item.name}** ${(amount > 1) ? `*x*` + amount : ''}`)
+            embed.addField(item.symbol, `**${item.name}** ${(amount > 1) ? `*x*` + amount : ''}`,true)
         }
 
         await interaction.followUp({
