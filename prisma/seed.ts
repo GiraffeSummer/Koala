@@ -31,9 +31,10 @@ const seeders = {
 async function main() {
     console.log(`Start seeding ...`)
     for (const [table, items] of Object.entries(seeders)) {
-        console.log(`Seeding ${table}.`)
+        console.log(`Seeding .`)
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
+            //console.log(`${table} ${i+1}/${items.length}`)
             await prisma[table].upsert({ where: { id: item.id }, create: item, update: item })
         }
     }
