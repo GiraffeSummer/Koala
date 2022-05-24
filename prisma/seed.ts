@@ -18,50 +18,26 @@ import items from './data/items.json';
 
 const prisma = new PrismaClient()
 
+const seeders = {
+    'badge': badges,
+    'fortune': fortunes,
+    'magic8': magic8,
+    'pickup': pickup,
+    'topics': topics,
+    'pronouns': pronouns,
+    'item': items
+}
+
 async function main() {
     console.log(`Start seeding ...`)
-
-    console.log(`Seeding bages.`)
-    for (let i = 0; i < badges.length; i++) {
-        const badge = badges[i];
-        await prisma.badge.upsert({ where: { id: badge.id }, create: badge, update: badge })
+    for (const [table, items] of Object.entries(seeders)) {
+        console.log(`Seeding ${table}.`)
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            await prisma[table].upsert({ where: { id: item.id }, create: item, update: item })
+        }
     }
-
-    console.log(`Seeding fortune.`)
-    for (let i = 0; i < fortunes.length; i++) {
-        const item = fortunes[i];
-        await prisma.fortune.upsert({ where: { id: item.id }, create: item, update: item })
-    }
-
-    console.log(`Seeding magic8.`)
-    for (let i = 0; i < magic8.length; i++) {
-        const item = magic8[i];
-        await prisma.magic8.upsert({ where: { id: item.id }, create: item, update: item })
-    }
-
-    console.log(`Seeding pickup.`)
-    for (let i = 0; i < pickup.length; i++) {
-        const item = pickup[i];
-        await prisma.pickup.upsert({ where: { id: item.id }, create: item, update: item })
-    }
-
-    console.log(`Seeding topics.`)
-    for (let i = 0; i < topics.length; i++) {
-        const item = topics[i];
-        await prisma.topics.upsert({ where: { id: item.id }, create: item, update: item })
-    }
-
-    console.log(`Seeding pronouns.`)
-    for (let i = 0; i < pronouns.length; i++) {
-        const item = pronouns[i];
-        await prisma.pronouns.upsert({ where: { id: item.id }, create: item, update: item })
-    }
-
-    console.log(`Seeding items.`)
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        await prisma.item.upsert({ where: { id: item.id }, create: item, update: item })
-    }
+    console.log(`Done seeding!`)
 }
 
 main()
