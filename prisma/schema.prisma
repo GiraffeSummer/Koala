@@ -85,16 +85,47 @@ model aboutus {
   details  String? @db.VarChar(255)
 }
 
-model commands {
-  id            Int      @id @default(autoincrement()) @map("_id")
-  active        Boolean? @default(true)
-  command       String?  @db.VarChar(100)
-  description   String?  @db.Text
-  command_usage String?  @db.Text
-  nsfw          Boolean? @default(false)
-  admin         Boolean? @default(false)
-  serveradmin   Boolean? @default(false)
-  aliases       String?  @db.VarChar(200)
+//model commands {
+//  id            Int      @id @default(autoincrement()) @map("_id")
+//  active        Boolean? @default(true)
+//  command       String?  @db.VarChar(100)
+//  description   String?  @db.Text
+//  command_usage String?  @db.Text
+//  nsfw          Boolean? @default(false)
+//  admin         Boolean? @default(false)
+//  serveradmin   Boolean? @default(false)
+//  aliases       String?  @db.VarChar(200)
+//}
+
+model Command {
+  id          Int               @id @default(autoincrement()) @map("_id")
+  command     String?           @db.VarChar(100)
+  description String?           @db.Text
+  type        String?           @default("CHAT_INPUT") @db.VarChar(100)
+  exp         Int               @default(1)
+  ephemeral   Boolean?          @default(false)
+  noDefer     Boolean?          @default(false)
+  options     command_options[]
+}
+
+model command_options {
+  commandid Int
+  optionid  Int
+
+  command Command        @relation(fields: [commandid], references: [id])
+  option  CommandOptions @relation(fields: [optionid], references: [id])
+  @@id([commandid, optionid])
+}
+
+model CommandOptions {
+  id          Int      @id @default(autoincrement())
+  type        String?  @db.VarChar(100)
+  name        String?  @db.VarChar(100)
+  description String?  @db.Text
+  //options     command_options[] @re
+  //choices
+
+  commands command_options[]
 }
 
 model fortune {
