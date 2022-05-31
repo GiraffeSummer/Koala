@@ -73,5 +73,50 @@
         "id": 15,
         "name": "paperclip",
         "symbol": "📎"
+    },
+    {
+        "id": 16,
+        "name": "Teddy Bear",
+        "symbol": "🧸"
+    },
+    {
+        "id": 17,
+        "name": "Nut and bolt",
+        "symbol": "🔩"
+    },
+    {
+        "id": 18,
+        "name": "Crayon",
+        "symbol": "🖍️"
+    },
+    {
+        "id": 19,
+        "name": "Envelope",
+        "symbol": "✉️"
+    },
+    {
+        "id": 20,
+        "name": "Balloon",
+        "symbol": "🎈"
+    },
+    {
+        "id": 21,
+        "name": "Ribbon",
+        "symbol": "🎀"
+    },
+    {
+        "id": 22,
+        "name": "Safety Pin",
+        "symbol": "🧷"
+    },
+    {
+        "id": 23,
+        "name": "Thread",
+        "symbol": "🧵"
+    },
+    {
+        "id": 24,
+        "name": "Candle",
+        "symbol": "🕯️"
     }
 ]
