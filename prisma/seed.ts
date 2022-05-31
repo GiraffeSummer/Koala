@@ -31,7 +31,7 @@ const seeders = {
 async function main() {
     console.log(`Start seeding ...`)
     for (const [table, items] of Object.entries(seeders)) {
-        console.log(`Seeding .`)
+        console.log(`Seeding ${table}.`)
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
             //console.log(`${table} ${i+1}/${items.length}`)
