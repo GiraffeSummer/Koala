@@ -101,21 +101,11 @@
     },
     {
         "id": 21,
-        "name": "Ribbon",
-        "symbol": "🎀"
-    },
-    {
-        "id": 22,
         "name": "Safety Pin",
         "symbol": "🧷"
     },
     {
-        "id": 23,
-        "name": "Thread",
-        "symbol": "🧵"
-    },
-    {
-        "id": 24,
+        "id": 22,
         "name": "Candle",
         "symbol": "🕯️"
     }
