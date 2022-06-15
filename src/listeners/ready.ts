@@ -10,8 +10,11 @@ export default (client: Client): void => {
 
         //register badges as choices to select command
         //await registerBadges();
-
-        await client.application.commands.set(Commands);
+        try {
+            await client.application.commands.set(Commands);
+        } catch (error) {
+            console.error(error);
+        }
 
         console.log(`${client.user.username} is online`);
     });
