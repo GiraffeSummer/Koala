@@ -118,10 +118,10 @@ model command_options {
 }
 
 model CommandOptions {
-  id          Int      @id @default(autoincrement())
-  type        String?  @db.VarChar(100)
-  name        String?  @db.VarChar(100)
-  description String?  @db.Text
+  id          Int     @id @default(autoincrement())
+  type        String? @db.VarChar(100)
+  name        String? @db.VarChar(100)
+  description String? @db.Text
   //options     command_options[] @re
   //choices
 
@@ -209,7 +209,8 @@ model pronoun_list {
 model pronouns {
   id     Int     @id @default(autoincrement())
   name   String? @db.VarChar(100)
-  symbol String? @db.VarChar(100)
+  symbol String? @db.VarChar(16)
+  emoji  String? @db.VarChar(16)
 
   list pronoun_list[]
 }

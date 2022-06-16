@@ -2,16 +2,20 @@
     {
         "id": 1,
         "name": "he/him",
-        "symbol": "♂"
+        "symbol": "♂",
+        "emoji": "🚹"
     },
     {
         "id": 2,
         "name": "she/her",
-        "symbol": "♀"
+        "symbol": "♀",
+        "emoji": "🚺"
     },
     {
         "id": 3,
         "name": "they/them",
-        "symbol": "⚥"
+        "symbol": "⚥",
+        "emoji": "🚻",
+        "_alt": "⚧️"
     }
 ]

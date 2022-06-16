@@ -96,7 +96,13 @@ export default {
                             .setCustomId('select_pronouns')
                             .setPlaceholder('None')
                             .addOptions(unUsedPronouns.map(
-                                (pronoun, i) => { return { label: pronoun.name, value: `${pronoun.id}`, description: pronoun.name } }
+                                (pronoun, i) => {
+                                    return {
+                                        label: pronoun.name, value: `${pronoun.id}`,
+                                        description: pronoun.name,
+                                        emoji: pronoun.emoji
+                                    }
+                                }
                             )),
                     );
 
