@@ -47,6 +47,13 @@ export default {
             include: { Badge: true, badges: { include: { badge: true } } }
         });
 
+        if (profile.badges.length <= 0) {
+            return await interaction.followUp({
+                ephemeral: true,
+                embeds: [{ description: `You do not have any badges. 😔` }]
+            });
+        }
+
         switch (sub) {
             case 'current':
                 if (profile.selectedBadge) {
@@ -73,12 +80,13 @@ export default {
                 break;
 
             case 'select':
+                const options = profile.badges.map((badge, i) => { return { label: badge.badge.name, emoji: badge.badge.badge, value: `${i}`, description: badge.badge.description } });
                 const row = new MessageActionRow()
                     .addComponents(
                         new MessageSelectMenu()
                             .setCustomId('select_badge')
                             .setPlaceholder('None')
-                            .addOptions(profile.badges.map((badge, i) => { return { label: badge.badge.name, value: `${i}`, description: badge.badge.description } })),
+                            .addOptions(options),
                     );
 
                 const channel = await client.channels.fetch(interaction.channelId) as TextChannel;
