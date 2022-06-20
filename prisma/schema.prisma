@@ -22,8 +22,8 @@ model User {
   bot           Boolean?  @default(false)
   balance       BigInt?   @default(1000)
 
-  lootTimer DateTime? @default(now())
-
+  lootTimer  DateTime? @default(now())
+  guessTimer DateTime? @default(now())
 
   partnerId String?
   partner   User?   @relation("parent", fields: [partnerId], references: [uid])
@@ -118,10 +118,10 @@ model command_options {
 }
 
 model CommandOptions {
-  id          Int      @id @default(autoincrement())
-  type        String?  @db.VarChar(100)
-  name        String?  @db.VarChar(100)
-  description String?  @db.Text
+  id          Int     @id @default(autoincrement())
+  type        String? @db.VarChar(100)
+  name        String? @db.VarChar(100)
+  description String? @db.Text
   //options     command_options[] @re
   //choices
 
