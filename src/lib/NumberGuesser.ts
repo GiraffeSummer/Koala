@@ -2,6 +2,7 @@
 import { User } from "discord.js";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import { addExp } from '../lib/LevelSystem'
+import { addBadge } from '../lib/BadgeSystem'
 export default class NumberGuess {
     #number: number;
     readonly #maxNumber: number = 100;
@@ -36,31 +37,7 @@ export default class NumberGuess {
         addExp(interaction, this.reward.exp);
 
         if (this.reward.badgeId !== null) {
-            const alreadyHas = await prisma.badge_inventory.findFirst({
-                where: {
-                    badgeid: this.reward.badgeId,
-                    userid: user.id,
-                }
-            })
-
-            const badge = await prisma.badge.findFirst(where({ id: this.reward.badgeId }))
-            if (alreadyHas == null) {
-                await prisma.badge_inventory.upsert({
-                    where: {
-                        userid_badgeid: {
-                            badgeid: this.reward.badgeId,
-                            userid: user.id,
-                        }
-                    },
-                    create: {
-                        userid: user.id,
-                        badgeid: this.reward.badgeId
-                    }, update: {}
-                });
-                interaction.followUp({ content: `You earned the ${badge.badge} \`${badge.name}\` badge!`, ephemeral: true })
-            } else {
-                interaction.followUp({ content: `You already have ${badge.badge} \`${badge.name}\``, ephemeral: true })
-            }
+            addBadge(interaction, this.reward.badgeId)
         }
     }
 
