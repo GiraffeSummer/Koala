@@ -33,7 +33,7 @@ export default class NumberGuess {
         }
     }
     //@ts-ignore
-    async Reward(user: User, interaction: any) {
+    async Reward(interaction: any) {
         addExp(interaction, this.reward.exp);
 
         if (this.reward.badgeId !== null) {

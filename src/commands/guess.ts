@@ -36,7 +36,7 @@ export default {
 
         if (guess) {
             content = `You got it, the number was ${number} after \`${numberGuesser.guesses.length}\` guesses,\nYou've earned the badge!`
-            numberGuesser.Reward(interaction.user, interaction);
+            numberGuesser.Reward(interaction);
             numberGuesser.Reset();
         }
 
