@@ -1,11 +1,10 @@
 import { BaseCommandInteraction, Client, MessageActionRow, MessageButton } from "discord.js";
 import { Command } from "../../src/Command";
-import Embed from '../lib/Embed'
 import CollectorManager from "../lib/CollectorManager";
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
-    name: "test",
+    name: "testcollector",
     description: "Testing collector manager",
     type: "CHAT_INPUT",
     options: [],
@@ -20,6 +19,10 @@ export default {
                     .setCustomId('test_yes')
                     .setLabel('Yes')
                     .setStyle('SUCCESS'),
+                new MessageButton()
+                    .setCustomId('test_other')
+                    .setLabel('another')
+                    .setStyle('SUCCESS'),
 
                 new MessageButton()
                     .setCustomId('invalid')
@@ -27,11 +30,10 @@ export default {
                     .setStyle('DANGER')
             );
 
-        //row.components[0].customId
-
         collector
-            .setIds('test_yes', 'test_no')
-          //  .getIds(row)
+            //.setIds('test_yes', 'test_no')
+            .getIds([row])
+            //.rmId('invalid')//remove id from verified
             .createCollector()
             .end(async click => {
                 await interaction.editReply({
@@ -39,7 +41,6 @@ export default {
                     content: `Done ${click.customId}`
                 })
             })
-
 
         await interaction.followUp({
             content: `Hello`,

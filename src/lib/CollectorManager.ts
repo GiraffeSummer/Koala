@@ -1,50 +1,83 @@
-import { type Client, type MessageActionRow, type TextChannel, type Interaction, MessageChannelComponentCollectorOptions, ButtonInteraction, SelectMenuInteraction, InteractionCollector } from 'discord.js'
+import {
+    type Client, type MessageActionRow, type TextChannel, type Interaction, type MessageChannelComponentCollectorOptions, type CollectorFilter,
+    type CacheType, type ButtonInteraction, type SelectMenuInteraction, type InteractionCollector
+} from 'discord.js'
 
 export default class CollectorManager {
-    channel: TextChannel;
+    #channel: TextChannel;
 
-    client: Client;
-    interaction: Interaction
+    #client: Client;
+    #interaction: Interaction
 
-    collector: InteractionCollector<ButtonInteraction | SelectMenuInteraction>;
+    collector: InteractionCollector<ButtonInteraction | SelectMenuInteraction | any>;
     ids: string[] = []
 
 
     constructor(client: Client, interaction: Interaction) {
-        this.client = client;
-        this.interaction = interaction;
+        this.#client = client;
+        this.#interaction = interaction;
     };
 
     async setChannel() {
-        this.channel = await this.client.channels.fetch(this.interaction.channelId) as TextChannel;
+        this.#channel = await this.#client.channels.fetch(this.#interaction.channelId) as TextChannel;
+    }
+
+    setInteraction(interaction: Interaction) {
+        this.#interaction = interaction;
+        return this;
     }
 
     setIds(...ids) {
-        //possibly scrape ids from MessageActionRow object? 
         this.ids = ids
         return this;
     }
 
-    getIds(row: MessageActionRow) {
-        row.components.forEach(component => {
-            this.ids.push(component.customId)
+    rmId(...ids) {
+        this.ids = this.ids.filter(x => !ids.includes(x))
+        return this;
+    }
+
+    getIds(rows: MessageActionRow[]) {
+        rows.forEach(row => {
+            row.components.forEach(component => {
+                this.ids.push(component.customId)
+            })
         })
 
         return this;
     }
 
-    createCollector(options: MessageChannelComponentCollectorOptions<ButtonInteraction | SelectMenuInteraction> = {
-        filter: (int) => this.interaction.user.id === int.user.id,
-        componentType: "BUTTON",
-        max: 1,
-        time: 300 * 1000
-    }) {
-        this.collector = this.channel.createMessageComponentCollector({
-            filter: (int) => this.interaction.user.id === int.user.id,
+    #collectorOptions:
+        MessageChannelComponentCollectorOptions<ButtonInteraction | SelectMenuInteraction> =
+        {
+            filter: (int) => this.#interaction.user.id === int.user.id,
             componentType: "BUTTON",
             max: 1,
             time: 300 * 1000
-        });
+        };
+
+    setTimeOut(minutes: number) {
+        this.#collectorOptions.time = minutes * 60 * 1000;
+        return this;
+    }
+
+    setMax(max: number) {
+        this.#collectorOptions.max = max;
+        return this;
+    }
+
+    setFilter(filter: CollectorFilter<[ButtonInteraction<CacheType> | SelectMenuInteraction<CacheType>]> | null) {
+        this.#collectorOptions.filter = filter;
+        return this;
+    }
+
+    setComponentType(type: ComponentTypes) {
+        this.#collectorOptions.componentType = type;
+        return this;
+    }
+
+    createCollector(options: MessageChannelComponentCollectorOptions<ButtonInteraction | SelectMenuInteraction | any> = this.#collectorOptions) {
+        this.collector = this.#channel.createMessageComponentCollector(options);
 
         return this;
     }
@@ -59,19 +92,17 @@ export default class CollectorManager {
         return this;
     }
     async collect(cb: Function) {
-        this.collector.on('collect', async (collection) => {
-            //collection.forEach(async click => {
-            //    if (Object.keys(this.ids).includes(click.customId)) await cb(click)
-            //})
+        this.collector.on('collect', async (click) => {
+            if (Object.keys(this.ids).includes(click.customId)) await cb(click)
         })
 
         return this;
     }
-    /*
-    const collector = channel.createMessageComponentCollector({
-        filter: (int) => interaction.user.id === int.user.id,
-        componentType: "BUTTON",
-        max: 1,
-        time: 300 * 1000
-    })*/
+}
+
+export enum ComponentTypes {
+    BUTTON = "BUTTON",
+    ACTION_ROW = "ACTION_ROW",
+    SELECT_MENU = "SELECT_MENU",
+    TEXT_INPUT = "TEXT_INPUT"
 }
