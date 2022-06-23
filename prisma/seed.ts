@@ -15,6 +15,8 @@ import pronouns from './data/pronouns.json';
 
 //@ts-ignore
 import items from './data/items.json';
+//@ts-ignore
+import rewards from './data/rewards.json'
 
 const prisma = new PrismaClient()
 
@@ -25,7 +27,8 @@ const seeders = {
     'pickup': pickup,
     'topics': topics,
     'pronouns': pronouns,
-    'item': items
+    'item': items,
+    'reward': rewards
 }
 
 async function main() {

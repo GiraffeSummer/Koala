@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "name": "ZERO",
+        "exp": 0,
+        "badge": null
+    },
+    {
+        "id": 2,
+        "name": "NumberGuesser",
+        "exp": 3,
+        "badge": 8
+    }
+]

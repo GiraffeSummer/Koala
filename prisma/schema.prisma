@@ -57,6 +57,7 @@ model Badge {
   description     String?           @db.VarChar(255)
   User            User[]
   badge_inventory badge_inventory[]
+  Reward          Reward[]
 }
 
 model item_inventory {
@@ -75,6 +76,16 @@ model Item {
   symbol String? @db.VarChar(100)
 
   item_inventory item_inventory[]
+}
+
+model Reward {
+  id   Int     @id @default(autoincrement())
+  name String? @db.VarChar(100)
+
+  Badge Badge? @relation(fields: [badge], references: [id])
+  badge Int?
+  exp   Int?   @default(0)
+
 }
 
 model aboutus {

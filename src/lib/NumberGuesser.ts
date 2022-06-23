@@ -1,17 +1,12 @@
-
-import { User } from "discord.js";
-import prisma, { where, FindOrCreateUser } from "../lib/db";
-import { addExp } from '../lib/LevelSystem'
-import { addBadge } from '../lib/BadgeSystem'
+import RewardManager from '../lib/RewardManager'
 export default class NumberGuess {
     #number: number;
     readonly #maxNumber: number = 100;
 
     guesses: Guess[];
-    reward: Reward;//badgeId = NUll for no badge reward
+    rewardId: Number = 2;
 
-    constructor(reward: Reward = { exp: 3, badgeId: 8 }) {
-        this.reward = reward;
+    constructor() {
 
         this.guesses = [];
         this.#Generate();
@@ -34,11 +29,7 @@ export default class NumberGuess {
     }
     //@ts-ignore
     async Reward(interaction: any) {
-        addExp(interaction, this.reward.exp);
-
-        if (this.reward.badgeId !== null) {
-            addBadge(interaction, this.reward.badgeId)
-        }
+        return await RewardManager(interaction, this.rewardId);
     }
 
     #Generate() {
@@ -49,10 +40,7 @@ export default class NumberGuess {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
-export interface Reward {
-    exp: number;
-    badgeId: number | null;
-}
+
 export interface Guess {
     number: number;
 }
