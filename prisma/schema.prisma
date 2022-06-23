@@ -221,6 +221,7 @@ model pronouns {
   id     Int     @id @default(autoincrement())
   name   String? @db.VarChar(100)
   symbol String? @db.VarChar(100)
+  emoji  String? @db.VarChar(100)
 
   list pronoun_list[]
 }

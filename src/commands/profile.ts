@@ -38,7 +38,7 @@ export default {
             .setFooter(interaction.user.username, interaction.user.avatarURL({ dynamic: true }))
             .setDescription("**Username: **" + profile.name +
                 `\n**Pronouns:** ${(profile.pronouns.length > 0) ?
-                    profile.pronouns.map(x => `${x.pronouns.symbol} ${x.pronouns.name}`).join(', ')
+                    profile.pronouns.map(x => `${x.pronouns.emoji} ${x.pronouns.name}`).join(', ')
                     : 'any/none set'
                 }` +
                 `${badgeT}

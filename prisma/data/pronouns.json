@@ -2,16 +2,19 @@
     {
         "id": 1,
         "name": "he/him",
-        "symbol": "♂"
+        "symbol": "♂",
+        "emoji": "<:male_symbol:989574806292824095>"
     },
     {
         "id": 2,
         "name": "she/her",
-        "symbol": "♀"
+        "symbol": "♀",
+        "emoji": "<:female_symbol:989574805164523612>"
     },
     {
         "id": 3,
         "name": "they/them",
-        "symbol": "⚥"
+        "symbol": "⚥",
+        "emoji": "<:trans_symbol:989574807408492596>"
     }
 ]

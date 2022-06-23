@@ -58,7 +58,7 @@ export default {
                                 .setCustomId('remove_pronouns')
                                 .setPlaceholder('None')
                                 .addOptions(usedPronouns.map(
-                                    (pronoun, i) => { return { label: pronoun.name, value: `${pronoun.id}`, description: pronoun.name } }
+                                    (pronoun, i) => { return { label: pronoun.name, value: `${pronoun.id}`, emoji: pronoun.emoji, description: pronoun.name } }
                                 )),
                         );
 
@@ -96,7 +96,7 @@ export default {
                             .setCustomId('select_pronouns')
                             .setPlaceholder('None')
                             .addOptions(unUsedPronouns.map(
-                                (pronoun, i) => { return { label: pronoun.name, value: `${pronoun.id}`, description: pronoun.name } }
+                                (pronoun, i) => { return { label: pronoun.name, value: `${pronoun.id}`,emoji: pronoun.emoji, description: pronoun.name } }
                             )),
                     );
 
@@ -115,7 +115,7 @@ export default {
                         if (click.customId == `select_pronouns`) {
                             const pronoun = pronouns.find(x => x.id == parseInt(click.values[0]))
                             await prisma.pronoun_list.create({ data: { userid: interaction.user.id, pronounId: parseInt(click.values[0]) } });
-                            await interaction.editReply({ content: `You selected: ${pronoun.name}!`, components: [] });
+                            await interaction.editReply({ content: `You selected: ${pronoun.emoji} ${pronoun.name}!`, components: [] });
                         }
                     })
                 })
