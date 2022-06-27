@@ -14,7 +14,9 @@ export async function FindOrCreateUser(user): Promise<Prisma.User> {
         create: {
             uid: user.id,
             name: user.username,
-            discriminator: user.discriminator
+            discriminator: user.discriminator,
+            lootTimer: new Date(0),
+            guessTimer: new Date(0)
         },
     });
     return u;
