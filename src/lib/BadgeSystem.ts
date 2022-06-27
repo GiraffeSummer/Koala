@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
 export enum Status {
@@ -5,6 +6,35 @@ export enum Status {
     AlreadyOwns,
     Removed,
     Failed,
+}
+
+export async function silentAdd(user: any, badgeId: number,) {
+    await FindOrCreateUser(user);
+
+    const alreadyHas = await prisma.badge_inventory.findFirst({
+        where: {
+            badgeid: badgeId,
+            userid: user.id,
+        }
+    })
+    const badge = await prisma.badge.findFirst(where({ id: badgeId }))
+    if (alreadyHas == null) {
+        await prisma.badge_inventory.upsert({
+            where: {
+                userid_badgeid: {
+                    badgeid: badgeId,
+                    userid: user.id,
+                }
+            },
+            create: {
+                userid: user.id,
+                badgeid: badgeId
+            }, update: {}
+        });
+        return { status: Status.Given, badge }
+    } else {
+        return { status: Status.AlreadyOwns, badge }
+    }
 }
 
 export async function addBadge(interaction: any, badgeId: number, userOb: any = null) {
@@ -61,6 +91,32 @@ export async function revokeBadge(interaction: any, badgeId: number, userOb: any
             }
         });
         interaction.followUp({ content: `You earned the ${badge.badge} \`${badge.name}\` badge!`, ephemeral: true })
+        return { status: Status.Removed, badge }
+    } else {
+        return { status: Status.Failed, badge }
+    }
+}
+
+export async function silentRevoke(userOb: any, badgeId: number) {
+    let user = await FindOrCreateUser(userOb);
+
+    const has = await prisma.badge_inventory.findFirst({
+        where: {
+            badgeid: badgeId,
+            userid: user.uid,
+        }
+    })
+
+    const badge = await prisma.badge.findFirst(where({ id: badgeId }))
+    if (has == null) {
+        await prisma.badge_inventory.delete({
+            where: {
+                userid_badgeid: {
+                    badgeid: badgeId,
+                    userid: user.uid,
+                }
+            }
+        });
         return { status: Status.Removed, badge }
     } else {
         return { status: Status.Failed, badge }
