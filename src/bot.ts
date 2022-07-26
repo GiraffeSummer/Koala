@@ -4,6 +4,7 @@ import interactionCreate from "./listeners/interactionCreate";
 import ready from "./listeners/ready";
 import guildCreate from './listeners/guildCreate';
 import guildDelete from './listeners/guildDelete';
+import message from './listeners/message';
 
 import { LoadCommands } from './Commands'
 
@@ -13,7 +14,7 @@ console.log("Bot is starting...");
 
 //GUILD_MESSAGES
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS]
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 LoadCommands().then((commands) => {
     //@ts-ignore
@@ -27,5 +28,7 @@ ready(client);
 interactionCreate(client);
 guildCreate(client);
 guildDelete(client);
+
+message(client);
 
 client.login(process.env.TOKEN);
