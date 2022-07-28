@@ -1,52 +1,67 @@
-"# Hikage-v3" 
+# Koala
+
+Koala is version 3 of Hikage, my discord bot I started years ago.  
+I've had to redo most of the work, and in the end very happy I did.  
+It now uses slash commands and all the other fancy new features like dropdowns, buttons and modals.   
+The level system is now based on command usage, and does no longer log the levelup message due to API changes, but that's just how it is.
 
 
-check if `ephemeral` should be false
+## todo:
+- Put magic 8 ball results on image!  
+- Proper licence  
 
-## IMPORTANT TODO
-- make seeder for consistent data (badges,pronouns, topics etc)
+## Features
 
+### other features
+- slash commands! (Finally!)  
+- Level system  
+- badge system  
 
-Put magic 8 ball results on image!
-
-### TODO:
- + setstatus
- + level system
- + profile
- - userinfo
- - memberinfo
+  
+### commands:
+ - avatar
+ - badge
+ - divorce
+ - face
+ - fortune
+ - gif
+ - guess
+ - inventory
  - invite
- + avatar
- + roll
- + pickup
- + magic8
- + fortune
- + topic
-
-not priority
- - guess (the number)
- + lvltop
- + badges
- - admin
-
+ - loot
+ - lvltop
+ - magic8
+ - marry
+ - pickup
+ - profile
+ - pronouns
+ - rank
+ - rate
+ - RockPaperScissors
+ - roll
+ - setstatus
+ - suggest
+ - support
+ - throw
+ - topic
+ - urbandictionary
 
 maybe:
- - owo
- - hentai
+ - admin
+ - owo (or rewrite owoify to use slash commands)
  - reddit
  - google
  - googleimage
- -
+ - servers
+ - nsfw stuff (hentai,porngifs)
 
+dev features
+- using prisma for easy database interaction
+- seeder for consistent data (badges,pronouns, topics etc)
 
-### DB TODO
-+ pickup
-+ magic8
-+ topics
-+ fortune
-+ users
+### Licence
+I do not currently have a licence, but you're free to check out my code and use it for reference.
+Do **not** redistribute, or sell.
 
-Lower priority:
-+ badges
-+ badges_inventory
-- servers
+I struggled a lot finding any good working examples of slash commands (at least of how I wanted to make them)  
+So I do want to help out.
