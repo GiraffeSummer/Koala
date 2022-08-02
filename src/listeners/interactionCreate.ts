@@ -1,18 +1,20 @@
 import { BaseCommandInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction } from "discord.js";
 import { logCommand } from '../lib/Log'
 import { addExp } from '../lib/LevelSystem'
-import Commands from "../Commands";
+import commands, { context_commands } from "../Commands";
 
 export default (client: Client): void => {
     client.on("interactionCreate", async (interaction: Interaction) => {
-        if (interaction.isCommand() || interaction.isContextMenu()) {
+        if (interaction.isContextMenu()) {
+            await handleContextMenu(client, interaction);
+        } else if (interaction.isCommand()) {
             await handleSlashCommand(client, interaction);
         }
     });
 };
 
 const handleSlashCommand = async (client: Client, interaction: BaseCommandInteraction): Promise<void> => {
-    const slashCommand = Commands.find(c => c.name === interaction.commandName);
+    const slashCommand = commands.find(c => c.name === interaction.commandName);
     if (!slashCommand) {
         interaction.followUp({ content: "An error has occurred" });
         return;
@@ -29,4 +31,24 @@ const handleSlashCommand = async (client: Client, interaction: BaseCommandIntera
     } catch (error) { }
 
     slashCommand.run(client, interaction);
+};
+
+const handleContextMenu = async (client: Client, interaction: BaseCommandInteraction): Promise<void> => {
+    const context_command = context_commands.find(c => c.name === interaction.commandName);
+    if (!context_command) {
+        interaction.followUp({ content: "An error has occurred" });
+        return;
+    }
+
+    //const levelUp = await addExp(interaction, context_command?.exp || 1);
+
+    try {
+        logCommand(interaction.user.id, interaction.commandName, (interaction.options['_hoistedOptions'].length > 0) ? interaction.options['_hoistedOptions'] : null)
+    } catch (error) { }
+
+    if ((typeof context_command.noDefer == 'boolean') ? !context_command.noDefer : true) {
+        await interaction.deferReply((context_command.ephemeral != null) ? { ephemeral: context_command.ephemeral || false } : undefined);
+    }
+
+    context_command.run(client, interaction);
 };

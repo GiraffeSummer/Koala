@@ -1,12 +1,9 @@
 import 'dotenv/config'
 import { Client, ClientOptions, Intents } from "discord.js";
-import interactionCreate from "./listeners/interactionCreate";
-import ready from "./listeners/ready";
-import guildCreate from './listeners/guildCreate';
-import guildDelete from './listeners/guildDelete';
-import message from './listeners/message';
 
-import { LoadCommands } from './Commands'
+import EventSubscriber from "./lib/EventSubscriber";
+
+import { LoadCommands, LoadContextMenuCommands } from './Commands'
 
 import NumberGuesser from './lib/NumberGuesser';
 
@@ -21,14 +18,16 @@ LoadCommands().then((commands) => {
     console.log('Commands (' + commands.length + '): ' + commands.map(x => x.name).join(', '))
 });
 
+
+LoadContextMenuCommands().then((commands) => {
+    //@ts-ignore
+    console.log('Context Commands (' + commands.length + '): ' + commands.map(x => x.name).join(', '))
+});
+
+
 const numberGuesser = new NumberGuesser()
 client['numberGuesser'] = numberGuesser;
 
-ready(client);
-interactionCreate(client);
-guildCreate(client);
-guildDelete(client);
-
-message(client);
+EventSubscriber(client)
 
 client.login(process.env.TOKEN);

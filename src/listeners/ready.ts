@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import Commands from "../Commands";
+import commands, { context_commands } from "../Commands";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
 export default (client: Client): void => {
@@ -8,7 +8,10 @@ export default (client: Client): void => {
             return;
         }
 
-        await client.application.commands.set(Commands);
+
+        //@ts-ignore
+        await client.application.commands.set([...commands, ...context_commands]);
+
 
         console.log(`${client.user.username} is online`);
     });
