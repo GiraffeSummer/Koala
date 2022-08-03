@@ -86,7 +86,8 @@ export default {
                     })
                 }
                 await interaction.editReply({ components: [], content: `You threw a: ${item.symbol} ${item.name} at ${user}` })
-                user.send({ content: `${interaction.user} threw a ${item.symbol} ${item.name} at you. That hurt!` })
+                if (!user.bot)
+                    user.send({ content: `${interaction.user} threw a ${item.symbol} ${item.name} at you. That hurt!` })
 
                 //add item to user's inventory (chance?)
             })
