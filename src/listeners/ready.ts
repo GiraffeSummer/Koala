@@ -13,7 +13,7 @@ export default (client: Client): void => {
         //@ts-ignore
         await client.application.commands.set([...commands, ...context_commands]);
 
-        await CheckGuildsStillActive(client.guilds.cache);
+        CheckGuildsStillActive(client.guilds.cache);
 
         console.log(`${client.user.username} is online`);
     });
