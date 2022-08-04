@@ -47,6 +47,7 @@ model badge_inventory {
 
   user  User  @relation(fields: [userid], references: [uid])
   badge Badge @relation(fields: [badgeid], references: [id])
+
   @@id([userid, badgeid])
 }
 
@@ -67,6 +68,7 @@ model item_inventory {
 
   user User @relation(fields: [userid], references: [uid])
   item Item @relation(fields: [itemid], references: [id])
+
   @@id([userid, itemid])
 }
 
@@ -85,7 +87,6 @@ model Reward {
   Badge Badge? @relation(fields: [badge], references: [id])
   badge Int?
   exp   Int?   @default(0)
-
 }
 
 model aboutus {
@@ -125,6 +126,7 @@ model command_options {
 
   command Command        @relation(fields: [commandid], references: [id])
   option  CommandOptions @relation(fields: [optionid], references: [id])
+
   @@id([commandid, optionid])
 }
 
@@ -186,6 +188,13 @@ model warnings {
   reason  String? @db.Text
 }
 
+model Guild {
+  id     String     @id @default(uuid())
+  name   String?
+  active Boolean @default(true)
+  createdAt   DateTime?      @default(now())
+}
+
 //model commandlog {
 //  id          String    @id @db.VarChar(45)
 //  serverid    String    @db.VarChar(45)
@@ -214,6 +223,7 @@ model pronoun_list {
 
   user     User     @relation(fields: [userid], references: [uid])
   pronouns pronouns @relation(fields: [pronounId], references: [id])
+
   @@id([userid, pronounId])
 }
 
