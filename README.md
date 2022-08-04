@@ -5,6 +5,10 @@ I've had to redo most of the work, and in the end very happy I did.
 It now uses slash commands and all the other fancy new features like dropdowns, buttons and modals.   
 The level system is now based on command usage, and does no longer log the levelup message due to API changes, but that's just how it is.
 
+## template
+I've also stripped this down and turned it into a [template](https://github.com/GiraffeSummer/ts-discordjs-template)  
+you are free to use this as you like, A mention would be nice, but not required, I will set up proper readme and license on that soon
+
 
 ## todo:
 - Put magic 8 ball results on image!  
