@@ -58,13 +58,17 @@ export async function CheckStillActive(guilds: Collection<any, Guild>) {
 }
 
 export async function Remove(guild: Guild) {
-    return await prisma.guild.update({
-        where: {
-            id: guild.id,
-        },
-        data: {
-            name: guild.name,
-            active: false
-        }
-    })
+    try {
+        return await prisma.guild.update({
+            where: {
+                id: guild.id,
+            },
+            data: {
+                name: guild.name,
+                active: false
+            }
+        })
+    } catch (error) {
+        return null
+    }
 }
