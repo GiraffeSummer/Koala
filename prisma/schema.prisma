@@ -189,10 +189,10 @@ model warnings {
 }
 
 model Guild {
-  id     String     @id @default(uuid())
-  name   String?
-  active Boolean @default(true)
-  createdAt   DateTime?      @default(now())
+  id        String    @id @default(uuid())
+  name      String?
+  active    Boolean   @default(true)
+  createdAt DateTime? @default(now())
 }
 
 //model commandlog {
@@ -207,14 +207,26 @@ model Guild {
 //}
 
 model suggestions {
-  id         Int    @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   title      String
-  suggestion String @db.LongText
+  suggestion String   @db.LongText
+  userId     String
+  timestamp  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [uid])
 
-  user   User   @relation(fields: [userId], references: [uid])
-  userId String
+  status suggestion_status @default(unread)
 
-  timestamp DateTime @default(now())
+  deleted DateTime?
+
+  @@index([userId], map: "suggestions_userId_fkey")
+}
+
+enum suggestion_status {
+  unread
+  accepted
+  hold
+  rejected
+  WIP
 }
 
 model pronoun_list {
