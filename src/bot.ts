@@ -11,7 +11,7 @@ console.log("Bot is starting...");
 
 //GUILD_MESSAGES
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES,Intents.FLAGS.GUILD_MEMBERS]
 });
 LoadCommands().then((commands) => {
     //@ts-ignore
