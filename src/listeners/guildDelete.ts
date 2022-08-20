@@ -4,15 +4,12 @@ import { Remove as GuildRemove } from '../lib/GuildManager'
 
 export default (client: Client): void => {
     client.on("guildDelete", async (guild) => {
-        if (!guild) {
+        if (guild == undefined || !guild) {
             return;
         }
         await GuildRemove(guild);
 
         console.log(`Left guild ${guild?.name || 'unknown'}`);
-        if(!guild){
-            console.log(guild)
-        }
         try {
             const owner = await (await guild.fetchOwner()).user;
             await silentRevoke(owner, 3);//remove
