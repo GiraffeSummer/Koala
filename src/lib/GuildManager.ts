@@ -35,7 +35,7 @@ export async function CheckStillActive(guilds: Collection<any, Guild>) {
 
         const guildObj = await guilds.find(x => x.id == guild.id);
         const newName = guildObj.name || guild.name;
-        console.log(`updating: ${guild.name} -> ` + newName)
+        console.log(`updating: ${guild.name} ${newName == guild.name ? '' : '-> ' + newName}`)
         await prisma.guild.update({
             where: {
                 id: guild.id,
