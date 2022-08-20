@@ -9,7 +9,10 @@ export default (client: Client): void => {
         }
         await GuildRemove(guild);
 
-        console.log(`Left guild ${guild.name}`);
+        console.log(`Left guild ${guild.name || 'unknown'}`);
+        if(!guild){
+            console.log(guild)
+        }
         try {
             const owner = await (await guild.fetchOwner()).user;
             await silentRevoke(owner, 3);//remove
