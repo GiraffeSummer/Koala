@@ -9,9 +9,13 @@ export default (client: Client): void => {
         }
         await GuildAdd(guild);
 
-        const owner = await (await guild.fetchOwner()).user;
-        await silentAdd(owner, 3);
-        //3
         console.log(`joined guild ${guild.name}`);
+
+        try {
+            const owner = await (await guild.fetchOwner()).user;
+            await silentAdd(owner, 3);
+        } catch (error) {
+            console.log('failed to add owner');
+        }
     });
 };
