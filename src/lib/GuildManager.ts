@@ -32,17 +32,18 @@ export async function CheckStillActive(guilds: Collection<any, Guild>) {
     let removed = []
     dbGuilds.forEach(async guild => {
         const exists = dbGuilds.some(x => ids.includes(x.id))
+
+        await prisma.guild.update({
+            where: {
+                id: guild.id,
+            },
+            data: {
+                name: guild.name,
+                active: exists
+            }
+        })
         if (!exists) {
             console.log(`removing '${guild.name}'`)
-            await prisma.guild.update({
-                where: {
-                    id: guild.id,
-                },
-                data: {
-                    name: guild.name,
-                    active: false
-                }
-            })
             removed.push(guild)
         }
     });
