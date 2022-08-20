@@ -9,7 +9,7 @@ export default (client: Client): void => {
         }
         await GuildAdd(guild);
 
-        console.log(`joined guild ${guild.name}`);
+        console.log(`joined guild ${guild?.name || 'unknown'}`);
         if (!guild) {
             console.log(guild)
         }
