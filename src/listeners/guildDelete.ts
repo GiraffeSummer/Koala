@@ -9,7 +9,7 @@ export default (client: Client): void => {
         }
         await GuildRemove(guild);
 
-        console.log(`Left guild ${guild.name || 'unknown'}`);
+        console.log(`Left guild ${guild?.name || 'unknown'}`);
         if(!guild){
             console.log(guild)
         }
