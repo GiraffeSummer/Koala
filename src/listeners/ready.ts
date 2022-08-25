@@ -9,7 +9,6 @@ export default (client: Client): void => {
             return;
         }
 
-
         //@ts-ignore
         await client.application.commands.set([...commands, ...context_commands]);
 
