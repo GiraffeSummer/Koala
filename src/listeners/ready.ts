@@ -10,7 +10,7 @@ export default (client: Client): void => {
         }
 
         //@ts-ignore
-        await client.application.commands.set([...commands, ...context_commands]);
+        //await client.application.commands.set([...commands, ...context_commands]);
 
         CheckGuildsStillActive(client.guilds.cache);
 
