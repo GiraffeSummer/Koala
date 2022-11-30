@@ -14,6 +14,6 @@ export default (client: Client): void => {
 
         CheckGuildsStillActive(client.guilds.cache);
 
-        console.log(`${client.user.username} is online`);
+        console.log(`${client.user.username} is online [${client.guilds.cache.size} servers]`);
     });
 };
