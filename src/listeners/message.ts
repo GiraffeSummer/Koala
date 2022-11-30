@@ -6,7 +6,10 @@ export default (client: Client): void => {
         if (!message) {
             return;
         }
-        
+        //ignore webhooks and bots
+        if (message.author.bot || message.webhookId) {
+            return;
+        }
         const levelUp = await addExpMessage(message, 1);
     });
 };
