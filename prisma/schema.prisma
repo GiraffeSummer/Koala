@@ -259,3 +259,29 @@ model commandLog {
 
   timestamp DateTime @default(now())
 }
+
+
+model wouldyourather {
+  id    Int     @id @default(autoincrement())
+  question String? @db.LongText
+}
+
+model neverhaveiever {
+  id    Int     @id @default(autoincrement())
+  question String? @db.LongText
+}
+
+model paranoia {
+  id    Int     @id @default(autoincrement())
+  question String? @db.LongText
+}
+
+model truth {
+  id    Int     @id @default(autoincrement())
+  question String? @db.LongText
+}
+
+model dare {
+  id    Int     @id @default(autoincrement())
+  question String? @db.LongText
+}

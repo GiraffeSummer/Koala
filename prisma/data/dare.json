@@ -1,0 +1,542 @@
+[
+    {
+        "id": 1,
+        "question": "Act like a chicken until your next turn."
+    },
+    {
+        "id": 2,
+        "question": "Act out an infomercial for a product chosen by the other players."
+    },
+    {
+        "id": 3,
+        "question": "Attempt the first TikTok dance on your FYP."
+    },
+    {
+        "id": 4,
+        "question": "Attempt to juggle two or three items of the asker's choosing."
+    },
+    {
+        "id": 5,
+        "question": "Bark like a dog."
+    },
+    {
+        "id": 6,
+        "question": "Brush your teeth with salt"
+    },
+    {
+        "id": 7,
+        "question": "Burp the alphabet."
+    },
+    {
+        "id": 8,
+        "question": "Call a friend, pretend it's their birthday, and sing “Happy Birthday” to them."
+    },
+    {
+        "id": 9,
+        "question": "Call a parent and prank them by saying you've been arrested."
+    },
+    {
+        "id": 10,
+        "question": "Call a random acquaintance and tell them you want to break up."
+    },
+    {
+        "id": 11,
+        "question": "Call the first person in your contacts list and sing them “Happy Birthday.”"
+    },
+    {
+        "id": 12,
+        "question": "Call your best friend and pick a fight with them."
+    },
+    {
+        "id": 13,
+        "question": "Call your crush."
+    },
+    {
+        "id": 14,
+        "question": "Call your parents and convince them that you are pregnant."
+    },
+    {
+        "id": 15,
+        "question": "Call your partner and prank them by saying you are pregnant."
+    },
+    {
+        "id": 16,
+        "question": "Change your relationship status on your social media."
+    },
+    {
+        "id": 17,
+        "question": "Choose someone from this room to go skinny dipping in a pool."
+    },
+    {
+        "id": 18,
+        "question": "Choose someone in this room to lick whipped cream from your finger."
+    },
+    {
+        "id": 19,
+        "question": "Comment a fire emoji on the first five pictures on your Instagram feed."
+    },
+    {
+        "id": 20,
+        "question": "Crack an egg on our head."
+    },
+    {
+        "id": 21,
+        "question": "Dance with no music for 1 minute."
+    },
+    {
+        "id": 22,
+        "question": "Demonstrate a sexual position with a pillow."
+    },
+    {
+        "id": 23,
+        "question": "Demonstrate how you style your hair in the mirror, without actually using the mirror."
+    },
+    {
+        "id": 24,
+        "question": "Describe the most attractive quality of every person in the room."
+    },
+    {
+        "id": 25,
+        "question": "Do 100 squats"
+    },
+    {
+        "id": 26,
+        "question": "Do 5 minutes of stand-up comedy."
+    },
+    {
+        "id": 27,
+        "question": "Do a cartwheel."
+    },
+    {
+        "id": 28,
+        "question": "Do a free-style rap for the next minute."
+    },
+    {
+        "id": 29,
+        "question": "Do a plank for a full minute."
+    },
+    {
+        "id": 30,
+        "question": "Do an impression of another player until your next turn."
+    },
+    {
+        "id": 31,
+        "question": "Do karaoke to a song of the group's choosing."
+    },
+    {
+        "id": 32,
+        "question": "Do your best impression of a fish out of water."
+    },
+    {
+        "id": 33,
+        "question": "Do your best interpretive dance/gymnastics floor routine."
+    },
+    {
+        "id": 34,
+        "question": "Do your best sexy crawl"
+    },
+    {
+        "id": 35,
+        "question": "Drink 1 cup of lemon juice."
+    },
+    {
+        "id": 36,
+        "question": "Dump a bucket of cold water on your head."
+    },
+    {
+        "id": 37,
+        "question": "Dump out your purse or pockets and do a show and tell of what's inside."
+    },
+    {
+        "id": 38,
+        "question": "Eat a bite of a banana peel."
+    },
+    {
+        "id": 39,
+        "question": "Eat a packet of hot sauce straight."
+    },
+    {
+        "id": 40,
+        "question": "Eat a packet of ketchup straight."
+    },
+    {
+        "id": 41,
+        "question": "Eat a raw egg."
+    },
+    {
+        "id": 42,
+        "question": "Eat a snack without using your hands"
+    },
+    {
+        "id": 43,
+        "question": "Eat a spoonful of coffee grounds"
+    },
+    {
+        "id": 44,
+        "question": "Feed someone a food with your mouth."
+    },
+    {
+        "id": 45,
+        "question": "Find your first crush on social and DM them."
+    },
+    {
+        "id": 46,
+        "question": "Flash someone"
+    },
+    {
+        "id": 47,
+        "question": "For the rest of the game, no walking is allowed. You can roll, hop on one foot, crawl on all fours, somersault, etc."
+    },
+    {
+        "id": 48,
+        "question": "Give a foot massage to the person on your right"
+    },
+    {
+        "id": 49,
+        "question": "Give a lap dance to someone of your choice"
+    },
+    {
+        "id": 50,
+        "question": "Give a one-word “roast” to each other player."
+    },
+    {
+        "id": 51,
+        "question": "Give a shoulder rub to the player to your right (if they are comfortable)."
+    },
+    {
+        "id": 52,
+        "question": "Give another player your phone and let them send a social media DM to anyone they want."
+    },
+    {
+        "id": 53,
+        "question": "Go outside and do your best wolf howl at the moon."
+    },
+    {
+        "id": 54,
+        "question": "Go outside and pretend to mow grass with an invisible mower — make mowing sounds too!"
+    },
+    {
+        "id": 55,
+        "question": "Go outside and sing “You are My Sunshine” at full volume."
+    },
+    {
+        "id": 56,
+        "question": "Grab a broom and do a seductive dance with it."
+    },
+    {
+        "id": 57,
+        "question": "Keep your eyes closed until it's your turn again"
+    },
+    {
+        "id": 58,
+        "question": "Kiss the person to your left."
+    },
+    {
+        "id": 59,
+        "question": "Lay on the floor and act like a sizzling piece of bacon."
+    },
+    {
+        "id": 60,
+        "question": "Lead the group in a mini yoga class for one minute."
+    },
+    {
+        "id": 61,
+        "question": "Let another person draw a tattoo on you with a permanent marker."
+    },
+    {
+        "id": 62,
+        "question": "Let another person post a status on your behalf."
+    },
+    {
+        "id": 63,
+        "question": "Let another player create a hat out of toilet paper and wear it for the rest of the game."
+    },
+    {
+        "id": 64,
+        "question": "Let another player style your hair and leave it that way for the rest of the game."
+    },
+    {
+        "id": 65,
+        "question": "Let someone give you a wedgie."
+    },
+    {
+        "id": 66,
+        "question": "Let someone in the group blindfold you and feed you one item out of the fridge."
+    },
+    {
+        "id": 67,
+        "question": "Let someone paint your nails any way they want."
+    },
+    {
+        "id": 68,
+        "question": "Let the group mix together five of whatever liquids they find in the fridge, then drink it."
+    },
+    {
+        "id": 69,
+        "question": "Let the other players blindfold you and try to guess three food items just by smell."
+    },
+    {
+        "id": 70,
+        "question": "Let the other players go through your phone for one minute."
+    },
+    {
+        "id": 71,
+        "question": "Let the other players pose you and remain in that position until your next turn."
+    },
+    {
+        "id": 72,
+        "question": "Let the person on your right draw on your face."
+    },
+    {
+        "id": 73,
+        "question": "Let the player to your right redo your makeup."
+    },
+    {
+        "id": 74,
+        "question": "Lick a bar of soap."
+    },
+    {
+        "id": 75,
+        "question": "lick the floor and make a video of it."
+    },
+    {
+        "id": 76,
+        "question": "Like the first 15 posts on your Facebook newsfeed"
+    },
+    {
+        "id": 77,
+        "question": "Make silly faces until someone in the group laughs."
+    },
+    {
+        "id": 78,
+        "question": "Narrate the game in a newscaster voice for three turns."
+    },
+    {
+        "id": 79,
+        "question": "Peel a banana using just your toes."
+    },
+    {
+        "id": 80,
+        "question": "Perform a dance routine to a boy band song of the group's choice."
+    },
+    {
+        "id": 81,
+        "question": "Perform a dramatic version of a monologue from a favorite TV show or movie."
+    },
+    {
+        "id": 82,
+        "question": "Perform ballet for 1 minute."
+    },
+    {
+        "id": 83,
+        "question": "Play air guitar for one minute."
+    },
+    {
+        "id": 84,
+        "question": "Pole dance with an imaginary pole"
+    },
+    {
+        "id": 85,
+        "question": "Post a photo to social with a heartfelt dedication to a celebrity of the group's choosing."
+    },
+    {
+        "id": 86,
+        "question": "Post an unflattering selfie to your favorite social media account."
+    },
+    {
+        "id": 87,
+        "question": "Post the oldest selfie on your phone to Snapchat or Instagram stories (and leave it up!)."
+    },
+    {
+        "id": 88,
+        "question": "Pour ice down your pants."
+    },
+    {
+        "id": 89,
+        "question": "Prank call one of your family members."
+    },
+    {
+        "id": 90,
+        "question": "Pretend that you have a pet and play with it."
+    },
+    {
+        "id": 91,
+        "question": "Pretend to make love to someone invisible."
+    },
+    {
+        "id": 92,
+        "question": "Pretend to make out with your hand."
+    },
+    {
+        "id": 93,
+        "question": "Put on a blindfold and guess who each player is by touching their face."
+    },
+    {
+        "id": 94,
+        "question": "Put on makeup a full face of makeup without looking in the mirror, then leave it like that for the rest of the game."
+    },
+    {
+        "id": 95,
+        "question": "Put on the worst outfit in your closet, take a selfie and post to social media"
+    },
+    {
+        "id": 96,
+        "question": "Quack like a duck until your next turn."
+    },
+    {
+        "id": 97,
+        "question": "Read aloud the last five things you searched on your phone."
+    },
+    {
+        "id": 98,
+        "question": "Read the last text message you sent out loud."
+    },
+    {
+        "id": 99,
+        "question": "Remove four items of clothing"
+    },
+    {
+        "id": 100,
+        "question": "Remove your socks with your teeth."
+    },
+    {
+        "id": 101,
+        "question": "Repeat everything the person to your right says until your next turn."
+    },
+    {
+        "id": 102,
+        "question": "Say something dirty to the person on your left"
+    },
+    {
+        "id": 103,
+        "question": "Seductively eat a banana"
+    },
+    {
+        "id": 104,
+        "question": "Send a sext to the last person in your contact list"
+    },
+    {
+        "id": 105,
+        "question": "Serenade the person to your right for a full minute."
+    },
+    {
+        "id": 106,
+        "question": "Shave one eyebrow."
+    },
+    {
+        "id": 107,
+        "question": "Show me the least sexy part of your body."
+    },
+    {
+        "id": 108,
+        "question": "Show off your best dance moves for the full duration of a song."
+    },
+    {
+        "id": 109,
+        "question": "Show off your orgasm face"
+    },
+    {
+        "id": 110,
+        "question": "Show the most embarrassing photo on your phone."
+    },
+    {
+        "id": 111,
+        "question": "Shower with your clothes on."
+    },
+    {
+        "id": 112,
+        "question": "Sing a song every time you receive a notification on your phone."
+    },
+    {
+        "id": 113,
+        "question": "Sing instead of speaking any time you talk for three turns."
+    },
+    {
+        "id": 114,
+        "question": "Sing your partner a lullaby"
+    },
+    {
+        "id": 115,
+        "question": "Smell another player's armpit."
+    },
+    {
+        "id": 116,
+        "question": "Smell another player's bare foot."
+    },
+    {
+        "id": 117,
+        "question": "Speak in an Irish accent until your next turn."
+    },
+    {
+        "id": 118,
+        "question": "Spin around 12 times and try to walk straight."
+    },
+    {
+        "id": 119,
+        "question": "Stand in the cold shower with your favorite clothes on."
+    },
+    {
+        "id": 120,
+        "question": "Streak around the block"
+    },
+    {
+        "id": 121,
+        "question": "Swap clothes with someone of the opposite sex for 2 rounds."
+    },
+    {
+        "id": 122,
+        "question": "Take a body shot"
+    },
+    {
+        "id": 123,
+        "question": "Take a selfie on the toilet and post it."
+    },
+    {
+        "id": 124,
+        "question": "Talk without closing your mouth."
+    },
+    {
+        "id": 125,
+        "question": "Touch someone else's tongue with yours."
+    },
+    {
+        "id": 126,
+        "question": "Try to drink a glass of water without using your hands."
+    },
+    {
+        "id": 127,
+        "question": "Try to lick your elbow"
+    },
+    {
+        "id": 128,
+        "question": "Try to put your whole fist in your mouth"
+    },
+    {
+        "id": 129,
+        "question": "Twerk for a minute"
+    },
+    {
+        "id": 130,
+        "question": "Video chat the person of your choice while picking your nose through the entire conversation."
+    },
+    {
+        "id": 131,
+        "question": "Walk next door with a measuring cup and ask for a cup of sugar."
+    },
+    {
+        "id": 132,
+        "question": "Wear another player's socks like gloves for the next five minutes."
+    },
+    {
+        "id": 133,
+        "question": "Wear your shoes on the wrong feet for the rest of the game."
+    },
+    {
+        "id": 134,
+        "question": "Write a naughty story and send it to your crush."
+    },
+    {
+        "id": 135,
+        "question": "You have 5 minutes to write a country song and perform it."
+    }
+]

@@ -16,7 +16,17 @@ import pronouns from './data/pronouns.json';
 //@ts-ignore
 import items from './data/items.json';
 //@ts-ignore
-import rewards from './data/rewards.json'
+import rewards from './data/rewards.json';
+//@ts-ignore
+import wyr from './data/wouldyourather.json';
+//@ts-ignore
+import nhie from './data/neverhaveiever.json'
+//@ts-ignore
+import paranoia from './data/paranoia.json';
+//@ts-ignore
+import truth from './data/truth.json'
+//@ts-ignore
+import dare from './data/dare.json'
 
 const prisma = new PrismaClient()
 
@@ -28,7 +38,12 @@ const seeders = {
     'topics': topics,
     'pronouns': pronouns,
     'item': items,
-    'reward': rewards
+    'reward': rewards,
+    'wouldyourather': wyr,
+    'neverhaveiever': nhie,
+    'paranoia': paranoia,
+    'truth': truth,
+    'dare': dare
 }
 
 async function main() {
@@ -41,6 +56,7 @@ async function main() {
             await prisma[table].upsert({ where: { id: item.id }, create: item, update: item })
         }
     }
+
     console.log(`Done seeding!`)
 }
 
