@@ -1,5 +1,6 @@
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import { Message, BaseCommandInteraction as Interaction, User } from 'discord.js';
+import theme from "../lib/theme";
 
 const levelMessages = true;
 
@@ -11,7 +12,7 @@ export async function addExpInteraction(interaction: Interaction, exp: number = 
         interaction.followUp({
             ephemeral: true,
             embeds: [{
-                color: 0x0000ff,
+                color: theme.default,
                 description: `You levelled up to level: **${user.lvl}**!`,
                 title: "**LEVEL UP**"
             }]
@@ -28,7 +29,7 @@ export async function addExpMessage(message: Message, exp: number = 1, userOb: a
     if (leveled && levelMessages) {
         message.reply({
             embeds: [{
-                color: 0x0000ff,
+                color: theme.default,
                 description: `You levelled up to level: **${user.lvl}**!`,
                 title: "**LEVEL UP**"
             }]

@@ -1,6 +1,7 @@
 import { BaseCommandInteraction, Client } from "discord.js";
 import { Command } from "../../src/Command";
 import Embed from '../lib/Embed'
+import theme from "../lib/theme";
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
