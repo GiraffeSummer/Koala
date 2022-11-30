@@ -1,6 +1,6 @@
 import { BaseCommandInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction } from "discord.js";
 import { logCommand } from '../lib/Log'
-import { addExp } from '../lib/LevelSystem'
+import { addExpInteraction } from '../lib/LevelSystem'
 import commands, { context_commands } from "../Commands";
 
 export default (client: Client): void => {
@@ -24,7 +24,7 @@ const handleSlashCommand = async (client: Client, interaction: BaseCommandIntera
         await interaction.deferReply((slashCommand.ephemeral != null) ? { ephemeral: slashCommand.ephemeral || false } : undefined);
     }
 
-    const levelUp = await addExp(interaction, slashCommand?.exp || 1);
+    //const levelUp = await addExpInteraction(interaction, slashCommand?.exp || 0);
 
     try {
         logCommand(interaction.user.id, interaction.commandName, (interaction.options['_hoistedOptions'].length > 0) ? interaction.options['_hoistedOptions'] : null)

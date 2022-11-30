@@ -1,5 +1,5 @@
 import { BaseCommandInteraction, Client, Modal, MessageActionRow, ModalActionRowComponent, TextInputComponent } from "discord.js";
-import { addExp } from "../lib/LevelSystem";
+import { addExpInteraction } from "../lib/LevelSystem";
 import { Command } from "../../src/Command";
 import prisma, { where } from "../lib/db";
 
@@ -44,7 +44,7 @@ export default {
                 await prisma.suggestions.create({ data: { userId: interaction.user.id, title: suggestion.title, suggestion: suggestion.suggestion } })
 
                 submit.reply({ ephemeral: true, content: 'Thanks for your suggestion, We will look into it!' });
-                await addExp(interaction, 2);
+                await addExpInteraction(interaction, 2);
             })
             .catch((err) => {
                 interaction.followUp({ ephemeral: true, content: 'Your suggestion did not come through' });

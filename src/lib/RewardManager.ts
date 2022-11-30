@@ -1,5 +1,5 @@
 import prisma, { where, FindOrCreateUser } from "../lib/db";
-import { addExp } from './LevelSystem'
+import { addExpInteraction } from './LevelSystem'
 import { addBadge } from './BadgeSystem'
 
 export default async function (interaction: any, rewardId: Number) {
@@ -8,7 +8,7 @@ export default async function (interaction: any, rewardId: Number) {
 
     await FindOrCreateUser(interaction.user);
 
-    addExp(interaction, reward.exp);
+    addExpInteraction(interaction, reward.exp);
 
     if (reward.badge !== null) {
         addBadge(interaction, reward.badge)
