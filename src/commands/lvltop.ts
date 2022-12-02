@@ -18,7 +18,6 @@ export default {
             const usr = top[i];
             embed.fields.push({ name: `**#${i + 1}** ${usr.name}#${usr.discriminator}`, value: `Level: ${usr.lvl} with ${usr.toLvl} to go.`, inline: true })
         }
-        console.log(embed)
         await interaction.followUp({
             embeds: [embed]
         });
