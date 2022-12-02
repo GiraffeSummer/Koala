@@ -1,4 +1,5 @@
 const getInvite = (id: string) => {
+    //533314530369
     return `https://discord.com/api/oauth2/authorize?client_id=${id}&permissions=516000369729&scope=bot%20applications.commands`
 }
 import { BaseCommandInteraction, Client, MessageActionRow, MessageButton } from "discord.js";

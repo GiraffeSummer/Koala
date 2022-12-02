@@ -11,9 +11,10 @@ export default {
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const question = await getTruth();
 
-        await interaction.followUp({
+        interaction.deleteReply();
+        const msg = await interaction.channel.send({
             embeds: [{ description: question, color: theme.default }],
-           // components: [await addButtons(client, interaction, question,)]
         });
+        msg.edit({ components: [await addButtons(client, msg, question,)] })
     }
 } as Command;

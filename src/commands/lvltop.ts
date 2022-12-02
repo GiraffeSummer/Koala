@@ -2,6 +2,7 @@ import { BaseCommandInteraction, Client } from "discord.js";
 import { Command } from "../../src/Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import Embed from '../lib/Embed'
+import theme from '../lib/theme'
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
@@ -11,15 +12,14 @@ export default {
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const top = await prisma.user.findMany({ take: 10, orderBy: [{ lvl: 'desc' }, { toLvl: 'asc' }] });
 
-        const embed = new Embed("Top 10:");
+        const embed = { title: "Top 10:", color: theme.default, fields: [] };
 
         for (let i = 0; i < top.length; i++) {
             const usr = top[i];
-            embed.addField(`${usr.name}#${usr.discriminator}`, `Level: ${usr.lvl} with ${usr.toLvl} to go.`)
+            embed.fields.push({ name: `**#${i + 1}** ${usr.name}#${usr.discriminator}`, value: `Level: ${usr.lvl} with ${usr.toLvl} to go.`, inline: true })
         }
-
         await interaction.followUp({
-            embeds: embed.get()
+            embeds: [embed]
         });
     }
 } as Command;
