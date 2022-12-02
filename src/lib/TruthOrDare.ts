@@ -10,17 +10,14 @@ export async function addButtons(client, interaction, question) {
         .addComponents(
             new MessageButton()
                 .setCustomId('truth')
-                //just.setEmoji('💍')
                 .setLabel('truth')
                 .setStyle('SUCCESS'),
             new MessageButton()
                 .setCustomId('dare')
-                //.setEmoji('💔')
                 .setLabel('dare')
                 .setStyle('DANGER'),
             new MessageButton()
                 .setCustomId('random')
-                // .setEmoji('💔')
                 .setLabel('random')
                 .setStyle("PRIMARY"),
         );
@@ -35,7 +32,7 @@ export async function addButtons(client, interaction, question) {
     collector.on('end', async (collection) => {
         collection.forEach(async click => {
             console.log(click.message.id)
-            if(click.message.id !== interaction.message.id) return;
+            if (click.message.id !== interaction.message.id) return;
             interaction.editReply({
                 ...interaction, components: []
             })

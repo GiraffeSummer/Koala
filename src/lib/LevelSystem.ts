@@ -13,8 +13,8 @@ export async function addExpInteraction(interaction: Interaction, exp: number = 
             ephemeral: true,
             embeds: [{
                 color: theme.default,
+                title: "**LEVEL UP**",
                 description: `You levelled up to level: **${user.lvl}**!`,
-                title: "**LEVEL UP**"
             }]
         })
     }
@@ -30,8 +30,11 @@ export async function addExpMessage(message: Message, exp: number = 1, userOb: a
         message.reply({
             embeds: [{
                 color: theme.default,
+                title: "**LEVEL UP**",
                 description: `You levelled up to level: **${user.lvl}**!`,
-                title: "**LEVEL UP**"
+                footer:{
+                    text: `Annoying message?\nuse /suggest, I'll fix this soon.`
+                }
             }]
         })
     }
