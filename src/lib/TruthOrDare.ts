@@ -1,11 +1,11 @@
-import { BaseCommandInteraction, Client, MessageActionRow, MessageButton, ButtonInteraction, TextChannel } from "discord.js";
+import { BaseCommandInteraction, Client, MessageActionRow, MessageButton, ButtonInteraction, TextChannel, Message } from "discord.js";
 import { RandomNum } from "../lib/Functions";
 import prisma, { where } from "../lib/db";
 import theme from "../lib/theme";
 
 //TODO: 
 //WORK IN PROGRESS
-export async function addButtons(client, interaction, question) {
+export async function addButtons(client: Client, message: Message, question) {
     const row = new MessageActionRow()
         .addComponents(
             new MessageButton()
@@ -22,7 +22,7 @@ export async function addButtons(client, interaction, question) {
                 .setStyle("PRIMARY"),
         );
 
-    const channel = await client.channels.fetch(interaction.channelId) as TextChannel;
+    const channel = await client.channels.fetch(message.channelId) as TextChannel;
     const collector = channel.createMessageComponentCollector({
         componentType: "BUTTON",
         max: 1,
@@ -31,11 +31,8 @@ export async function addButtons(client, interaction, question) {
 
     collector.on('end', async (collection) => {
         collection.forEach(async click => {
-            console.log(click.message.id)
-            if (click.message.id !== interaction.message.id) return;
-            interaction.editReply({
-                ...interaction, components: []
-            })
+            if (click.message.id !== message.id) return;
+            message.edit({ components: [] })
             let question;
             switch (click.customId) {
                 case 'truth':
@@ -53,9 +50,13 @@ export async function addButtons(client, interaction, question) {
                 default:
                     break;
             }
+            message.reply({ embeds: [{ description: question, color: theme.default }] })
+                .then(async int => {
+                    int.edit({ components: [await addButtons(client, int, question,)] })
+                }).catch(err => {
+                    message.channel.send({ content: `Something went wrong!\nMake sure I have the read message history and send message permissions` })
+                });
 
-            const int = await channel.send({ embeds: [{ description: question, color: theme.default }] });
-            await addButtons(client, int, question);
         })
     })
 
