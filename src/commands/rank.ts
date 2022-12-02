@@ -29,10 +29,10 @@ export default {
         const img = parseInt(user.discriminator) % 4; //this number should be amount of images
         await canvas.setBackground(`./resources/bg${img}.png`);
 
-        canvas.addBox(20, 20, 896, 242, "rgba(0,0,0,0.7)", 20);
+        canvas.addBox(20, 20, 896, 242, "rgba(0,0,0,0.7)", 40);
 
         //Draw avatar circle
-        await canvas.addCircleImage(60, 40, 202, user.displayAvatarURL({ format: "jpg", size: 2048 }), 8, lineColor);
+        await canvas.addCircleImage(60, 40, 202, user.displayAvatarURL({ format: "jpg", size: 2048 }), 8, "rgba(0,0,0,0.7)");
 
         //draw badge
         if (profile.selectedBadge != null) {
@@ -40,7 +40,7 @@ export default {
             const badgeExt = (selectedBadge.badge[1] == 'a') ? 'gif' : 'png';
             const badgeId = selectedBadge.badge.split(':')[2].replace('>', '').trim()
             const badgeURl = `https://cdn.discordapp.com/emojis/${badgeId}.${badgeExt}`
-            await canvas.addCircleImage(canvas.canvas.width - 150, 20, 90, badgeURl, 0, lineColor);
+            await canvas.addCircleImage(canvas.canvas.width - 150, 35, 70, badgeURl, 0, "rgba(0,0,0,0.7)");
         }
 
         //Draw progress bar
@@ -48,8 +48,8 @@ export default {
         canvas.addBar(306, 185, 570, 40, 10, lineColor, barValue);
 
         //Draw text
-        canvas.addText(299, 100, user.username, "56px Arial");
-        canvas.addText(302, 165, "Level " + profile.lvl, "32px Arial");
+        canvas.addText(302, 100, user.username, "56px Comfortaa");
+        canvas.addText(302, 165, "Level " + profile.lvl, "32px Comfortaa");
 
         //Draw line
         canvas.addLine(304, 120, 874, 120, 2);

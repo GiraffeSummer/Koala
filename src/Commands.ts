@@ -7,13 +7,13 @@ let context_commands: ContextCommand[] = [];
 export async function LoadCommands() {
     try {
         const files = fs.readdirSync("./src/commands/")
-      
+
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             if (!file.endsWith(".ts")) return;
             const command = (await import(`./commands/${file}`)).default;
 
-            if (true /*if enabled*/) {
+            if (!command.disabled) {
                 commands.push(command);
             }
         }
@@ -26,7 +26,7 @@ export async function LoadCommands() {
 export async function LoadContextMenuCommands() {
     try {
         const files = fs.readdirSync("./src/context_menu/")
-    
+
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             if (!file.endsWith(".ts")) return;
