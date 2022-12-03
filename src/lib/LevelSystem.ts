@@ -17,7 +17,7 @@ export async function addExpInteraction(interaction: Interaction, exp: number = 
             })
         } catch (error) {
             interaction.followUp({
-                embeds: [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, footer: { text: `Annoying message?\nuse /suggest, I'll fix this soon.` } }],
+                embeds: [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, footer: { text: `Annoying message?\nuse /suggest, I'll fix this soon. (also enable attach file permission)` } }],
             })
         }
     }
@@ -36,7 +36,7 @@ export async function addExpMessage(message: Message, exp: number = 1, userOb: a
             })
         } catch (error) {
             message.reply({
-                embeds: [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, footer: { text: `Annoying message?\nuse /suggest, I'll fix this soon.` } }],
+                embeds: [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, footer: { text: `Annoying message?\nuse /suggest, I'll fix this soon. (also enable attach file permission)` } }],
             })
         }
     }
