@@ -10,11 +10,16 @@ export async function addExpInteraction(interaction: Interaction, exp: number = 
     const { user, leveled } = await addExp(userOb || interaction.user, exp);
 
     if (leveled && levelMessages) {
-        interaction.followUp({
-            ephemeral: true,
-            //embeds: [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, }],
-            files: [(await levelUp(userOb)).toBuffer()]
-        })
+        try {
+            interaction.followUp({
+                ephemeral: true,
+                files: [await levelUp(userOb || interaction.user)]
+            })
+        } catch (error) {
+            interaction.followUp({
+                embeds: [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, footer: { text: `Annoying message?\nuse /suggest, I'll fix this soon.` } }],
+            })
+        }
     }
 
     return { user, leveled }
@@ -25,11 +30,15 @@ export async function addExpMessage(message: Message, exp: number = 1, userOb: a
     const { user, leveled } = await addExp(userOb || message.author, exp);
 
     if (leveled && levelMessages) {
-
-        message.reply({
-            //embeds: [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, footer: { text: `Annoying message?\nuse /suggest, I'll fix this soon.` } }],
-            files: [(await levelUp(userOb)).toBuffer()]
-        })
+        try {
+            message.reply({
+                files: [await levelUp(userOb || message.author)]
+            })
+        } catch (error) {
+            message.reply({
+                embeds: [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, footer: { text: `Annoying message?\nuse /suggest, I'll fix this soon.` } }],
+            })
+        }
     }
 
     return { user, leveled }
