@@ -27,7 +27,7 @@ const handleSlashCommand = async (client: Client, interaction: BaseCommandIntera
     //const levelUp = await addExpInteraction(interaction, slashCommand?.exp || 0);
 
     try {
-        logCommand(interaction.user.id, interaction.commandName, (interaction.options['_hoistedOptions'].length > 0) ? interaction.options['_hoistedOptions'] : null)
+        logCommand(interaction.user.id, interaction.commandName, interaction.options.data.map(x => x.value) || null)
     } catch (error) { }
 
     slashCommand.run(client, interaction);
