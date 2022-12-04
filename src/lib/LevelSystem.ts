@@ -1,12 +1,12 @@
 import prisma, { where, FindOrCreateUser } from "../lib/db";
-import { Message, BaseCommandInteraction as Interaction, User } from 'discord.js';
+import { Message, BaseCommandInteraction as Interaction, User, TextChannel } from 'discord.js';
 import Canvas from "../lib/Canvas";
 import theme from "../lib/theme";
 
-const levelMessages = true;
+//const levelMessages = true;
 
 export async function addExpInteraction(interaction: Interaction, exp: number = 1, userOb: any = null) {
-
+    const levelMessages = true;
     const { user, leveled } = await addExp(userOb || interaction.user, exp);
 
     if (leveled && levelMessages) {
@@ -26,18 +26,54 @@ export async function addExpInteraction(interaction: Interaction, exp: number = 
 }
 
 export async function addExpMessage(message: Message, exp: number = 1, userOb: any = null) {
-
+    const guild = (await prisma.guild.findFirst({ where: { id: message.guildId } }));
+    const levelMessages = guild.lvlmessages;
     const { user, leveled } = await addExp(userOb || message.author, exp);
 
     if (leveled && levelMessages) {
-        try {
-            message.reply({
-                files: [await levelUp(userOb || message.author)]
-            })
-        } catch (error) {
-            message.reply({
-                embeds: [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, footer: { text: `Annoying message?\nuse /suggest, I'll fix this soon. (also enable attach file permission)` } }],
-            })
+        const files = [await levelUp(userOb || message.author)]
+        const embeds = [{ color: theme.default, title: "**LEVEL UP**", description: `You levelled up to level: **${user.lvl}**!`, footer: { text: `You can disable this message, or force it into another channel with /lvlmessage` } }]
+
+        if (guild.lvlChannel == null) {
+            try {
+                message.reply({
+                    files
+                })
+            } catch (error) {
+                message.reply({
+                    embeds
+                })
+            }
+        } else {
+            const channel = await message.client.channels.fetch(guild.lvlChannel) as TextChannel;
+            //making sure it has permissions in channel, sending embed if no image permission
+            //if no permissions sending it in same channel
+            try {
+                channel.send({
+                    files
+                })
+            } catch (error) {
+                try {
+                    channel.send({
+                        embeds
+                    })
+                } catch (error) {
+                    //in case no permissions in channel
+                    const content = `Make sure I have **embed links**, **attach files** and **send message** permission in ${channel}!`
+                    try {
+                        message.reply({
+                            content,
+                            files
+                        })
+                    } catch (error) {
+                        message.reply({
+                            content,
+                            embeds
+                        })
+                    }
+                }
+            }
+
         }
     }
 
