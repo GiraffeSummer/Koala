@@ -9,7 +9,7 @@ export default async function (type: CardType = CardType.All, deckName: string =
     if (!interpretations) {
         throw new Error('Interpretations not found!!!');
     }
-    
+    //deck is to map images to card interpretations
     let deck: Deck = decks[deckName];
     if (!deck) {
         console.warn('Deck not found, using main')
