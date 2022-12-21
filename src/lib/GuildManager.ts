@@ -31,7 +31,7 @@ export async function CheckStillActive(guilds: Collection<any, Guild>) {
     let toCreate = ids.filter(cId => !dbGuilds.some(g => cId === g.id))
     let removed = []
     dbGuilds.forEach(async guild => {
-        const exists = dbGuilds.some(x => ids.includes(x.id))
+        const exists = ids.includes(guild.id)//dbGuilds.some(x => ids.includes(x.id))
 
         const guildObj = await guilds.find(x => x.id == guild.id);
         const newName = guildObj?.name || guild?.name || 'NULL';
