@@ -10,10 +10,11 @@ export default async function (type: CardType = CardType.All, deckName: string =
         throw new Error('Interpretations not found!!!');
     }
     //deck is to map images to card interpretations
-    let deck: Deck = decks[deckName];
-    if (!deck) {
+    let deck: Deck = mainDeck;
+    if (deckName in decks) {
+        deck = decks[deckName];
+    } else {
         console.warn('Deck not found, using main')
-        deck = mainDeck;
     }
 
     const filter = (type == CardType.All) ? () => true :
