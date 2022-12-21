@@ -26,7 +26,7 @@ export async function CheckOrUpdate(guild: Guild) {
 
 export async function CheckStillActive(guilds: Collection<any, Guild>) {
     const ids = guilds.map((g, id) => id);
-    const dbGuilds = await prisma.guild.findMany()
+    const dbGuilds = await prisma.guild.findMany({ where: { active: true } })
 
     let toCreate = ids.filter(cId => !dbGuilds.some(g => cId === g.id))
     let removed = []
