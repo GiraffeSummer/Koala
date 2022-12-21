@@ -1,6 +1,7 @@
 import { BaseCommandInteraction, Client, MessageAttachment } from "discord.js";
 import { Command } from "../../src/Command";
-import Tarot, { Card, Suits, CardType } from '../lib/Tarot/Tarot';
+import Tarot, { Card, Suits, CardType, defaultDeckName } from '../lib/Tarot/Tarot';
+import { decks, } from '../lib/Tarot/Decks';
 import theme from "../lib/theme";
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
@@ -13,16 +14,17 @@ export default {
         type: 'NUMBER',
         name: 'set',
         description: 'How many sides should the dice have?',
-        choices: [
-            { name: 'All', value: 0 },
-            { name: 'Major', value: 1 },
-            { name: 'Minor', value: 2 }
-        ]
-        //{ type: 'STRING', name: 'deck', description: 'which deck to use', choices: [ { name: 'rock', value: 'rock' },{ name: 'paper', value: 'paper' }, { name: 'scissors', value: 'scissors' } ], } 
+        choices: [CardType.All, CardType.Major, CardType.Minor].map(x => { return { name: CardType[x], value: x } }),
+
     },
+        //  {
+        //     type: 'STRING', name: 'deck', description: 'Which deck images to use?',
+        //     choices: Object.keys(decks).map(key => { return { value: key, name: decks[key].name } }),
+        // },
     ],
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const type: CardType = interaction.options.get('set')?.value as CardType || CardType.All;
+       // const deck: string = interaction.options.get('deck')?.value as string || defaultDeckName
         const card = await Tarot(type);
 
         const embeds = [{
