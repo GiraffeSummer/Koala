@@ -10,11 +10,13 @@ export default (client: Client): void => {
         await GuildRemove(guild);
 
         console.log(`Left guild ${guild?.name || 'unknown'}`);
-        try {
-            const owner = await (await guild.fetchOwner()).user;
-            await silentRevoke(owner, 3);//remove
-        } catch (error) {
-            console.log('failed to remove owner')
-        }
+        /*try {
+              const owner = await (await guild.fetchOwner()).user;
+              //check if owner of another server
+              await silentRevoke(owner, 3);//remove
+          } catch (error) {
+              console.log('failed to remove owner')
+          }
+          */
     });
 };
