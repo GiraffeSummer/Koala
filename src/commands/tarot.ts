@@ -24,7 +24,7 @@ export default {
     ],
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const type: CardType = interaction.options.get('set')?.value as CardType || CardType.All;
-       // const deck: string = interaction.options.get('deck')?.value as string || defaultDeckName
+        //const deck: string = interaction.options.get('deck')?.value as string || defaultDeckName
         const card = await Tarot(type);
 
         const embeds = [{
