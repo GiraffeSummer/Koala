@@ -17,10 +17,12 @@ export default {
         choices: [CardType.All, CardType.Major, CardType.Minor].map(x => { return { name: CardType[x], value: x } }),
 
     },
-          {
-             type: 'STRING', name: 'deck', description: 'Which deck images to use?',
-             choices: Object.keys(decks).map(key => { return { value: key, name: decks[key].name } }),
-         },
+    {
+        type: 'STRING',
+        name: 'deck',
+        description: 'Which deck images to use?',
+        choices: Object.keys(decks).map(key => { return { value: key, name: decks[key].name } }),
+    },
     ],
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         const type: CardType = interaction.options.get('set')?.value as CardType || CardType.All;
