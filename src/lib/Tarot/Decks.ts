@@ -1,7 +1,9 @@
 import { Card } from './Tarot'
 import path from 'path'
 
-const basePath = path.join(process.cwd(), `/src/lib/Tarot/decks/`);
+const basePath = path.join(process.cwd(), `/resources/Tarot/decks/`);
+
+//folder name, lowercase, snake_case
 
 //This is used to "easily" map different images to the same cards
 export class Deck {
@@ -17,12 +19,12 @@ export class Deck {
 
     public filename(card: Card) {
         const rank = typeof card.rank == 'string' ? this.ranks[card.rank] : card.rank.toString().padStart(2, '0')
-        return path.join(basePath, `${this.name}/${card.suit}/sm_RWSa-${this.suits[card.suit]}-${rank}.png`);
+        return path.join(basePath, `${this.name.toLowerCase().replaceAll(' ', '_')}/${card.suit}/sm_RWSa-${this.suits[card.suit]}-${rank}.png`);
     }
 }
 
 //declare so it can be used independently
-export const mainDeck = new Deck('main', {
+export const mainDeck = new Deck('Rider Waite', {
     coins: 'P',
     cups: "C",
     major: "T",
