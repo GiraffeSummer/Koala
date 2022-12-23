@@ -13,7 +13,7 @@ export default {
 
         interaction.deleteReply();
         const msg = await interaction.channel.send({
-            embeds: [{ description: question, color: theme.default }],
+            embeds: [{ description: question, color: theme.default, author: { name: interaction.user.username, icon_url: interaction.user.displayAvatarURL({ dynamic: true }) } }],
         });
         msg.edit({ components: [await addButtons(client, msg, question,)] })
     }

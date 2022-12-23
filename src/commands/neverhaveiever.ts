@@ -15,7 +15,7 @@ export default {
         const question: string = (await prisma.neverhaveiever.findFirst({ skip: RandomNum(count), take: 1 })).question;
 
         await interaction.followUp({
-            embeds: [{ description: question, color: theme.default }]
+            embeds: [{ description: question, color: theme.default, author: { name: interaction.user.username, icon_url: interaction.user.displayAvatarURL({ dynamic: true }) } }],
         });
     }
 } as Command;

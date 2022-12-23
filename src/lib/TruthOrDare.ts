@@ -50,7 +50,8 @@ export async function addButtons(client: Client, message: Message, question) {
                 default:
                     break;
             }
-            message.reply({ embeds: [{ description: question, color: theme.default }] })
+
+            message.reply({ embeds: [{ description: question, color: theme.default, author: { name: click.user.username, icon_url: click.user.displayAvatarURL({ dynamic: true }) } }], })
                 .then(async int => {
                     int.edit({ components: [await addButtons(client, int, question,)] })
                 }).catch(err => {
