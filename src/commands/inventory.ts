@@ -1,22 +1,22 @@
-import { BaseCommandInteraction, Client } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import theme from "../lib/theme";
+import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
-import Embed from '../lib/Embed'
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
     name: "inventory",
     description: "Get your inventory",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     ephemeral: true,
     options: [
         {
-            type: 'USER',
+            type: ApplicationCommandOptionType.User,
             name: 'user',
             description: 'Which user'
         }
     ],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
 
         await FindOrCreateUser(user);
@@ -26,17 +26,20 @@ export default {
             return await interaction.followUp({ content: `<@${user.id}> has no items.` })
         }
 
-        const embed = new Embed(`${user.username}'s Inventory.`)
-            .setColorRaw(user.accentColor);
+        const embed = {
+            title: `${user.username}'s Inventory.`,
+            color: user.accentColor || theme.default,
+            fields: []
+        }
 
         for (let i = 0; i < profile.items.length; i++) {
             const { item, amount } = profile.items[i];
             if (i >= 24) break;
-            embed.addField(item.symbol, `**${item.name}** ${(amount > 1) ? `*x*` + amount : ''}`,true)
+            embed.fields.push({ name: item.symbol, value: `**${item.name}** ${(amount > 1) ? `*x*` + amount : ''}`, inline: true })
         }
 
         await interaction.followUp({
-            embeds: embed.get()
+            embeds: [embed]
         });
     }
 } as Command;

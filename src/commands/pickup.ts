@@ -1,5 +1,5 @@
-import { BaseCommandInteraction, Client } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import { RandomNum } from "../lib/Functions";
 import prisma, { where } from "../lib/db";
 
@@ -7,13 +7,13 @@ import prisma, { where } from "../lib/db";
 export default {
     name: "pickup",
     description: "use a bad pickup line",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     options: [{
-        type: 'STRING',
+        type: ApplicationCommandOptionType.String,
         name: 'find',
         description: 'Look for a specific line'
     }],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const find = interaction.options.get('find')?.value as string || null
         let line = ''
         if (find == null) {

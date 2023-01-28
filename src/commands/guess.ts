@@ -1,5 +1,5 @@
-import { BaseCommandInteraction, Client } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import type NumberGuesser from '../lib/NumberGuesser';
 
 import prisma, { where, FindOrCreateUser } from "../lib/db";
@@ -9,14 +9,14 @@ const timeAmount = 3 * 60 * 60 * 1000
 export default {
     name: "guess",
     description: "Guess a number",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     options: [{
-        type: 'NUMBER',
+        type: ApplicationCommandOptionType.Number,
         name: 'number',
         description: 'Number to guess',
         required: true
     }],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const number = interaction.options.get('number')?.value as number
         const profile = await FindOrCreateUser(interaction.user);
 

@@ -1,35 +1,35 @@
-import { BaseCommandInteraction, Client, MessageActionRow, MessageSelectMenu, TextChannel } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, ActionRowBuilder, StringSelectMenuBuilder, ComponentType, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
     name: "pronouns",
     description: "badge commands",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     ephemeral: true,
     options: [
         {
-            type: 'SUB_COMMAND',
+            type: ApplicationCommandOptionType.Subcommand,
             name: 'set',
             description: 'Choose your pronouns',
         },
         {
-            type: 'SUB_COMMAND',
+            type: ApplicationCommandOptionType.Subcommand,
             name: 'remove',
             description: 'Remove a pronoun',
         },
         {
-            type: 'SUB_COMMAND',
+            type: ApplicationCommandOptionType.Subcommand,
             name: 'get',
             description: 'Get someone\'s pronouns',
             options: [{
-                type: 'USER',
+                type: ApplicationCommandOptionType.User,
                 name: 'user',
                 description: 'who\'s?',
             },]
         }],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const sub = interaction.options['_subcommand']
         const user = interaction.options.get('user')?.user || interaction.user;
 
@@ -52,9 +52,9 @@ export default {
                     profile.pronouns.some(x => x.pronouns.id == p.id)
                 );
                 if (usedPronouns.length > 0) {
-                    const row = new MessageActionRow()
+                    const row = new ActionRowBuilder<StringSelectMenuBuilder>()
                         .addComponents(
-                            new MessageSelectMenu()
+                            new StringSelectMenuBuilder()
                                 .setCustomId('remove_pronouns')
                                 .setPlaceholder('None')
                                 .addOptions(usedPronouns.map(
@@ -67,7 +67,7 @@ export default {
                         filter: (int) => {
                             return user.id === int.user.id;
                         },
-                        componentType: "SELECT_MENU",
+                        componentType: ComponentType.StringSelect,
                         max: 1,
                         time: 300 * 1000
                     })
@@ -90,13 +90,13 @@ export default {
                 await interaction.followUp({ ephemeral: true, embeds: [{ title: `${user.username}`, description: `${pronounsText}` }] });
                 break;
             case 'set':
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder<StringSelectMenuBuilder>()
                     .addComponents(
-                        new MessageSelectMenu()
+                        new StringSelectMenuBuilder()
                             .setCustomId('select_pronouns')
                             .setPlaceholder('None')
                             .addOptions(unUsedPronouns.map(
-                                (pronoun, i) => { return { label: pronoun.name, value: `${pronoun.id}`,emoji: pronoun.emoji, description: pronoun.name } }
+                                (pronoun, i) => { return { label: pronoun.name, value: `${pronoun.id}`, emoji: pronoun.emoji, description: pronoun.name } }
                             )),
                     );
 
@@ -105,7 +105,7 @@ export default {
                     filter: (int) => {
                         return user.id === int.user.id;
                     },
-                    componentType: "SELECT_MENU",
+                    componentType: ComponentType.StringSelect,
                     max: 1,
                     time: 300 * 1000
                 })

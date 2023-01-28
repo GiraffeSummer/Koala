@@ -3,6 +3,8 @@ import {
     type CacheType, type ButtonInteraction, type SelectMenuInteraction, type InteractionCollector
 } from 'discord.js'
 
+//need update
+
 export default class CollectorManager {
     #channel: TextChannel;
 

@@ -1,5 +1,5 @@
-import { BaseCommandInteraction, Client, MessageActionRow, MessageSelectMenu, TextChannel } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, ActionRowBuilder, StringSelectMenuBuilder, TextChannel, PermissionFlagsBits, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
 
@@ -7,32 +7,32 @@ import prisma, { where, FindOrCreateUser } from "../lib/db";
 export default {
     name: "lvlmessage",
     description: "Change levelmessage settings",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     ephemeral: true,
-    defaultMemberPermissions: ["MANAGE_GUILD"],
+    defaultMemberPermissions: [PermissionFlagsBits.ManageGuild],
     options: [{
-        type: 'SUB_COMMAND',
+        type: ApplicationCommandOptionType.Subcommand,
         name: 'channel',
         description: 'Change the channel level messages are sent in (blank to reset)',
         options: [{
-            type: 'CHANNEL',
+            type: ApplicationCommandOptionType.Channel,
             name: 'channel',
             description: 'channel to send level messages in',
         }],
     },
     {
-        type: 'SUB_COMMAND',
+        type: ApplicationCommandOptionType.Subcommand,
         name: 'toggle',
         description: 'toggle messages on or off',
         options: [{
-            type: 'BOOLEAN',
+            type: ApplicationCommandOptionType.Boolean,
             name: 'enable',
             description: 'enable level messages?',
             required: true
         }]
     },
     ],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         //const user = interaction.options.get('user')?.user || interaction.user;
         const sub = interaction.options['_subcommand'];
 

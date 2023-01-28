@@ -1,5 +1,5 @@
-import { BaseCommandInteraction, Client, MessageAttachment } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import { expNeeded, levelUp } from '../lib/LevelSystem'
 import Canvas from "../lib/Canvas";
@@ -9,23 +9,23 @@ import { Prisma } from "@prisma/client";
 export default {
     name: "test",
     description: "tesssts",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     options: [
         {
-            type: 'USER',
+            type: ApplicationCommandOptionType.User,
             name: 'user',
             description: 'Which user'
         }
     ],
-    disabled:true,
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    disabled: true,
+    run: async (client: Client, interaction: CommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
 
         const image = await levelUp(user)
 
         await interaction.followUp({
             content: `${user.accentColor}`,
-            files: [new MessageAttachment(image, 'levelup.png')]
+            files: [new AttachmentBuilder(image).setName('levelup.png')]
         });
     }
 } as Command;

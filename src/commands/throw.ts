@@ -1,5 +1,5 @@
-import { BaseCommandInteraction, Client, MessageActionRow, MessageButton, TextChannel } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import Prisma from '@prisma/client';
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
@@ -7,17 +7,17 @@ import prisma, { where, FindOrCreateUser } from "../lib/db";
 export default {
     name: "throw",
     description: "Throw an item to someone",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     ephemeral: true,
     options: [
         {
-            type: 'USER',
+            type: ApplicationCommandOptionType.User,
             name: 'user',
             description: 'Which user',
             required: true
         }
     ],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
 
         const profile = await prisma.user.findFirst({ where: { uid: interaction.user.id }, include: { items: { include: { item: true } } } })
@@ -31,17 +31,17 @@ export default {
         let itemMap = {}
 
         for (let r = 0; r < rowNum; r++) {
-            const row = new MessageActionRow();
+            const row = new ActionRowBuilder<ButtonBuilder>();
             const subList = profile.items.slice().splice(r * 5, 5)
             for (let i = 0; i < subList.length; i++) {
                 const { item, amount } = subList[i];
                 const itemId = 'throwpick_' + item.id
                 itemMap[itemId] = { item, amount }
-                row.addComponents(new MessageButton()
+                row.addComponents(new ButtonBuilder()
                     .setCustomId(itemId)
                     .setEmoji(item.symbol)
                     .setLabel(`${item.name} ${(amount > 1) ? `(` + amount + "x)" : ''}`)
-                    .setStyle("PRIMARY"))
+                    .setStyle(ButtonStyle.Primary))
             }
             rows.push(row)
         }
@@ -54,7 +54,7 @@ export default {
         const channel = await client.channels.fetch(interaction.channelId) as TextChannel;
         const collector = channel.createMessageComponentCollector({
             filter: (int) => interaction.user.id === int.user.id,
-            componentType: "BUTTON",
+            componentType: ComponentType.Button,
             max: 1,
             time: 300 * 1000
         })

@@ -17,12 +17,14 @@ const client = new Client({
 
 LoadCommands().then((commands) => {
     //@ts-ignore
-    console.log('Commands (' + commands.length + '): ' + commands.map(x => x.name).join(', '))
+    if (commands)
+        console.log('Commands (' + commands?.length + '): ' + commands?.map(x => x.name).join(', '))
 });
 
 LoadContextMenuCommands().then((commands) => {
     //@ts-ignore
-    console.log('Context Commands (' + commands.length + '): ' + commands.map(x => x.name).join(', '))
+    if (commands)
+        console.log('Context Commands (' + commands?.length + '): ' + commands?.map(x => x.name).join(', '))
 });
 
 const numberGuesser = new NumberGuesser()

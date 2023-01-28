@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Client, MessageActionRow, MessageButton, ButtonInteraction, TextChannel, Message } from "discord.js";
+import { CommandInteraction, Client, ActionRowBuilder, ButtonBuilder, ButtonStyle, ButtonInteraction, TextChannel, Message, ComponentType } from "discord.js";
 import { RandomNum } from "../lib/Functions";
 import prisma, { where } from "../lib/db";
 import theme from "../lib/theme";
@@ -6,25 +6,25 @@ import theme from "../lib/theme";
 //TODO: 
 //WORK IN PROGRESS
 export async function addButtons(client: Client, message: Message, question) {
-    const row = new MessageActionRow()
+    const row = new ActionRowBuilder<ButtonBuilder>()
         .addComponents(
-            new MessageButton()
+            new ButtonBuilder()
                 .setCustomId('truth')
                 .setLabel('truth')
-                .setStyle('SUCCESS'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Success),
+            new ButtonBuilder()
                 .setCustomId('dare')
                 .setLabel('dare')
-                .setStyle('DANGER'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Danger),
+            new ButtonBuilder()
                 .setCustomId('random')
                 .setLabel('random')
-                .setStyle("PRIMARY"),
+                .setStyle(ButtonStyle.Primary),
         );
 
     const channel = await client.channels.fetch(message.channelId) as TextChannel;
     const collector = channel.createMessageComponentCollector({
-        componentType: "BUTTON",
+        componentType: ComponentType.Button,
         max: 1,
         time: 300 * 1000
     })
@@ -51,7 +51,7 @@ export async function addButtons(client: Client, message: Message, question) {
                     break;
             }
 
-            message.reply({ embeds: [{ description: question, color: theme.default, author: { name: click.user.username, icon_url: click.user.displayAvatarURL({ dynamic: true }) } }], })
+            message.reply({ embeds: [{ description: question, color: theme.default, author: { name: click.user.username, icon_url: click.user.avatarURL() } }], })
                 .then(async int => {
                     int.edit({ components: [await addButtons(client, int, question,)] })
                 }).catch(err => {
