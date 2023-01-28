@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { Client, ClientOptions, Intents } from "discord.js";
+import { Client, ClientOptions, GatewayIntentBits as Intents } from "discord.js";
 
 import EventSubscriber from "./lib/EventSubscriber";
 
@@ -11,7 +11,7 @@ console.log("Bot is starting...");
 
 //GUILD_MESSAGES
 const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS]
+    intents: [Intents.Guilds, Intents.GuildMessages, Intents.GuildMembers]
 });
 
 
