@@ -4,7 +4,7 @@ import { ShardingManager } from 'discord.js';
 const sharding = getShardingEnabled();
 
 if (sharding) {
-    const manager = new ShardingManager('./src/bot.ts', { totalShards: 'auto', execArgv: ['-r', 'ts-node/register'], token: process.env.token });
+    const manager = new ShardingManager('./src/bot.ts', { totalShards: 'auto', execArgv: ['-r', 'ts-node/register'], token: process.env.TOKEN });
 
     manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 
