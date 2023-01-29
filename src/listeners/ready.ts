@@ -1,6 +1,6 @@
 import { Client, Guild } from "discord.js";
 import commands, { context_commands } from "../Commands";
-import { CheckStillActiveSharded as CheckGuildsStillActive } from '../lib/GuildManager'
+import { CheckStillActiveSharded as CheckGuildsStillActive, filterInactive as RemoveInactiveGuilds } from '../lib/GuildManager'
 
 export default (client: Client): void => {
     client.on("ready", async () => {
@@ -19,6 +19,7 @@ export default (client: Client): void => {
 
         const servers = guildCacheServersArray.reduce((memo, servers) => { return [...memo, ...servers] }, [])
         CheckGuildsStillActive(servers)
+        RemoveInactiveGuilds()
 
         console.log(`${client.user.username} is online [${guildCacheSize} servers]`);
     });
