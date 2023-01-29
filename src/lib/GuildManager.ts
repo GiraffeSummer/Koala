@@ -24,6 +24,37 @@ export async function CheckOrUpdate(guild: Guild) {
     })
 }
 
+export async function CheckStillActiveSharded(guilds: Guild[], timeInactiveDays: number = 30) {
+    const ids = guilds.map((g) => g.id);
+
+    const alReadyExists = await prisma.guild.findMany({ where: { id: { in: ids } } })
+    const alReadyExistIds = alReadyExists.map((g) => g.id);
+    const notExisting = guilds.filter(guild => !alReadyExistIds.includes(guild.id));
+
+    notExisting.forEach(async guild => {
+        await Add(guild);
+    })
+
+    const { count: active } = await prisma.guild.updateMany({
+        where: { id: { in: ids } },
+        data: { updatedAt: new Date(), active: true }
+    })
+
+    const { count: removed } = await prisma.guild.updateMany({
+        where: {
+            updatedAt:
+            {
+                lte: new Date(new Date().setDate(new Date().getDate() - timeInactiveDays))
+            },
+            AND: { active: true }
+        },
+        data: { active: false }
+    });
+    console.log(`Created: ${notExisting.length} Active ${active} Inactive: ${removed}`);
+}
+
+
+//deprecated (doesnt work with sharding)
 export async function CheckStillActive(guilds: Collection<any, Guild>) {
     const ids = guilds.map((g, id) => id);
     const dbGuilds = await prisma.guild.findMany({ where: { active: true } })

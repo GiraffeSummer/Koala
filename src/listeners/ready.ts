@@ -1,19 +1,25 @@
-import { Client } from "discord.js";
+import { Client, Guild } from "discord.js";
 import commands, { context_commands } from "../Commands";
-import prisma, { where, FindOrCreateUser } from "../lib/db";
-import { CheckStillActive as CheckGuildsStillActive } from '../lib/GuildManager'
+import { CheckStillActiveSharded as CheckGuildsStillActive } from '../lib/GuildManager'
 
 export default (client: Client): void => {
     client.on("ready", async () => {
         if (!client.user || !client.application) {
             return;
         }
-
         //@ts-ignore
         await client.application.commands.set([...commands, ...context_commands]);
 
-        CheckGuildsStillActive(client.guilds.cache);
+        let [guildCacheSize, guildCacheServersArray] = await Promise.all([
+            client.shard.fetchClientValues('guilds.cache.size') as Promise<number[]>,
+            client.shard.fetchClientValues('guilds.cache') as Promise<Guild[][]>
+        ]);
 
-        console.log(`${client.user.username} is online [${client.guilds.cache.size} servers]`);
+        guildCacheSize.reduce((acc, guildCount) => acc + guildCount, 0);
+
+        const servers = guildCacheServersArray.reduce((memo, servers) => { return [...memo, ...servers] }, [])
+        CheckGuildsStillActive(servers)
+
+        console.log(`${client.user.username} is online [${guildCacheSize} servers]`);
     });
 };

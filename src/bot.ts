@@ -1,4 +1,4 @@
-import 'dotenv/config'
+// import 'dotenv/config'
 import { Client, ClientOptions, GatewayIntentBits as Intents } from "discord.js";
 
 import EventSubscriber from "./lib/EventSubscriber";

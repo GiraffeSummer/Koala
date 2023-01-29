@@ -15,8 +15,8 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "scripts": {
-    "start": "ts-node src/bot.ts",
-    "dev": "nodemon src/bot.ts"
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon src/index.ts"
   },
   "devDependencies": {
     "i": "^0.3.7",
