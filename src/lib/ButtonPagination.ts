@@ -1,28 +1,36 @@
-import { CommandInteraction, InteractionCollector, InteractionReplyOptions, ButtonBuilder, ActionRowBuilder, ButtonStyle } from "discord.js";
+import { CommandInteraction, InteractionCollector, InteractionReplyOptions, ButtonBuilder, ActionRowBuilder, ButtonStyle, Message } from "discord.js";
 
 export default class Paginator {
 
-    public interaction: CommandInteraction
-    public maxPages: number;
     public timeoutSeconds: number = 1 * 60;
     public showPageNumber: boolean = false;
+
+    private maxPages: number;
+    private interaction: CommandInteraction
+    private currentPage: number = 0;
 
     private pageNext = 'page-next'
     private pagePrevious = 'page-prev'
     private pageNumber = 'pagenum'
 
+    public customCollect?: (i: any) => Promise<void>;
+
     private collector: InteractionCollector<any>
+    private reply: Message<boolean>
 
     constructor(interaction: CommandInteraction, maxPages: number = 5) {
         this.interaction = interaction;
         this.maxPages = maxPages;
     }
 
-    async reply(initialContent: InteractionReplyOptions, onCollect: (page: number) => InteractionReplyOptions) {
+    async init(onCollect: (page: number) => InteractionReplyOptions) {
+        const initialContent = onCollect(this.currentPage)
+
         const reply = await this.interaction.followUp({
             ...initialContent,
-            components: [this.buttonBuilder(0)]
+            components: [this.buttonBuilder(this.currentPage), ...initialContent?.components].slice(0, 5)
         });
+        this.reply = reply;
         const collector = reply.createMessageComponentCollector({
             filter: (i) => {
                 return i.user.id == this.interaction.user.id
@@ -36,26 +44,35 @@ export default class Paginator {
         collector.on('end', async () => {
             await reply.edit({ components: [] })
         })
+        return { reply, collector }
     }
 
     private collect(contentFn: (page: number) => InteractionReplyOptions) {
         this.collector.on('collect', async i => {
-            let page = 0;
+            let page = this.currentPage;
             if (i.customId.startsWith(this.pageNext)) {
                 page = parseInt(i.customId.slice(this.pageNext.length))
             } else if (i.customId.startsWith(this.pagePrevious)) {
                 page = parseInt(i.customId.slice(this.pagePrevious.length))
             }
-            const content = contentFn(page)
-            i.update({
-                ...content,
-                components: [this.buttonBuilder(page)]
-            })
+            if (i.customId.startsWith(this.pageNext) || i.customId.startsWith(this.pagePrevious)) {
+                if (page != this.currentPage) {
+                    this.currentPage = page;
+                    const content = contentFn(page)
+                    i.update({
+                        ...content,
+                        components: [this.buttonBuilder(page), ...content?.components].slice(0, 5)
+                    })
+                }
+            } else {
+                if (this.customCollect)
+                    await this.customCollect(i)
+            }
         });
     }
 
 
-    private buttonBuilder(page: number = 0) {
+    private buttonBuilder(page: number) {
         const row = new ActionRowBuilder<ButtonBuilder>();
         if (page > 0) {
             row.addComponents(new ButtonBuilder()
