@@ -1,5 +1,6 @@
 import { CommandInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction } from "discord.js";
 import { logCommand } from '../lib/Log'
+import { FindOrCreateUser } from '../lib/db'
 import { addExpInteraction } from '../lib/LevelSystem'
 import commands, { context_commands } from "../Commands";
 
@@ -24,6 +25,7 @@ const handleSlashCommand = async (client: Client, interaction: CommandInteractio
         await interaction.deferReply((slashCommand.ephemeral != null) ? { ephemeral: slashCommand.ephemeral || false } : undefined);
     }
 
+    await FindOrCreateUser(interaction.user);
     //const levelUp = await addExpInteraction(interaction, slashCommand?.exp || 0);
 
     try {
