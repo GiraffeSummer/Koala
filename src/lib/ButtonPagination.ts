@@ -1,4 +1,13 @@
-import { CommandInteraction, InteractionCollector, InteractionReplyOptions, ButtonBuilder, ActionRowBuilder, ButtonStyle, Message } from "discord.js";
+import {
+    CommandInteraction,
+    InteractionCollector,
+    InteractionReplyOptions,
+    ButtonBuilder,
+    ActionRowBuilder,
+    ButtonStyle,
+    Message,
+    MessageComponentInteraction,
+} from "discord.js";
 
 export default class Paginator {
 
@@ -13,22 +22,28 @@ export default class Paginator {
     private pagePrevious = 'page-prev'
     private pageNumber = 'pagenum'
 
-    public customCollect?: (i: any) => Promise<void>;
+    public customCollect?: (i: MessageComponentInteraction) => Promise<void>;
 
     private collector: InteractionCollector<any>
     private reply: Message<boolean>
 
     constructor(interaction: CommandInteraction, maxPages: number = 5) {
         this.interaction = interaction;
-        this.maxPages = maxPages;
+        this.maxPages = Math.ceil(maxPages);
+    }
+
+    public static paginateArray<T>(array: Array<T>, page: number, pageSize: number = 5): Array<T> {
+        return array.slice().splice(page * pageSize, pageSize)
     }
 
     async init(onCollect: (page: number) => InteractionReplyOptions) {
         const initialContent = onCollect(this.currentPage)
 
+        const initialComponents = (typeof initialContent?.components === typeof []) ? initialContent.components : [];
+
         const reply = await this.interaction.followUp({
             ...initialContent,
-            components: [this.buttonBuilder(this.currentPage), ...initialContent?.components].slice(0, 5)
+            components: [this.buttonBuilder(this.currentPage), ...initialComponents].slice(0, 5)
         });
         this.reply = reply;
         const collector = reply.createMessageComponentCollector({
@@ -59,9 +74,10 @@ export default class Paginator {
                 if (page != this.currentPage) {
                     this.currentPage = page;
                     const content = contentFn(page)
+                    const components = (typeof content?.components === typeof []) ? content.components : [];
                     i.update({
                         ...content,
-                        components: [this.buttonBuilder(page), ...content?.components].slice(0, 5)
+                        components: [this.buttonBuilder(page), ...components].slice(0, 5)
                     })
                 }
             } else {
