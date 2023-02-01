@@ -43,7 +43,7 @@ export default class Paginator {
 
         const reply = await this.interaction.followUp({
             ...initialContent,
-            components: [this.buttonBuilder(this.currentPage), ...initialComponents].slice(0, 5)
+            components: (this.maxPages > 1) ? [this.buttonBuilder(this.currentPage), ...initialComponents].slice(0, 5) : initialComponents
         });
         this.reply = reply;
         const collector = reply.createMessageComponentCollector({
@@ -77,7 +77,7 @@ export default class Paginator {
                     const components = (typeof content?.components === typeof []) ? content.components : [];
                     i.update({
                         ...content,
-                        components: [this.buttonBuilder(page), ...components].slice(0, 5)
+                        components: (this.maxPages > 1) ? [this.buttonBuilder(page), ...components].slice(0, 5) : components
                     })
                 }
             } else {
@@ -99,7 +99,7 @@ export default class Paginator {
         if (this.showPageNumber) {
             row.addComponents(new ButtonBuilder()
                 .setCustomId(this.pageNumber)
-                .setLabel(`${page}/${this.maxPages - 1}`)
+                .setLabel(`${page + 1}/${this.maxPages}`)
                 .setDisabled(true)
                 .setStyle(ButtonStyle.Danger));
         }
