@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Client } from "discord.js";
+import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import fetch from '../lib/fetch'
 import theme from "../lib/theme";
@@ -6,10 +6,10 @@ import theme from "../lib/theme";
 export default {
     name: "horoscope",
     description: "get your horoscope",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     //ephemeral: true,
     options: [{
-        type: 'STRING',
+        type: ApplicationCommandOptionType.String,
         name: 'sign',
         required: true,
         description: 'your starsign',
@@ -64,7 +64,7 @@ export default {
             }
         ],
     }],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const sign: string = interaction.options.get('sign').value as string;
         const baseUrl = 'https://ohmanda.com/api/horoscope/'
         const body: any = (await fetch(baseUrl + sign)).data

@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Client } from "discord.js";
+import { CommandInteraction, Client, ApplicationCommandType } from "discord.js";
 import { Command } from "../Command";
 import { RandomNum } from "../lib/Functions";
 import prisma, { where } from "../lib/db";
@@ -8,14 +8,14 @@ import theme from "../lib/theme";
 export default {
     name: "neverhaveiever",
     description: "Play never have I ever",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     options: [],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const count: number = await prisma.neverhaveiever.count();
         const question: string = (await prisma.neverhaveiever.findFirst({ skip: RandomNum(count), take: 1 })).question;
 
         await interaction.followUp({
-            embeds: [{ description: question, color: theme.default, author: { name: interaction.user.username, icon_url: interaction.user.displayAvatarURL({ dynamic: true }) } }],
+            embeds: [{ description: question, color: theme.default, author: { name: interaction.user.username, icon_url: interaction.user.avatarURL() } }],
         });
     }
 } as Command;

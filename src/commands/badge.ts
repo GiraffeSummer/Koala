@@ -1,5 +1,10 @@
-import { BaseCommandInteraction, Client, MessageActionRow, MessageSelectMenu, TextChannel } from "discord.js";
-import { Command } from "../../src/Command";
+import {
+    CommandInteraction, Client, ActionRowBuilder, StringSelectMenuBuilder, TextChannel,
+    ComponentType,
+    ApplicationCommandType,
+    ApplicationCommandOptionType
+} from "discord.js";
+import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
 
@@ -7,36 +12,36 @@ import prisma, { where, FindOrCreateUser } from "../lib/db";
 export default {
     name: "badge",
     description: "badge commands",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     ephemeral: true,
     options: [{
-        type: 'SUB_COMMAND',
+        type: ApplicationCommandOptionType.Subcommand,
         name: 'list',
         description: 'List all badges',
         options: [{
-            type: 'USER',
+            type: ApplicationCommandOptionType.User,
             name: 'user',
             description: 'user to list',
         }]
     },
     {
-        type: 'SUB_COMMAND',
+        type: ApplicationCommandOptionType.Subcommand,
         name: 'current',
         description: 'get current badge',
         options: [{
-            type: 'USER',
+            type: ApplicationCommandOptionType.User,
             name: 'user',
             description: 'user to list'
         }]
     },
     {
-        type: 'SUB_COMMAND',
+        type: ApplicationCommandOptionType.Subcommand,
         name: 'select',
         description: 'set selected badge',
         //choices: [],
         //options: [{ type: 'STRING', name: 'badge', description: 'badge name', required: true }],
     }],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const sub = interaction.options['_subcommand']
         const user = interaction.options.get('user')?.user || interaction.user;
 
@@ -81,9 +86,9 @@ export default {
 
             case 'select':
                 const options = profile.badges.map((badge, i) => { return { label: badge.badge.name, emoji: badge.badge.badge, value: `${i}`, description: badge.badge.description } });
-                const row = new MessageActionRow()
+                const row = new ActionRowBuilder<StringSelectMenuBuilder>()
                     .addComponents(
-                        new MessageSelectMenu()
+                        new StringSelectMenuBuilder()
                             .setCustomId('select_badge')
                             .setPlaceholder('None')
                             .addOptions(options),
@@ -94,7 +99,7 @@ export default {
                     filter: (int) => {
                         return user.id === int.user.id;
                     },
-                    componentType: "SELECT_MENU",
+                    componentType: ComponentType.StringSelect,
                     max: 1,
                     time: 300 * 1000
                 })

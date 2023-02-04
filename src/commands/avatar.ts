@@ -1,26 +1,23 @@
-import { BaseCommandInteraction, Client } from "discord.js";
+import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../../src/Command";
-import Embed from '../lib/Embed'
 import theme from "../lib/theme";
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
     name: "avatar",
     description: "Get someone's avatar",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     options: [{
-        type: 'USER',
+        type: ApplicationCommandOptionType.User,
         name: 'user',
         description: 'Which user'
     }],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
-        const avatarUrl = user.displayAvatarURL({ dynamic: true })
-
-        const embed = new Embed(user.username).setImage(avatarUrl).setColor('4169e1')
+        const avatarUrl = user.avatarURL()
 
         await interaction.followUp({
-            embeds: embed.get()
+            embeds: [{ title: user.username, image: { url: avatarUrl }, color: theme.default }]
         });
     }
 } as Command;

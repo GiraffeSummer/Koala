@@ -5,7 +5,7 @@ export enum METHODS {
     PUT = 'put'
 }
 
-export default async function fetch(uri, opts = { method: METHODS.GET, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } }) {
+export default async function fetch(uri, opts: { method: METHODS, headers: any, body?: string } = { method: METHODS.GET, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' } }) {
     try {
         const response = await axios({ url: uri, ...opts });
         return response;

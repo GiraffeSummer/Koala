@@ -1,30 +1,19 @@
-import { BaseCommandInteraction, Client, MessageAttachment } from "discord.js";
+import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import fetch, { METHODS } from '../lib/fetch'
 import { Command } from "../Command";
 import { createCanvas, loadImage } from 'canvas'
-import Embed from '../lib/Embed'
-
-function FileInfo(image: string) {
-    return {
-        "api_key": 'd45fd466-51e2-4701-8da8-04351c872236',
-        "file_uri": image,
-        "detection_flags": "basicpoints,propoints,classifiers,content",
-        "recognize_targets": [],
-        "original_filename": "sample.png"
-    }
-}
 
 export default {
     name: "face",
     description: "Face recognition",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     options: [{
-        type: 'ATTACHMENT',
+        type: ApplicationCommandOptionType.Attachment,
         name: 'image',
         description: 'Image with a face in it (real faces work best)',
         required: true
     }],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const attachment = interaction.options.get('image')?.attachment || null;
         if (attachment == null) return;
 
@@ -64,13 +53,23 @@ export default {
             ctx.rect(face.x - (face.width / 2), face.y - (face.height / 2), face.width, face.height);
             ctx.stroke();
 
-            const embed = new Embed(attachment.name)
-                .setColor('4169e1').setDescription(desc).setThumb('attachment://file.jpg')//attachment.url)
+            const embed = { title: attachment.name, color: 0x4169e1, description: desc, thumbnail: { url: 'attachment://file.jpg' } }
 
             await interaction.followUp({
-                embeds: embed.get(),
-                files: [new MessageAttachment(canvas.toBuffer())]
+                embeds: [embed],
+                files: [new AttachmentBuilder(canvas.toBuffer())]
             });
         })
     }
 } as Command;
+
+
+function FileInfo(image: string) {
+    return {
+        "api_key": 'd45fd466-51e2-4701-8da8-04351c872236',
+        "file_uri": image,
+        "detection_flags": "basicpoints,propoints,classifiers,content",
+        "recognize_targets": [],
+        "original_filename": "sample.png"
+    }
+}

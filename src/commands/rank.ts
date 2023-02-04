@@ -1,5 +1,5 @@
-import { BaseCommandInteraction, Client, MessageAttachment } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import { expNeeded } from '../lib/LevelSystem'
 import Canvas from "../lib/Canvas";
@@ -8,15 +8,15 @@ import Canvas from "../lib/Canvas";
 export default {
     name: "rank",
     description: "get a player's rank (WORK IN PROGRESS",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     options: [
         {
-            type: 'USER',
+            type: ApplicationCommandOptionType.User,
             name: 'user',
             description: 'Which user'
         }
     ],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
         const profile = await FindOrCreateUser(user);
 
@@ -32,7 +32,7 @@ export default {
         canvas.addBox(20, 20, 896, 242, "rgba(0,0,0,0.7)", 40);
 
         //Draw avatar circle
-        await canvas.addCircleImage(60, 40, 202, user.displayAvatarURL({ format: "jpg", size: 2048 }), 8, "rgba(0,0,0,0.7)");
+        await canvas.addCircleImage(60, 40, 202, user.avatarURL({ extension: "jpg", size: 2048 }), 8, "rgba(0,0,0,0.7)");
 
         //draw badge
         if (profile.selectedBadge != null) {
@@ -54,9 +54,8 @@ export default {
         //Draw line
         canvas.addLine(304, 120, 874, 120, 2);
 
-
         await interaction.followUp({
-            files: [new MessageAttachment(canvas.toBuffer(), 'rank.png')]
+            files: [new AttachmentBuilder(canvas.toBuffer()).setName('rank.jpg')]
         });
     }
 } as Command;

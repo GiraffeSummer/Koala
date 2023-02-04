@@ -1,5 +1,5 @@
 import prisma, { where, FindOrCreateUser } from "../lib/db";
-import { Message, BaseCommandInteraction as Interaction, User, TextChannel } from 'discord.js';
+import { Message, CommandInteraction as Interaction, User, TextChannel } from 'discord.js';
 import Canvas from "../lib/Canvas";
 import theme from "../lib/theme";
 
@@ -92,7 +92,7 @@ export async function levelUp(user: User) {
     canvas.addBox(20, 20, 896, 242, "rgba(0,0,0,0.7)", 40);
 
     //Draw avatar circle
-    await canvas.addCircleImage(60, 40, 202, user.displayAvatarURL({ format: "jpg", size: 2048 }), 8, 'rgba(0,0,0,0.7)');
+    await canvas.addCircleImage(60, 40, 202, user.avatarURL({ extension: 'jpg', size: 2048 }), 8, 'rgba(0,0,0,0.7)');
 
     //Draw text
     canvas.addText(302, 110, `Leveled up to: ${profile.lvl}`, "56px Comfortaa");

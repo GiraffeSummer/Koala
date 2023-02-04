@@ -157,23 +157,23 @@ model pickup {
   includename Boolean? @default(false)
 }
 
-model servers {
-  id                  String   @id @db.VarChar(45)
-  name                String?  @db.LongText
-  prefix              String?  @default("!") @db.VarChar(45)
-  lvlmessages         Boolean? @default(true)
-  levelchannel        String?  @db.VarChar(45)
-  repTimeout          Int?     @default(72000)
-  joinLeaveMsg        Boolean? @default(false)
-  joinLeaveChannel    String?  @db.VarChar(45)
-  adminLogging        Boolean? @default(false)
-  adminLoggingChannel String?  @db.VarChar(45)
-  autorole            String?  @db.VarChar(45)
-  censorlvlmessage    Boolean? @default(false)
-  warnkick            Boolean? @default(false)
-  warnkicks           Int?     @default(3)
-  muterole            String?  @db.VarChar(45)
-}
+// model servers {
+//   id                  String   @id @db.VarChar(45)
+//   name                String?  @db.LongText
+//   prefix              String?  @default("!") @db.VarChar(45)
+//   lvlmessages         Boolean? @default(true)
+//   levelchannel        String?  @db.VarChar(45)
+//   repTimeout          Int?     @default(72000)
+//   joinLeaveMsg        Boolean? @default(false)
+//   joinLeaveChannel    String?  @db.VarChar(45)
+//   adminLogging        Boolean? @default(false)
+//   adminLoggingChannel String?  @db.VarChar(45)
+//   autorole            String?  @db.VarChar(45)
+//   censorlvlmessage    Boolean? @default(false)
+//   warnkick            Boolean? @default(false)
+//   warnkicks           Int?     @default(3)
+//   muterole            String?  @db.VarChar(45)
+// }
 
 model topics {
   id    Int     @id @default(autoincrement())
@@ -192,10 +192,12 @@ model Guild {
   id        String    @id @default(uuid())
   name      String?
   active    Boolean   @default(true)
-  createdAt DateTime? @default(now())
 
   lvlmessages Boolean? @default(true)
   lvlChannel  String?  @db.VarChar(45)
+  
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @default(now())
 }
 
 //model commandlog {

@@ -1,5 +1,5 @@
-import { BaseCommandInteraction, Client } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client ,ApplicationCommandType} from "discord.js";
+import { Command } from "../Command";
 import { RandomNum } from "../lib/Functions";
 import prisma, { where } from "../lib/db";
 
@@ -7,9 +7,9 @@ import prisma, { where } from "../lib/db";
 export default {
     name: "fortune",
     description: "Get your fortune told",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     options: [],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const count: number = await prisma.fortune.count();
         const fortune: string = (await prisma.fortune.findFirst({ skip: RandomNum(count), take: 1 })).fortune_line;
 

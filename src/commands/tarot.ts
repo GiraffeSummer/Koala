@@ -1,5 +1,5 @@
-import { BaseCommandInteraction, Client, MessageAttachment } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import Tarot, { Card, Suits, CardType, defaultDeckName } from '../lib/Tarot/Tarot';
 import { decks, } from '../lib/Tarot/Decks';
 import theme from "../lib/theme";
@@ -8,23 +8,23 @@ import theme from "../lib/theme";
 export default {
     name: "tarot",
     description: "do a tarot reading",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     ephemeral: true,
     options: [{
-        type: 'NUMBER',
+        type: ApplicationCommandOptionType.Integer,
         name: 'set',
-        description: 'How many sides should the dice have?',
+        description: 'What kind of reading do you want to',
         choices: [CardType.All, CardType.Major, CardType.Minor].map(x => { return { name: CardType[x], value: x } }),
 
     },
     {
-        type: 'STRING',
+        type: ApplicationCommandOptionType.String,
         name: 'deck',
         description: 'Which deck images to use?',
         choices: Object.keys(decks).map(key => { return { value: key, name: decks[key].name } }),
     },
     ],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const type: CardType = interaction.options.get('set')?.value as CardType || CardType.All;
         const deck: string = interaction.options.get('deck')?.value as string || defaultDeckName
         const card = await Tarot(type, deck);
@@ -39,14 +39,14 @@ export default {
             ],
             author: {
                 name: interaction.user.username,
-                icon_url: interaction.user.avatarURL({ dynamic: true })
+                icon_url: interaction.user.avatarURL()
             },
             image: { url: `attachment://tarot.png` },
             color: theme.default,
         }]
 
         await interaction.followUp({
-            embeds, files: [new MessageAttachment(card.image, `tarot.png`)]
+            embeds, files: [new AttachmentBuilder(card.image).setName(`tarot.png`)]
         });
     }
 } as Command;

@@ -1,5 +1,5 @@
-import { BaseCommandInteraction, Client, MessageActionRow, MessageButton, TextChannel } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, ActionRowBuilder, ButtonStyle, ButtonBuilder, TextChannel, ApplicationCommandType, ComponentType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import Prisma from '@prisma/client';
 import { RandomNum } from "../lib/Functions";
@@ -14,9 +14,9 @@ const timeAmount = 30 * 60 * 1000
 export default {
     name: "loot",
     description: "Loot some items",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     ephemeral: true,
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const profile = await FindOrCreateUser(interaction.user);
 
         const timeDif = new Date().getTime() - profile.lootTimer.getTime()
@@ -28,22 +28,22 @@ export default {
         let picked = await PickItems()
 
         const allowedIds = []
-        const row = new MessageActionRow();
+        const row = new ActionRowBuilder<ButtonBuilder>();
         for (let i = 0; i < picked.length; i++) {
             const item = picked[i];
             const itemId = 'itempick_' + item.id
             allowedIds[itemId] = item.id
-            row.addComponents(new MessageButton()
+            row.addComponents(new ButtonBuilder()
                 .setCustomId(itemId)
                 .setEmoji(item.symbol)
                 .setLabel(item.name)
-                .setStyle("PRIMARY"))
+                .setStyle(ButtonStyle.Primary))
         }
 
         const channel = await client.channels.fetch(interaction.channelId) as TextChannel;
         const collector = channel.createMessageComponentCollector({
             filter: (int) => interaction.user.id === int.user.id,
-            componentType: "BUTTON",
+            componentType: ComponentType.Button,
             max: 1,
             time: 300 * 1000
         })

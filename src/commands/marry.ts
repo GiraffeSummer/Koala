@@ -1,22 +1,21 @@
-import { BaseCommandInteraction, Client, MessageActionRow, MessageButton, ButtonInteraction, TextChannel } from "discord.js";
-import { Command } from "../../src/Command";
+import { CommandInteraction, Client, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
-import Embed from '../lib/Embed'
 import { addExpInteraction } from '../lib/LevelSystem'
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
     name: "marry",
     description: "Marry someone",
-    type: "CHAT_INPUT",
+    type: ApplicationCommandType.ChatInput,
     exp: 2,
     options: [{
-        type: 'USER',
+        type: ApplicationCommandOptionType.User,
         name: 'user',
         description: 'Which user',
         required: true
     }],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const user = interaction.options.get('user')?.user;
         if (user.id === interaction.user.id) return await interaction.followUp({ content: "You cannot marry yourself!", ephemeral: true })
 
@@ -27,27 +26,27 @@ export default {
             return await interaction.editReply({ content: `${profile.married ? '**You** are' : '**' + user.username + '**'} already married!` })
         }
 
-        const row = new MessageActionRow()
+        const row = new ActionRowBuilder<ButtonBuilder>()
             .addComponents(
-                new MessageButton()
+                new ButtonBuilder()
                     .setCustomId('marry_yes')
                     .setEmoji('💍')
                     .setLabel('Yes')
-                    .setStyle('SUCCESS'),
-                new MessageButton()
+                    .setStyle(ButtonStyle.Success),
+                new ButtonBuilder()
                     .setCustomId('marry_no')
                     .setEmoji('💔')
                     .setLabel('No')
-                    .setStyle('DANGER')
+                    .setStyle(ButtonStyle.Danger)
             );
-
-        const embed = new Embed().setColor('ffb6c1')
-            .setDescription(`${user}, do you take ${interaction.user} to be your lawfully wedded partner?`)
-            .setFooter(interaction.user.username, interaction.user.avatarURL({ dynamic: true }))
 
         await interaction.editReply({
             content: `${user}`,
-            embeds: embed.get(),
+            embeds: [{
+                color: 0xffb6c1,
+                description: `${user}, do you take ${interaction.user} to be your lawfully wedded partner?`,
+                footer: { text: interaction.user.username, icon_url: interaction.user.avatarURL() }
+            }],
             components: [row]
         })
 
@@ -58,7 +57,7 @@ export default {
         const channel = await client.channels.fetch(interaction.channelId) as TextChannel;
         const collector = channel.createMessageComponentCollector({
             filter,
-            componentType: "BUTTON",
+            componentType: ComponentType.Button,
             max: 1,
             time: 300 * 1000
         })

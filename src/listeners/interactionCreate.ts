@@ -1,11 +1,12 @@
-import { BaseCommandInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction } from "discord.js";
+import { CommandInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction } from "discord.js";
 import { logCommand } from '../lib/Log'
+import { FindOrCreateUser } from '../lib/db'
 import { addExpInteraction } from '../lib/LevelSystem'
 import commands, { context_commands } from "../Commands";
 
 export default (client: Client): void => {
     client.on("interactionCreate", async (interaction: Interaction) => {
-        if (interaction.isContextMenu()) {
+        if (interaction.isContextMenuCommand()) {
             await handleContextMenu(client, interaction);
         } else if (interaction.isCommand()) {
             await handleSlashCommand(client, interaction);
@@ -13,7 +14,7 @@ export default (client: Client): void => {
     });
 };
 
-const handleSlashCommand = async (client: Client, interaction: BaseCommandInteraction): Promise<void> => {
+const handleSlashCommand = async (client: Client, interaction: CommandInteraction): Promise<void> => {
     const slashCommand = commands.find(c => c.name === interaction.commandName);
     if (!slashCommand) {
         interaction.followUp({ content: "An error has occurred" });
@@ -24,6 +25,7 @@ const handleSlashCommand = async (client: Client, interaction: BaseCommandIntera
         await interaction.deferReply((slashCommand.ephemeral != null) ? { ephemeral: slashCommand.ephemeral || false } : undefined);
     }
 
+    await FindOrCreateUser(interaction.user);
     //const levelUp = await addExpInteraction(interaction, slashCommand?.exp || 0);
 
     try {
@@ -33,7 +35,7 @@ const handleSlashCommand = async (client: Client, interaction: BaseCommandIntera
     slashCommand.run(client, interaction);
 };
 
-const handleContextMenu = async (client: Client, interaction: BaseCommandInteraction): Promise<void> => {
+const handleContextMenu = async (client: Client, interaction: CommandInteraction): Promise<void> => {
     const context_command = context_commands.find(c => c.name === interaction.commandName);
     if (!context_command) {
         interaction.followUp({ content: "An error has occurred" });

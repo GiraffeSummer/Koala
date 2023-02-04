@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Client } from "discord.js";
+import { CommandInteraction, Client } from "discord.js";
 import { Command } from "../../src/Command";
 import theme from "../lib/theme";
 import { getDare, addButtons } from "../lib/TruthOrDare"
@@ -8,12 +8,12 @@ export default {
     name: "dare",
     description: "truth or DARE",
     options: [],
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    run: async (client: Client, interaction: CommandInteraction) => {
         const question = await getDare();
 
         interaction.deleteReply();
         const msg = await interaction.channel.send({
-            embeds: [{ description: question, color: theme.default, author: { name: interaction.user.username, icon_url: interaction.user.displayAvatarURL({ dynamic: true }) } }],
+            embeds: [{ description: question, color: theme.default, author: { name: interaction.user.username, icon_url: interaction.user.avatarURL() } }],
         });
         msg.edit({ components: [await addButtons(client, msg, question,)] })
     }
