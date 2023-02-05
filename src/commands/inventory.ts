@@ -1,7 +1,8 @@
 import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
-import theme from "../lib/theme";
 import { Command } from "../Command";
+import theme from '../lib/theme'
 import prisma, { where, FindOrCreateUser } from "../lib/db";
+import Paginator from '../lib/ButtonPagination'
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
@@ -26,20 +27,25 @@ export default {
             return await interaction.followUp({ content: `<@${user.id}> has no items.` })
         }
 
-        const embed = {
-            title: `${user.username}'s Inventory.`,
-            color: user.accentColor || theme.default,
-            fields: []
-        }
+        const itemsPerPage = 9
 
-        for (let i = 0; i < profile.items.length; i++) {
-            const { item, amount } = profile.items[i];
-            if (i >= 24) break;
-            embed.fields.push({ name: item.symbol, value: `**${item.name}** ${(amount > 1) ? `*x*` + amount : ''}`, inline: true })
-        }
+        const paginator = new Paginator(interaction, profile.items.length / itemsPerPage)
+        paginator.showPageNumber = true;
+        paginator.timeoutSeconds = 30;
 
-        await interaction.followUp({
-            embeds: [embed]
-        });
+        paginator.init(
+            (page) => {
+                const embed = {
+                    title: `${user.username}'s Inventory.`,
+                    color: user.accentColor || theme.default,
+                    fields: Paginator.paginateArray(profile.items, page, itemsPerPage)
+                        .map(it => {
+                            return { name: it.item.symbol, value: `**${it.item.name}** ${(it.amount > 1) ? `*x*` + it.amount : ''}`, inline: true }
+                        })
+                }
+                return {
+                    embeds: [embed]
+                }
+            })
     }
 } as Command;
