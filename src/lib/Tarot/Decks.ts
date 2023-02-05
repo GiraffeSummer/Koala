@@ -11,15 +11,16 @@ export class Deck {
     ranks: Ranks
     suits: Suits
 
-    constructor(name: string, suits: Suits, ranks: Ranks) {
+    path: string;
+    filename: (Card) => string;
+
+    constructor(name: string, suits: Suits, ranks: Ranks, fileName: (Card) => string) {
         this.name = name;
         this.suits = suits;
         this.ranks = ranks;
-    }
 
-    public filename(card: Card) {
-        const rank = typeof card.rank == 'string' ? this.ranks[card.rank] : card.rank.toString().padStart(2, '0')
-        return path.join(basePath, `${this.name.toLowerCase().replaceAll(' ', '_')}/${card.suit}/sm_RWSa-${this.suits[card.suit]}-${rank}.png`);
+        this.path = path.join(basePath, `${this.name.toLowerCase().replaceAll(' ', '_')}`);
+        this.filename = fileName;
     }
 }
 
@@ -35,11 +36,29 @@ export const mainDeck = new Deck('Rider Waite', {
     queen: "QU",
     knight: "J1",
     page: "J2"
+}, function (card: Card) {
+    const rank = typeof card.rank == 'string' ? this.ranks[card.rank] : card.rank.toString().padStart(2, '0')
+    return path.join(this.path, `/${card.suit}/sm_RWSa-${this.suits[card.suit]}-${rank}.png`);
 })
 
 //list with all the decks
 export const decks = {
-    'main': mainDeck
+    'main': mainDeck,
+    'visconti': new Deck('Visconti', {
+        coins: 'coins',
+        cups: "cups",
+        major: "major",
+        swords: "swords",
+        wands: "wands",
+    }, {
+        king: "k",
+        queen: "q",
+        knight: "kn",
+        page: "p"
+    }, function (card: Card) {
+        const rank = typeof card.rank == 'string' ? this.ranks[card.rank] : card.rank.toString()
+        return path.join(this.path, `/${card.suit}/${rank}.jpg`);
+    })
 }
 
 export interface Ranks {
