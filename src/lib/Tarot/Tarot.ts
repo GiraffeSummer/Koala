@@ -17,15 +17,12 @@ export default async function (type: CardType = CardType.All, deckName: string =
         console.warn('Deck not found, using main')
     }
 
-    const filter = (type == CardType.All) ? () => true :
-        (
-            (type == CardType.Major) ?
-                (card) => { return card.suit == "major" }
-                : //minor:
-                (card) => { return card.suit != "major" }
+    const cards = (type == CardType.All) ? interpretations :
+        interpretations.filter((type == CardType.Major) ?
+            (card) => { return card.suit == "major" }
+            : //minor:
+            (card) => { return card.suit != "major" }
         );
-
-    const cards = interpretations.filter(filter)
     const card: Card = cards.random() as Card;
     card.image = deck.filename(card);
     return card;
