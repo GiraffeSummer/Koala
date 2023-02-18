@@ -2,7 +2,7 @@ import interpretation from './interpretation'
 import { Deck, decks, mainDeck } from './Decks'
 export const defaultDeckName = 'main'
 
-const interpretations = interpretation as Card[];
+const interpretations = interpretation;
 
 //main function
 export default async function (type: CardType = CardType.All, deckName: string = defaultDeckName) {
@@ -26,7 +26,7 @@ export default async function (type: CardType = CardType.All, deckName: string =
         );
 
     const cards = interpretations.filter(filter)
-    const card: Card = cards.random();
+    const card: Card = cards.random() as Card;
     card.image = deck.filename(card);
     return card;
 }
