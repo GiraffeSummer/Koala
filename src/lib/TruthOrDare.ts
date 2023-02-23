@@ -2,11 +2,10 @@ import { CommandInteraction, Client, ActionRowBuilder, ButtonBuilder, ButtonStyl
 import { RandomNum } from "../lib/Functions";
 import prisma, { where } from "../lib/db";
 import theme from "../lib/theme";
-
-
-export const functionmap = {
-    truth: {
-        customID: 'tod-truth',
+type FunctionMapType = Record<string, { customId: string, function: () => Promise<string>, buttonList: ButtonEntry[] }>
+export const functionmap: FunctionMapType = {
+    'truth': {
+        customId: 'tod-truth',
         function: getTruth,
         buttonList: [
             { customId: 'tod-truth', label: 'truth', style: ButtonStyle.Success },
@@ -14,8 +13,8 @@ export const functionmap = {
             { customId: 'tod-random', label: 'random' },
         ],
     },
-    dare: {
-        customID: 'tod-dare',
+    'dare': {
+        customId: 'tod-dare',
         function: getDare,
         buttonList: [
             { customId: 'tod-truth', label: 'truth', style: ButtonStyle.Success },
@@ -23,8 +22,8 @@ export const functionmap = {
             { customId: 'tod-random', label: 'random' },
         ],
     },
-    random_tod: {
-        customID: 'tod-random',
+    'random_tod': {
+        customId: 'tod-random',
         function: getRandom,
         buttonList: [
             { customId: 'tod-truth', label: 'truth', style: ButtonStyle.Success },
@@ -33,18 +32,12 @@ export const functionmap = {
         ],
     },
 
-    paranoia: { customID: 'tod-paranoia', buttonList: [{ label: 'paranoia', customId: 'tod-paranoia' }], function: getParanoia },
-    neverhaveiever: { customID: 'tod-nhie', buttonList: [{ label: 'Never have I ever', customId: 'tod-nhie' }], function: getNeverhaveIever },
-    wouldyourather: { customID: 'tod-wyr', buttonList: [{ label: 'Would you rather', customId: 'tod-wyr' }], function: getWouldYouRather },
+    'paranoia': { customId: 'tod-paranoia', function: getParanoia, buttonList: [{ label: 'paranoia', customId: 'tod-paranoia' }] },
+    'neverhaveiever': { customId: 'tod-nhie', function: getNeverhaveIever, buttonList: [{ label: 'Never have I ever', customId: 'tod-nhie' }] },
+    'wouldyourather': { customId: 'tod-wyr', function: getWouldYouRather, buttonList: [{ label: 'Would you rather', customId: 'tod-wyr' }] },
 }
 
-export const allowedIds = Object.keys(functionmap).map(x => functionmap[x].customID);
-
-export const todButtonList = [
-    { customId: functionmap.truth.customID, label: 'truth', style: ButtonStyle.Success },
-    { customId: functionmap.dare.customID, label: 'dare', style: ButtonStyle.Danger },
-    { customId: functionmap.random_tod.customID, label: 'random' },
-]
+export const allowedIds = Object.keys(functionmap).map(x => functionmap[x].customId);
 
 type ButtonEntry = {
     customId: string,
@@ -62,29 +55,7 @@ export async function makeButtons(buttons: ButtonEntry[]) {
     }))
 }
 
-//TODO: 
-//WORK IN PROGRESS
-export async function addButtons(a, i, o) {
-    const row = new ActionRowBuilder<ButtonBuilder>()
-        .addComponents(
-            new ButtonBuilder()
-                .setCustomId(functionmap.truth.customID)
-                .setLabel('truth')
-                .setStyle(ButtonStyle.Success),
-            new ButtonBuilder()
-                .setCustomId(functionmap.dare.customID)
-                .setLabel('dare')
-                .setStyle(ButtonStyle.Danger),
-            new ButtonBuilder()
-                .setCustomId(functionmap.random_tod.customID)
-                .setLabel('random')
-                .setStyle(ButtonStyle.Primary),
-        );
-
-    return row;
-}
-
-export async function InitializeMessage(interaction, type: keyof typeof functionmap) {
+export async function InitializeMessage(interaction: CommandInteraction, type: keyof typeof functionmap) {
     const functionObject = functionmap[type]
     const question: string = await functionObject.function();
 
@@ -98,7 +69,7 @@ export async function HandleTODButtonInteraction(client: Client, interaction: Bu
     const truthOrDareIDs = allowedIds;
     if (truthOrDareIDs.includes(interaction.customId)) {
         interaction.message.edit({ components: [] })
-        const functionObject = Object.values(functionmap).find(m => m.customID === interaction.customId)
+        const functionObject = Object.values(functionmap).find(m => m.customId === interaction.customId)
         let question = await functionObject.function();
         let buttonList: ButtonEntry[] | null = functionObject.buttonList ?? null;
 
