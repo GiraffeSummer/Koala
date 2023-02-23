@@ -1,18 +1,35 @@
-import { CommandInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction } from "discord.js";
+import { CommandInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction, CacheType } from "discord.js";
 import { logCommand } from '../lib/Log'
 import { FindOrCreateUser } from '../lib/db'
 import { addExpInteraction } from '../lib/LevelSystem'
 import commands, { context_commands } from "../Commands";
+import { HandleTODButtonInteraction, allowedIds as tod_allowed_ids } from "../lib/TruthOrDare"
+
+const buttonInteractionIncludeIds = [...tod_allowed_ids]
 
 export default (client: Client): void => {
     client.on("interactionCreate", async (interaction: Interaction) => {
-        if (interaction.isContextMenuCommand()) {
+        if (interaction.isButton() && buttonInteractionIncludeIds.includes(interaction.customId)) {
+            await HandleButtonInteractions(interaction,
+                [
+                    HandleTODButtonInteraction(client, interaction)
+                ])
+        }
+        else if (interaction.isContextMenuCommand()) {
             await handleContextMenu(client, interaction);
         } else if (interaction.isCommand()) {
             await handleSlashCommand(client, interaction);
         }
     });
 };
+
+async function HandleButtonInteractions(interaction: ButtonInteraction, interactions: Promise<boolean>[]) {
+    Promise.all(interactions).then(async results => {
+        if (!results.some(x => x)) {
+            await interaction.reply({ ephemeral: true, content: "This message is inactive now, please try the command again." })
+        }
+    })
+}
 
 const handleSlashCommand = async (client: Client, interaction: CommandInteraction): Promise<void> => {
     const slashCommand = commands.find(c => c.name === interaction.commandName);
