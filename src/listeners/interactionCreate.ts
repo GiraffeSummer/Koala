@@ -4,34 +4,42 @@ import { FindOrCreateUser } from '../lib/db'
 import { addExpInteraction } from '../lib/LevelSystem'
 import commands, { context_commands } from "../Commands";
 import { HandleTODButtonInteraction, allowedIds as tod_allowed_ids } from "../lib/TruthOrDare"
-
-const buttonInteractionIncludeIds = [...tod_allowed_ids]
+import { ButtonInteractionManager } from '../lib/ButtonInteractionListener'
 
 export default (client: Client): void => {
     client.on("interactionCreate", async (interaction: Interaction) => {
-        if (interaction.isButton() && buttonInteractionIncludeIds.includes(interaction.customId)) {
-            await HandleButtonInteractions(interaction,
-                [
-                    HandleTODButtonInteraction(client, interaction)
-                ])
+        if (interaction.isButton()) {
+            await handleButtonInteraction(client, interaction);
         }
         else if (interaction.isContextMenuCommand()) {
             await handleContextMenu(client, interaction);
-        } else if (interaction.isCommand()) {
+        }
+        else if (interaction.isCommand()) {
             await handleSlashCommand(client, interaction);
         }
     });
 };
 
-async function HandleButtonInteractions(interaction: ButtonInteraction, interactions: Promise<boolean>[]) {
-    Promise.all(interactions).then(async results => {
-        if (!results.some(x => x)) {
-            await interaction.reply({ ephemeral: true, content: "This message is inactive now, please try the command again." })
+async function handleButtonInteraction(client: Client, interaction: ButtonInteraction): Promise<void> {
+    const buttonManager = new ButtonInteractionManager(client, interaction);
+
+    if (tod_allowed_ids.includes(interaction.customId)) {
+        //truth or dare commands (never have I ever, would you rather, paranoia)
+        buttonManager.listen({
+            match: (id) => tod_allowed_ids.includes(id),
+            execute: HandleTODButtonInteraction,
+        })
+    } else {
+        if (interaction.message?.interaction?.commandName) {
+            const command = commands.find(c => c.name === interaction.message.interaction.commandName);
+            if ('buttonHandler' in command) {
+                buttonManager.listen(command.buttonHandler)
+            }
         }
-    })
+    }
 }
 
-const handleSlashCommand = async (client: Client, interaction: CommandInteraction): Promise<void> => {
+async function handleSlashCommand(client: Client, interaction: CommandInteraction): Promise<void> {
     const slashCommand = commands.find(c => c.name === interaction.commandName);
     if (!slashCommand) {
         interaction.followUp({ content: "An error has occurred" });
@@ -52,7 +60,7 @@ const handleSlashCommand = async (client: Client, interaction: CommandInteractio
     slashCommand.run(client, interaction);
 };
 
-const handleContextMenu = async (client: Client, interaction: CommandInteraction): Promise<void> => {
+async function handleContextMenu(client: Client, interaction: CommandInteraction): Promise<void> {
     const context_command = context_commands.find(c => c.name === interaction.commandName);
     if (!context_command) {
         interaction.followUp({ content: "An error has occurred" });
