@@ -16,6 +16,7 @@ export default {
         required: true
     }],
     run: async (client: Client, interaction: CommandInteraction) => {
+        //proposals database, or entry in user table ? 
         const user = interaction.options.get('user')?.user;
         if (user.id === interaction.user.id) return await interaction.followUp({ content: "You cannot marry yourself!", ephemeral: true })
 
@@ -59,7 +60,7 @@ export default {
             filter,
             componentType: ComponentType.Button,
             max: 1,
-            time: 300 * 1000
+            time: 5 * 60 * 1000
         })
 
         collector.on('end', async (collection) => {
