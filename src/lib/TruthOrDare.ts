@@ -45,7 +45,8 @@ type ButtonEntry = {
     style?: ButtonStyle,
 }
 
-export async function makeButtons(buttons: ButtonEntry[]) {
+export async function makeButtons(buttons?: ButtonEntry[]) {
+    //will only work with 5 buttons or less
     const row = new ActionRowBuilder<ButtonBuilder>();
     return row.addComponents(buttons.map(btn => {
         return new ButtonBuilder()
@@ -61,7 +62,7 @@ export async function InitializeMessage(interaction: CommandInteraction, type: k
 
     await interaction.followUp({
         embeds: [{ description: question, color: theme.default, author: { name: interaction.user.username, icon_url: interaction.user.avatarURL() } }],
-        components: [await makeButtons(functionObject.buttonList)]
+        components: functionObject.buttonList?.length > 0 ? [await makeButtons(functionObject.buttonList)] : []
     });
 }
 
@@ -72,14 +73,14 @@ export async function HandleTODButtonInteraction(client: Client, interaction: Bu
         const functionObject = Object.values(functionmap).find(m => m.customId === interaction.customId)
         let question = await functionObject.function();
         let buttonList: ButtonEntry[] | null = functionObject.buttonList ?? null;
+        const components = buttonList?.length > 0 ? [await makeButtons(buttonList)] : []
 
-        interaction.message.reply({ embeds: [{ description: question, color: theme.default, author: { name: interaction.user.username, icon_url: interaction.user.avatarURL() } }], })
-            .then(async int => {
-                if (buttonList != null)
-                    int.edit({ components: [await makeButtons(buttonList)] })
-            }).catch(err => {
-                interaction.message.channel.send({ content: `Something went wrong!\nMake sure I have the read message history and send message permissions` })
-            });
+        interaction.message.reply({
+            embeds: [{ description: question, color: theme.default, author: { name: interaction.user.username, icon_url: interaction.user.avatarURL() } }],
+            components,
+        }).catch(err => {
+            interaction.message.channel.send({ content: `Something went wrong!\nMake sure I have the read message history and send message permissions` })
+        });
         return true;
     } else return false;
 }
