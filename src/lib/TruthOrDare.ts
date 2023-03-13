@@ -100,6 +100,7 @@ export async function HandleTODButtonInteraction(client: Client, interaction: Bu
             components: await otherButtons
         })
         interaction.deferUpdate();
+        return true;
     } else if (truthOrDareIDs.includes(interaction.customId)) {
         interaction.message.edit({ components: [] })
         const functionObject = Object.values(questionMap).find(m => m.customId === interaction.customId)
