@@ -10,7 +10,6 @@ datasource db {
 model User {
   uid           String    @id @db.VarChar(45)
   name          String?   @db.LongText
-  discriminator String?   @default("0") @db.VarChar(4)
   lvl           Int?      @default(0)
   reputation    Int?      @default(0)
   toLvl         Int?      @default(11)

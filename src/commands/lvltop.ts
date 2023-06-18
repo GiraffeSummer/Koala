@@ -15,7 +15,7 @@ export default {
 
         for (let i = 0; i < top.length; i++) {
             const usr = top[i];
-            embed.fields.push({ name: `**#${i + 1}** ${usr.name}#${usr.discriminator}`, value: `Level: ${usr.lvl} with ${usr.toLvl} to go.`, inline: true })
+            embed.fields.push({ name: `**#${i + 1}** @${usr.name}`, value: `Level: ${usr.lvl} with ${usr.toLvl} to go.`, inline: true })
         }
         await interaction.followUp({
             embeds: [embed]

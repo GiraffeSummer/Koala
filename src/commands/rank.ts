@@ -26,7 +26,7 @@ export default {
 
         const canvas = new Canvas();
 
-        const img = parseInt(user.discriminator) % 4; //this number should be amount of images
+        const img = parseInt(user.id) % 4; //this number should be amount of images
         await canvas.setBackground(`./resources/bg${img}.png`);
 
         canvas.addBox(20, 20, 896, 242, "rgba(0,0,0,0.7)", 40);
@@ -48,7 +48,7 @@ export default {
         canvas.addBar(306, 185, 570, 40, 10, lineColor, barValue);
 
         //Draw text
-        canvas.addText(302, 100, user.username, "56px Comfortaa");
+        canvas.addText(302, 100, `@${user.username}`, "56px Comfortaa");
         canvas.addText(302, 165, "Level " + profile.lvl, "32px Comfortaa");
 
         //Draw line

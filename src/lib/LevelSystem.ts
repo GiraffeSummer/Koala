@@ -86,7 +86,7 @@ export async function levelUp(user: User) {
 
     const canvas = new Canvas();
 
-    const img = parseInt(user.discriminator) % 4; //this number should be amount of images
+    const img = parseInt(user.id) % 4; //this number should be amount of images
     await canvas.setBackground(`./resources/bg${img}.png`);
 
     canvas.addBox(20, 20, 896, 242, "rgba(0,0,0,0.7)", 40);
@@ -96,7 +96,7 @@ export async function levelUp(user: User) {
 
     //Draw text
     canvas.addText(302, 110, `Leveled up to: ${profile.lvl}`, "56px Comfortaa");
-    canvas.addText(302, 200, `${user.username}#${user.discriminator}`, "48px Comfortaa");
+    canvas.addText(302, 200, user.discriminator != '0' ? `${user.username}#${user.discriminator}` : `@${user.username}`, "48px Comfortaa");
 
     //Draw line
     canvas.addLine(304, canvas.height / 2, 874, canvas.height / 2, 2);

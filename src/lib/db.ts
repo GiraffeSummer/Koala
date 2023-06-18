@@ -10,11 +10,10 @@ export async function FindOrCreateUser(user): Promise<Prisma.User> {
         where: {
             uid: user.id
         },
-        update: { name: user.username, discriminator: user.discriminator },
+        update: { name: user.username },
         create: {
             uid: user.id,
             name: user.username,
-            discriminator: user.discriminator,
             lootTimer: new Date(0),
             guessTimer: new Date(0)
         },
