@@ -2,6 +2,7 @@ import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, 
 import fetch, { METHODS } from '../lib/fetch'
 import { Command } from "../Command";
 import { createCanvas, loadImage } from 'canvas'
+import theme from '../lib/theme'
 
 export default {
     name: "face",
@@ -30,7 +31,11 @@ export default {
                 "Access-Control-Allow-Origin": "*"
             },
         })).data
-
+        if (body.media.faces == null) {
+            return await interaction.followUp({
+                embeds: [{ title: 'No face found', color: theme.error, description: 'Does the image have a (real) face?'}],
+            });
+        }
         let tags = body.media.faces[0].tags;
 
         let desc: string = "";
