@@ -1,9 +1,6 @@
 import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
-import { RandomNum } from '../lib/Functions'
 import { DiceRoll } from '@dice-roller/rpg-dice-roller';
-
-const roll = new DiceRoll('4d6');
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
@@ -18,7 +15,7 @@ export default {
     },
     ],
     run: async (client: Client, interaction: CommandInteraction) => {
-        const notation = interaction.options.get('notation').value as string 
+        const notation = interaction.options.get('notation').value as string
         const roll = new DiceRoll(notation);
         await interaction.followUp({
             embeds: [{
