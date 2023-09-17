@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@coffeeandfun/google-profanity-words": "^2.1.0",
     "@dice-roller/rpg-dice-roller": "^5.4.1",
     "@napi-rs/canvas": "^0.1.44",
     "@prisma/client": "^5.3.1",
