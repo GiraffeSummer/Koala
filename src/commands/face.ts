@@ -1,7 +1,7 @@
 import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import fetch, { METHODS } from '../lib/fetch'
 import { Command } from "../Command";
-import { createCanvas, loadImage } from 'canvas'
+import { createCanvas, loadImage } from '@napi-rs/canvas'
 import theme from '../lib/theme'
 
 export default {
@@ -30,7 +30,7 @@ export default {
                 'accept': 'application/json',
                 "Access-Control-Allow-Origin": "*"
             },
-        })).data
+        }))?.data
         if (body.media.faces == null) {
             return await interaction.followUp({
                 embeds: [{ title: 'No face found', color: theme.error, description: 'Does the image have a (real) face?'}],
@@ -62,7 +62,7 @@ export default {
 
             await interaction.followUp({
                 embeds: [embed],
-                files: [new AttachmentBuilder(canvas.toBuffer())]
+                files: [new AttachmentBuilder(canvas.toBuffer('image/jpeg'))]
             });
         })
     }

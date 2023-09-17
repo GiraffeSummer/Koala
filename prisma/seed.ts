@@ -28,6 +28,7 @@ import truth from './data/truth.json'
 //@ts-ignore
 import dare from './data/dare.json'
 
+
 const prisma = new PrismaClient()
 
 const seeders = {
@@ -46,25 +47,20 @@ const seeders = {
     'dare': dare
 }
 
-async function main() {
-    console.log(`Start seeding ...`)
-    for (const [table, items] of Object.entries(seeders)) {
-        console.log(`Seeding ${table}.`)
-        for (let i = 0; i < items.length; i++) {
-            const item = items[i];
-            //console.log(`${table} ${i+1}/${items.length}`)
-            await prisma[table].upsert({ where: { id: item.id }, create: item, update: item })
-        }
-    }
 
-    console.log(`Done seeding!`)
+console.log(`Start seeding ...`)
+
+for (const [table, items] of Object.entries(seeders)) {
+    console.log(`Seeding ${table}.`)
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        //console.log(`${table} ${i+1}/${items.length}`)
+        await prisma[table].upsert({ where: { id: item.id }, create: item, update: item })
+    }
 }
 
-main()
-    .catch((e) => {
-        console.error(e)
-        process.exit(1)
-    })
-    .finally(async () => {
-        await prisma.$disconnect()
-    })
+console.log(`Done seeding!`)
+
+
+
+await prisma.$disconnect()

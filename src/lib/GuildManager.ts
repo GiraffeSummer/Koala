@@ -41,12 +41,14 @@ export async function CheckStillActiveSharded(guilds: Guild[]) {
     })
 
     //update names
-    await Promise.all(
-        guilds.map(
-            guild => prisma.guild.update({
-                where: { id: guild.id },
-                data: { name: guild.name }
-            })
+    Promise.all(
+        Object.values(guilds).map(
+            guild => {
+                prisma.guild.update({
+                    where: { id: guild.id },
+                    data: { name: guild.name }
+                })
+            }
         )
     );
 
