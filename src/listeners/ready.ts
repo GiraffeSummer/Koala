@@ -17,7 +17,8 @@ export default (client: Client): void => {
 
         guildCacheSize.reduce((acc, guildCount) => acc + guildCount, 0);
 
-        const servers = guildCacheServersArray.reduce((memo, servers) => { return [...memo, ...servers] }, [])
+        const servers = guildCacheServersArray.reduce((memo, servers) => { return [...memo, ...servers.values()] }, [])
+
         CheckGuildsStillActive(servers)
         RemoveInactiveGuilds()
 

@@ -1,5 +1,9 @@
-const Canvas = require("canvas");
+// const Canvas = require("canvas");
+const Canvas = require('@napi-rs/canvas')
 const Discord = require("discord.js");
+// const Canvas: any = {};
+
+Canvas.GlobalFonts.registerFromPath("./resources/Comfortaa-VariableFont_wght.ttf", 'Comfortaa')
 
 export default class DiscordCanvas {
     canvas: any;
@@ -11,14 +15,14 @@ export default class DiscordCanvas {
         h = h || 282;
         //Canvas.registerFont("./resources/fonts/arial.ttf", { family: "Arial" });
         //Canvas.registerFont("./resources/fonts/ariblk.ttf", { family: "Arial Black" });
-        Canvas.registerFont("./resources/Comfortaa-VariableFont_wght.ttf", { family: "Comfortaa" });
+        // Canvas.registerFont("./resources/Comfortaa-VariableFont_wght.ttf", { family: "Comfortaa" });
         this.canvas = Canvas.createCanvas(w, h);
         this.context = this.canvas.getContext("2d");
         this.width = w;
         this.height = h;
     }
 
-    async setBackground(url) {
+    async setBackground(url: string) {
         const background = await Canvas.loadImage(url);
         const scale = Math.max(
             this.canvas.width / background.width,
@@ -35,7 +39,7 @@ export default class DiscordCanvas {
     }
 
     /** Draw line */
-    addLine(ax, ay, bx, by, lWidth = 2, lColor = "white") {
+    addLine(ax: number, ay: number, bx: number, by: number, lWidth = 2, lColor = "white") {
         this.context.strokeStyle = lColor;
         this.context.lineWidth = lWidth;
         this.context.beginPath();
@@ -44,7 +48,7 @@ export default class DiscordCanvas {
         this.context.stroke();
     }
 
-    addBox(x, y, width, height, color, radius = 0, lWidth = 0, lColor = "white") {
+    addBox(x: number, y: number, width: number, height: number, color: string, radius = 0, lWidth = 0, lColor = "white") {
         this.context.save();
         this.context.beginPath();
         this.context.moveTo(x + radius, y);
@@ -63,12 +67,12 @@ export default class DiscordCanvas {
         this.context.restore();
     }
 
-    async addImage(x, y, width, height, url) {
+    async addImage(x: number, y: number, width: number, height: number, url: string) {
         const img = await Canvas.loadImage(url);
         this.context.drawImage(img, x, y, width, height);
     }
 
-    async addCircleImage(x, y, size, url, lWidth = 0, lColor = "white") {
+    async addCircleImage(x: number, y: number, size: number, url: string, lWidth = 0, lColor = "white") {
         const img = await Canvas.loadImage(url);
         this.context.save();
         this.context.beginPath();
@@ -83,14 +87,14 @@ export default class DiscordCanvas {
         this.context.restore();
     }
 
-    addText(x, y, text, font = "18px Arial", color = "white") {
+    addText(x: number, y: number, text: string, font = "18px Arial", color = "white") {
         this.context.font = font;
         this.context.fillStyle = color;
         this.context.fillText(text, x, y);
     }
 
     /** Progress bar */
-    addBar(x, y, width, height, radius = 0, color = "white", percentage = 100) {
+    addBar(x: number, y: number, width: number, height: number, radius = 0, color = "white", percentage = 100) {
         this.context.save();
         this.context.beginPath();
         this.context.moveTo(x + radius, y);
@@ -105,8 +109,8 @@ export default class DiscordCanvas {
         this.context.restore();
     }
 
-    toBuffer() {
-        return this.canvas.toBuffer();
+    toBuffer(bufferType = 'image/jpeg') {
+        return this.canvas.toBuffer(bufferType);
     }
 
     toAttachment(fileName = "canvas.jpg") {

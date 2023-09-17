@@ -1,20 +1,29 @@
-FROM node:latest
+FROM oven/bun as builder
 
-RUN apt-get update 
-RUN apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev -y
+RUN bun upgrade
 
-# Create the bot's directory
-RUN mkdir -p /usr/src/bot
+# Insstall node for prisma's generate
+RUN apt update \
+    && apt install -y curl
+ARG NODE_VERSION=18
+RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n \
+    && bash n $NODE_VERSION \
+    && rm n \
+    && npm install -g npm
 
-WORKDIR /usr/src/bot
 
-COPY package.json /usr/src/bot
+FROM builder as app
 
-RUN npm install
+WORKDIR /home/bun/app
 
-COPY . /usr/src/bot
+COPY package*.json bun.lockb ./
 
-RUN npx prisma generate
+RUN bun install
 
-# Start the bot.
-CMD ["npm","start"]
+COPY . .
+
+RUN bunx prisma generate
+
+ENV NODE_ENV production
+
+CMD [ "bun", "start" ]
