@@ -14,6 +14,9 @@ export default (client: Client): void => {
         else if (interaction.isContextMenuCommand()) {
             await handleContextMenu(client, interaction);
         }
+        else if (interaction.isAutocomplete()) {
+            await handleAutoComplete(client, interaction);
+        }
         else if (interaction.isCommand()) {
             await handleSlashCommand(client, interaction);
         }
@@ -78,4 +81,24 @@ async function handleContextMenu(client: Client, interaction: CommandInteraction
     }
 
     context_command.run(client, interaction);
+};
+
+
+async function handleAutoComplete(client: Client, interaction: CommandInteraction): Promise<void> {
+    const slashCommand = commands.find(c => c.name === interaction.commandName);
+    if (!slashCommand) {
+        interaction.followUp({ content: "An error has occurred" });
+        return;
+    }
+
+    if ('getAutoCompleteOptions' in slashCommand) {
+        const focusedOption = interaction.options.getFocused(true);
+        let options = await slashCommand?.getAutoCompleteOptions(client, interaction, focusedOption.value);
+        if (options.length > 25) {
+            options = options.slice(0, 25);
+        } else {
+            options = options;
+        }
+        await interaction.respond(options);
+    }
 };
