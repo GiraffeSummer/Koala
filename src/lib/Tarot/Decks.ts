@@ -37,7 +37,7 @@ export const mainDeck = new Deck('Rider Waite', {
     knight: "J1",
     page: "J2"
 }, function (card: Card) {
-    const rank = typeof card.rank == 'string' ? this.ranks[card.rank] : card.rank.toString().padStart(2, '0')
+    const rank = typeof card.rank == 'string' ? this.ranks[card.rank] : (card.rank == 1 && this.suits[card.suit] != "T") ? '0A' : card.rank.toString().padStart(2, '0')
     return path.join(this.path, `/${card.suit}/sm_RWSa-${this.suits[card.suit]}-${rank}.png`);
 })
 
