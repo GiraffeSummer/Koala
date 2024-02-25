@@ -3,6 +3,8 @@ services:
   bot:
     container_name: 'Hikage'
     restart: unless-stopped
-    build: 
+    volumes:
+      - $PWD/resources:/home/bun/app/resources
+    build:
       context: .
       dockerfile: Dockerfile
