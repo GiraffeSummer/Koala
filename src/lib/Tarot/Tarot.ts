@@ -1,5 +1,5 @@
 import interpretation from './interpretation'
-import { Deck, decks, mainDeck } from './Decks'
+import { Deck, tryDeck } from './Decks'
 export const defaultDeckName = 'main'
 
 const interpretations = interpretation;
@@ -10,12 +10,7 @@ export default async function (type: CardType = CardType.All, deckName: string =
         throw new Error('Interpretations not found!!!');
     }
     //deck is to map images to card interpretations
-    let deck: Deck = mainDeck;
-    if (deckName in decks) {
-        deck = decks[deckName];
-    } else {
-        console.warn('Deck not found, using main')
-    }
+    let deck: Deck = tryDeck(deckName)
 
     const cards = (type == CardType.All) ? interpretations :
         interpretations.filter((type == CardType.Major) ?

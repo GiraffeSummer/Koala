@@ -1,7 +1,7 @@
 import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import Tarot, { Card, Suits, CardType, defaultDeckName } from '../lib/Tarot/Tarot';
-import { type Deck, decks } from '../lib/Tarot/Decks';
+import { type Deck, decks,tryDeck } from '../lib/Tarot/Decks';
 import tarotInterpertation from '../lib/Tarot/interpretation';
 import theme from "../lib/theme";
 const cardNames = tarotInterpertation.map(x => x.name)
@@ -35,12 +35,7 @@ export default {
         const deckName: string = interaction.options.get('deck')?.value as string || defaultDeckName
         const card = tarotInterpertation.find(x => x.name == cardName);
 
-        let deck: Deck = decks[defaultDeckName];
-        if (deckName in decks) {
-            deck = decks[deckName];
-        } else {
-            console.warn('Deck not found, using main')
-        }
+        let deck: Deck = tryDeck(deckName);
 
         const embeds = [{
             title: card.name,

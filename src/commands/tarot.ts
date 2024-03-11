@@ -15,7 +15,6 @@ export default {
         name: 'set',
         description: 'What kind of reading do you want to',
         choices: [CardType.All, CardType.Major, CardType.Minor].map(x => { return { name: CardType[x], value: x } }),
-
     },
     {
         type: ApplicationCommandOptionType.String,

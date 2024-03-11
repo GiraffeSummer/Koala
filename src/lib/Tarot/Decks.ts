@@ -24,6 +24,16 @@ export class Deck {
     }
 }
 
+export function tryDeck(deckName: string): Deck{
+    let deck: Deck = mainDeck;
+    if (deckName in decks) {
+        deck = decks[deckName];
+    } else {
+        console.warn('Deck not found, using main')
+    }
+    return deck;
+}
+
 //declare so it can be used independently
 export const mainDeck = new Deck('Rider Waite', {
     coins: 'P',
