@@ -1,10 +1,11 @@
 FROM oven/bun as builder
 
+RUN apt update \
+    && apt install -y curl unzip
+
 RUN bun upgrade
 
 # Insstall node for prisma's generate
-RUN apt update \
-    && apt install -y curl
 ARG NODE_VERSION=18
 RUN curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n \
     && bash n $NODE_VERSION \
