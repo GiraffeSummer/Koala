@@ -6,7 +6,7 @@ import * as profanity from '../lib/ProfanityFilter'
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
     name: "setstatus",
-    description: "use a bad pickup line",
+    description: "set your profile's status",
     type: ApplicationCommandType.ChatInput,
     ephemeral: true,
     options: [{
