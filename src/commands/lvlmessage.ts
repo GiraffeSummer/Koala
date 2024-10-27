@@ -45,16 +45,17 @@ export default {
                 break;
 
             case 'channel':
-                const channel = interaction.options.get('channel')?.channel;
-                if (channel == undefined) {
+                const chosenChannel = interaction.options.get('channel')?.channel;
+                const channel = await client.channels.fetch(chosenChannel.id);
+                if (chosenChannel == undefined) {
                     await prisma.guild.update({ where: { id: interaction.guildId }, data: { lvlChannel: null } });
                     interaction.followUp({ content: `Reset level messages channel` })
                 } else {
-                    if (!["GUILD_TEXT"].includes(channel?.type.toString())) {
+                    if (!channel.isTextBased()) {
                         return interaction.followUp({ content: `Channel needs to be a text channel.`, ephemeral: true })
                     }
-                    await prisma.guild.update({ where: { id: interaction.guildId }, data: { lvlChannel: channel.id } });
-                    interaction.followUp({ content: `Sending level messages in: ${channel}` })
+                    await prisma.guild.update({ where: { id: interaction.guildId }, data: { lvlChannel: chosenChannel.id } });
+                    interaction.followUp({ content: `Sending level messages in: ${chosenChannel}` })
                 }
                 break;
 
