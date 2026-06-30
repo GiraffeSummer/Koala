@@ -1,0 +1,22 @@
+services:
+  bot:
+    container_name: Koala-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bun run src/index.ts
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+      - TZ=${TZ:-Europe/Amsterdam}
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./src
+          target: /home/bun/app/src
+
+        - action: sync+restart
+          path: ./resources
+          target: /home/bun/app/resources

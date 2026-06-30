@@ -9,6 +9,8 @@ The level system is now based on command usage, and does no longer log the level
 I've also stripped this down and turned it into a [template](https://github.com/GiraffeSummer/ts-discordjs-template)  
 you are free to use this as you like, A mention would be nice, but not required, I will set up proper readme and license on that soon
 
+## Docker
+run with docker watch mode `docker compose -f docker-compose.dev.yml watch`
 
 ## todo:
 - Put magic 8 ball results on image!  
