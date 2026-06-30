@@ -12,74 +12,78 @@ export default {
     description: "do a tarot reading",
     type: ApplicationCommandType.ChatInput,
     ephemeral: true,
-    options: [{
-        type: ApplicationCommandOptionType.Integer,
-        name: 'set',
-        description: 'What kind of reading do you want to',
-        choices: [CardType.All, CardType.Major, CardType.Minor].map(x => { return { name: CardType[x], value: x } }),
-    },
-    {
-        type: ApplicationCommandOptionType.String,
-        name: 'deck',
-        description: 'Which deck images to use?',
-        choices: Object.keys(decks).map(key => { return { value: key, name: decks[key].name } }),
-    },
-    {
-        type: ApplicationCommandOptionType.String,
-        name: 'reading_style',
-        description: 'How detailed should the card reading be?',
-        choices: [
-            { name: 'Simple', value: 'simple' },
-            { name: 'Interpreted', value: 'interpreted' },
-        ],
-    },
-    {
-        type: ApplicationCommandOptionType.String,
-        name: 'interpretation',
-        description: 'How should the card be interpreted?',
-        choices: [
-            { name: 'Balanced', value: 'mixed' },
-            { name: 'Light', value: 'light' },
-            { name: 'Shadow', value: 'shadow' },
-        ],
-    }
+    options: [
+        {
+            type: ApplicationCommandOptionType.String,
+            name: 'format',
+            description: 'How should the card result be shown?',
+            choices: [
+                { name: 'Short written reading · fun, may be slower', value: 'reading' },
+                { name: 'Simple card info', value: 'simple' },
+            ],
+        },
+        {
+            type: ApplicationCommandOptionType.Integer,
+            name: 'set',
+            description: 'What kind of reading do you want to',
+            choices: [CardType.All, CardType.Major, CardType.Minor].map(x => { return { name: CardType[x], value: x } }),
+        },
+        {
+            type: ApplicationCommandOptionType.String,
+            name: 'deck',
+            description: 'Which deck images to use?',
+            choices: Object.keys(decks).map(key => { return { value: key, name: decks[key].name } }),
+        },
+        {
+            type: ApplicationCommandOptionType.String,
+            name: 'interpretation',
+            description: 'How should the card be interpreted?',
+            choices: [
+                { name: 'Balanced', value: 'mixed' },
+                { name: 'Light', value: 'light' },
+                { name: 'Shadow', value: 'shadow' },
+            ],
+        }
     ],
     run: async (client: Client, interaction: CommandInteraction) => {
         const type: CardType = interaction.options.get('set')?.value as CardType || CardType.All;
         const deck: string = interaction.options.get('deck')?.value as string || defaultDeckName
 
-        const readingMode: string = interaction.options.get('reading_style')?.value as string || 'simple'
+        const isInterpreting: boolean = (interaction.options.get('format')?.value as string || 'simple') == 'reading'
         const interpretation: ReadingMode = interaction.options.get('interpretation')?.value as ReadingMode || 'mixed'
 
         const card = await Tarot(type, deck);
 
-        const embeds = [readingMode == 'simple' ? {
+        const embeds = [{
             title: card.name,
-            description: card.fortune_telling.random(),
-            fields: [
-                { name: 'Light:', value: card.meanings.light.random() },
-                { name: 'Shadow:', value: card.meanings.shadow.random() },
-                { name: 'Keywords:', value: card.keywords.join(', ') },
-            ],
+            description: isInterpreting ? 'Reading...' : card.fortune_telling.random(),
+            ...(!isInterpreting && {
+                fields: [
+                    { name: 'Light:', value: card.meanings.light.random() },
+                    { name: 'Shadow:', value: card.meanings.shadow.random() },
+                    { name: 'Keywords:', value: card.keywords.join(', ') },
+                ],
+            }),
             author: {
                 name: interaction.user.username,
                 icon_url: interaction.user.avatarURL()
             },
             image: { url: `attachment://tarot.png` },
             color: theme.default,
-        } : {
-            title: card.name,
-            description: await ollama(generatePrompt(card, interpretation)),
-            color: theme.default,
-            author: {
-                name: interaction.user.username,
-                icon_url: interaction.user.avatarURL()
-            },
-            image: { url: `attachment://tarot.png` },
         }]
 
-        await interaction.followUp({
+        const followUp = await interaction.followUp({
             embeds, files: [new AttachmentBuilder(card.image).setName(`tarot.png`)]
         });
+
+        if (isInterpreting) {
+            const response = await ollama(generatePrompt(card, interpretation));
+            if (response.success) {
+                embeds[0].description = response.response;
+            } else {
+                embeds[0].description = card.fortune_telling.random() + '\n\nReading format service is unavailable at this time. :sad:'
+            }
+            await interaction.webhook.editMessage(followUp.id, { embeds });
+        }
     }
 } as Command;
