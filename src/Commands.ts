@@ -11,7 +11,7 @@ export async function LoadCommands() {
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             if (!file.endsWith(".ts")) return;
-            const command = (await import(`./commands/${file}`)).default;
+            const command: Command = (await import(`./commands/${file}`)).default;
 
             if (!command.disabled) {
                 commands.push(command);
@@ -30,9 +30,9 @@ export async function LoadContextMenuCommands() {
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             if (!file.endsWith(".ts")) return;
-            const command = (await import(`./context_menu/${file}`)).default;
+            const command: ContextCommand = (await import(`./context_menu/${file}`)).default;
 
-            if (true /*if enabled*/) {
+            if (!command.disabled) {
                 context_commands.push(command);
             }
         }

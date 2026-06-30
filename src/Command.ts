@@ -9,12 +9,14 @@ export interface Command extends ChatInputApplicationCommandData {
     getAutoCompleteOptions?: (client: Client, interaction: CommandInteraction, query: string) => Promise<{ value: string, name: string }[]>;
     buttonHandler?: ButtonHandler;
     nsfw?: boolean;
+    disabled?: boolean;
 }
 
 export interface ContextCommand extends BaseApplicationCommandData {
     name: string;
     ephemeral?: boolean;
     noDefer?: boolean;
+    disabled?: boolean;
     run: (client: Client, interaction: CommandInteraction) => void;
 }
 
