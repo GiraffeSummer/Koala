@@ -1,4 +1,4 @@
-export default async function (prompt: string, model: string = 'llama3.2') {
+export default async function (prompt: string, model: string = 'llama3.2:3b') {
 
     // const prefetch = await fetch(`${process.env.OLLAMA_URL}`);//TODO: do a precheck once for online
 
@@ -6,7 +6,7 @@ export default async function (prompt: string, model: string = 'llama3.2') {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            model: model ?? 'llama3.2',
+            model: model ?? 'llama3.2:3b',
             prompt: prompt,
             stream: false
         })
