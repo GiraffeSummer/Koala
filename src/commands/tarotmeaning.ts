@@ -1,12 +1,11 @@
 import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
-import Tarot, { Card, Suits, CardType, defaultDeckName } from '../lib/Tarot/Tarot';
+import { defaultDeckName } from '../lib/Tarot/Tarot';
 import { type Deck, decks, tryDeck } from '../lib/Tarot/Decks';
-import tarotInterpertation from '../lib/Tarot/interpretation';
+import tarotInterpretation from '../lib/Tarot/interpretation';
 import theme from "../lib/theme";
-import ollama from "../lib/ollama";
-import { generatePrompt } from "../lib/Tarot/generatePrompt";
-const cardNames = tarotInterpertation.map(x => x.name)
+import readings from '../../resources/Tarot/readings.json'
+const cardNames = tarotInterpretation.map(x => x.name)
 
 export default {
     name: "tarotmeaning",
@@ -26,7 +25,7 @@ export default {
             name: 'format',
             description: 'How should the card result be shown?',
             choices: [
-                { name: 'Short written reading · fun, may be slower', value: 'reading' },
+                { name: 'Short written reading', value: 'reading' },
                 { name: 'Simple card info', value: 'simple' },
             ],
         },
@@ -47,13 +46,13 @@ export default {
         const deckName: string = interaction.options.get('deck')?.value as string || defaultDeckName
 
         const isInterpreting: boolean = (interaction.options.get('format')?.value as string || 'simple') == 'reading'
-        const card = tarotInterpertation.find(x => x.name == cardName);
+        const card = tarotInterpretation.find(x => x.name == cardName);
 
         let deck: Deck = tryDeck(deckName);
 
         const embeds = [{
             title: card.name,
-            description: isInterpreting ? 'Reading...' : card.fortune_telling.random(),
+            description: isInterpreting ? readings[card.name]['mixed'].random() : card.fortune_telling.random(),
             ...(!isInterpreting && {
                 fields: [
                     { name: 'Light:', value: card.meanings.light.random() },
@@ -69,19 +68,9 @@ export default {
             color: theme.default,
         }]
 
-        const followUp = await interaction.followUp({
+        await interaction.followUp({
             embeds, files: [new AttachmentBuilder(deck.filename(card)).setName(`tarot.png`)]
         });
-
-        if (isInterpreting) {
-            const response = await ollama(generatePrompt(card as Card, 'mixed'));
-            if (response.success) {
-                embeds[0].description = response.response;
-            } else {
-                embeds[0].description = card.fortune_telling.random() + '\n\nReading format service is unavailable at this time. :sad:'
-            }
-            await interaction.webhook.editMessage(followUp.id, { embeds });
-        }
     }
 } as Command;
 

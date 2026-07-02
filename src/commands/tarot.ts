@@ -1,10 +1,10 @@
 import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
-import Tarot, { Card, Suits, CardType, defaultDeckName } from '../lib/Tarot/Tarot';
+import Tarot, { CardType, defaultDeckName } from '../lib/Tarot/Tarot';
 import { decks, } from '../lib/Tarot/Decks';
 import theme from "../lib/theme";
-import { generatePrompt, ReadingMode } from "../lib/Tarot/generatePrompt";
-import ollama from "../lib/ollama";
+import { ReadingMode } from "../lib/Tarot/generatePrompt";
+import readings from '../../resources/Tarot/readings.json'
 
 //just copy and paste this commands, it has a few things pre made so it's easy as template
 export default {
@@ -18,7 +18,7 @@ export default {
             name: 'format',
             description: 'How should the card result be shown?',
             choices: [
-                { name: 'Short written reading · fun, may be slower', value: 'reading' },
+                { name: 'Short written reading', value: 'reading' },
                 { name: 'Simple card info', value: 'simple' },
             ],
         },
@@ -56,7 +56,7 @@ export default {
 
         const embeds = [{
             title: card.name,
-            description: isInterpreting ? 'Reading...' : card.fortune_telling.random(),
+            description: isInterpreting ? readings[card.name][interpretation].random() : card.fortune_telling.random(),
             ...(!isInterpreting && {
                 fields: [
                     { name: 'Light:', value: card.meanings.light.random() },
@@ -72,18 +72,8 @@ export default {
             color: theme.default,
         }]
 
-        const followUp = await interaction.followUp({
+        await interaction.followUp({
             embeds, files: [new AttachmentBuilder(card.image).setName(`tarot.png`)]
         });
-
-        if (isInterpreting) {
-            const response = await ollama(generatePrompt(card, interpretation));
-            if (response.success) {
-                embeds[0].description = response.response;
-            } else {
-                embeds[0].description = card.fortune_telling.random() + '\n\nReading format service is unavailable at this time. :sad:'
-            }
-            await interaction.webhook.editMessage(followUp.id, { embeds });
-        }
     }
 } as Command;
