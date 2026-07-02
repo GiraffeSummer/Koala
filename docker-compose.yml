@@ -3,6 +3,8 @@ services:
   bot:
     container_name: 'Hikage'
     restart: unless-stopped
+    env_file:
+      - .env
     volumes:
       - $PWD/resources:/home/bun/app/resources
     build:
