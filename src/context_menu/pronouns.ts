@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType } from "discord.js";
+import { ContextMenuCommandInteraction, Client, ApplicationCommandType } from "discord.js";
 import { ContextCommand } from "../Command";
 import prisma, { FindOrCreateUser } from "../lib/db";
 
@@ -6,7 +6,8 @@ export default {
     name: "pronouns",
     type: ApplicationCommandType.User,
     ephemeral: true,
-    run: async (client: Client, interaction: CommandInteraction) => {
+    disabled:true,
+    run: async (client: Client, interaction: ContextMenuCommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
 
         await FindOrCreateUser(user)

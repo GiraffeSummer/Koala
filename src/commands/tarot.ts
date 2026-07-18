@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import Tarot, { Card, CardType, defaultDeckName } from '../lib/Tarot/Tarot';
 import { decks, } from '../lib/Tarot/Decks';
@@ -115,7 +115,7 @@ export default {
             ],
         }
     ],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const type: CardType = interaction.options.get('set')?.value as CardType || CardType.All;
         const deck: string = interaction.options.get('deck')?.value as string || defaultDeckName
 

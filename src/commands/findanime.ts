@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType, ButtonBuilder, ActionRowBuilder, ButtonStyle, ButtonInteraction, Interaction } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType, ButtonBuilder, ActionRowBuilder, ButtonStyle, ButtonInteraction, Interaction } from "discord.js";
 import { Command } from "../Command";
 import fetch from "node-fetch";
 import theme from "../lib/theme";
@@ -29,7 +29,7 @@ export default {
         execute: ButtonHandler,
         maxAgeMs: 24 * 60 * 60 * 1000,//24 hours
     },
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const attachment = interaction.options.get('image')?.attachment || null;
 
         const anime = await GetAnime(attachment.url)

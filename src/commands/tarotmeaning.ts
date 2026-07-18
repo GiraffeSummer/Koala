@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, AutocompleteInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import { Card, defaultDeckName } from '../lib/Tarot/Tarot';
 import { type Deck, decks, tryDeck } from '../lib/Tarot/Decks';
@@ -42,12 +42,12 @@ export default {
             choices: Object.keys(decks).map(key => { return { value: key, name: decks[key].name } }),
         },
     ],
-    getAutoCompleteOptions: async (client: Client, interaction: CommandInteraction, query: string) => {
+    getAutoCompleteOptions: async (client: Client, interaction: AutocompleteInteraction, query: string) => {
         let options = cardNames.filter(choice => choice.toLowerCase().includes(query.toLowerCase()));
 
         return options.map(choice => { return { name: choice, value: choice } })
     },
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const cardName: string = interaction.options.get('card')?.value as string
         const deckName: string = interaction.options.get('deck')?.value as string || defaultDeckName
         const position: ReadingPosition = interaction.options.get('position')?.value as ReadingPosition ?? 'generic'

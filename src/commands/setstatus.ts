@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import prisma, { where } from "../lib/db";
 import * as profanity from '../lib/ProfanityFilter'
@@ -15,7 +15,7 @@ export default {
         description: 'Set a new status',
         required: true
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const status = interaction.options.get('status')?.value as string || null
 
         const hasCurseWords = await profanity.check(status)

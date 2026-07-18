@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { RandomNum } from "../lib/Functions";
 import { Command } from "../Command";
 
@@ -27,7 +27,7 @@ export default {
             }
         ],
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const rps = ["rock", "paper", "scissors"]
         const pick: string = interaction.options.get('pick').value as string;
 

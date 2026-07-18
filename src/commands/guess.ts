@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import type NumberGuesser from '../lib/NumberGuesser';
 
@@ -16,7 +16,7 @@ export default {
         description: 'Number to guess',
         required: true
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const number = interaction.options.get('number')?.value as number
         const profile = await FindOrCreateUser(interaction.user);
 

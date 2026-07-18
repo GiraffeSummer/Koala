@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import theme from '../lib/theme'
@@ -16,7 +16,7 @@ export default {
             description: 'Which user'
         }
     ],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
 
         await FindOrCreateUser(user);
@@ -42,10 +42,10 @@ export default {
             footer: { icon_url: interaction.user.avatarURL(), text: interaction.user.username },
 
             description: "**Username: **" + profile.name +
-                `\n**Pronouns:** ${(profile.pronouns.length > 0) ?
-                    profile.pronouns.map(x => `${x.pronouns.emoji} ${x.pronouns.name}`).join(', ')
-                    : 'any/none set'
-                }` +
+                // `\n**Pronouns:** ${(profile.pronouns.length > 0) ?
+                //     profile.pronouns.map(x => `${x.pronouns.emoji} ${x.pronouns.name}`).join(', ')
+                //     : 'any/none set'
+                // }` +
                 `${badgeT}
             \n**Status:** ` + profile.status +
                 '\n**Level:** ' + profile.lvl +

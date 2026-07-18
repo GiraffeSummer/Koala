@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import Paginator from '../lib/ButtonPagination'
@@ -17,7 +17,7 @@ export default {
             required: true
         }
     ],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
 
         const profile = await prisma.user.findFirst({ where: { uid: interaction.user.id }, include: { items: { include: { item: true } } } })

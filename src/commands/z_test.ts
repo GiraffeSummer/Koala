@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import { expNeeded, levelUp } from '../lib/LevelSystem'
@@ -18,7 +18,7 @@ export default {
         }
     ],
     disabled: true,
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
 
         const image = await levelUp(user)

@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import fetch, { METHODS } from '../lib/fetch'
 import { Command } from "../Command";
 import { createCanvas, loadImage } from '@napi-rs/canvas'
@@ -14,7 +14,7 @@ export default {
         description: 'Image with a face in it (real faces work best)',
         required: true
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const attachment = interaction.options.get('image')?.attachment || null;
         if (attachment == null) return;
 

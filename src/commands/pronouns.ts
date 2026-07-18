@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ActionRowBuilder, StringSelectMenuBuilder, ComponentType, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ActionRowBuilder, StringSelectMenuBuilder, ComponentType, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 
@@ -8,6 +8,7 @@ export default {
     description: "badge commands",
     type: ApplicationCommandType.ChatInput,
     ephemeral: true,
+    disabled:true,
     options: [
         {
             type: ApplicationCommandOptionType.Subcommand,
@@ -29,7 +30,7 @@ export default {
                 description: 'who\'s?',
             },]
         }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const sub = interaction.options['_subcommand']
         const user = interaction.options.get('user')?.user || interaction.user;
 

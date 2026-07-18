@@ -1,5 +1,5 @@
 import {
-    CommandInteraction, Client, ActionRowBuilder, StringSelectMenuBuilder, TextChannel,
+    ChatInputCommandInteraction, Client, ActionRowBuilder, StringSelectMenuBuilder, TextChannel,
     ComponentType,
     ApplicationCommandType,
     ApplicationCommandOptionType
@@ -41,7 +41,7 @@ export default {
         //choices: [],
         //options: [{ type: 'STRING', name: 'badge', description: 'badge name', required: true }],
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const sub = interaction.options['_subcommand']
         const user = interaction.options.get('user')?.user || interaction.user;
 

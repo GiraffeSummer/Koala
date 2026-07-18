@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, CommandInteractionOption, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, CommandInteractionOption, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import fetch from '../lib/fetch'
 import { Command } from "../Command";
 
@@ -17,7 +17,7 @@ export default {
         name: 'nsfw',
         description: 'allow nsfw'
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const tag: CommandInteractionOption | null = interaction.options.get('tag') || null
 
         const channel: TextChannel = await client.channels.fetch(interaction.channelId) as TextChannel;

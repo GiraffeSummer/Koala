@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import { DiceRoll } from '@dice-roller/rpg-dice-roller';
 
@@ -14,7 +14,7 @@ export default {
         required: true
     },
     ],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const notation = interaction.options.get('notation').value as string
         const roll = new DiceRoll(notation);
         await interaction.followUp({

@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import fetch, { METHODS } from '../lib/fetch';
 
@@ -13,7 +13,7 @@ export default {
         description: 'What does this mean?',
         required: true
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const define = interaction.options.get('define')?.value as string || null
         const body = (await fetch('http://api.urbandictionary.com/v0/define?term=' + define.split(' ').join('%20'))).data
 

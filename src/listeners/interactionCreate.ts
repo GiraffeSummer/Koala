@@ -1,4 +1,4 @@
-import { CommandInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction, CacheType } from "discord.js";
+import { ChatInputCommandInteraction, ContextMenuCommandInteraction, AutocompleteInteraction, ButtonInteraction, Client, Interaction, MessageComponentInteraction, CacheType } from "discord.js";
 import { logCommand } from '../lib/Log'
 import { FindOrCreateUser } from '../lib/db'
 import { addExpInteraction } from '../lib/LevelSystem'
@@ -17,7 +17,7 @@ export default (client: Client): void => {
         else if (interaction.isAutocomplete()) {
             await handleAutoComplete(client, interaction);
         }
-        else if (interaction.isCommand()) {
+        else if (interaction.isChatInputCommand()) {
             await handleSlashCommand(client, interaction);
         }
     });
@@ -42,7 +42,7 @@ async function handleButtonInteraction(client: Client, interaction: ButtonIntera
     }
 }
 
-async function handleSlashCommand(client: Client, interaction: CommandInteraction): Promise<void> {
+async function handleSlashCommand(client: Client, interaction: ChatInputCommandInteraction): Promise<void> {
     const slashCommand = commands.find(c => c.name === interaction.commandName);
     if (!slashCommand) {
         interaction.followUp({ content: "An error has occurred" });
@@ -63,7 +63,7 @@ async function handleSlashCommand(client: Client, interaction: CommandInteractio
     slashCommand.run(client, interaction);
 };
 
-async function handleContextMenu(client: Client, interaction: CommandInteraction): Promise<void> {
+async function handleContextMenu(client: Client, interaction: ContextMenuCommandInteraction): Promise<void> {
     const context_command = context_commands.find(c => c.name === interaction.commandName);
     if (!context_command) {
         interaction.followUp({ content: "An error has occurred" });
@@ -84,10 +84,10 @@ async function handleContextMenu(client: Client, interaction: CommandInteraction
 };
 
 
-async function handleAutoComplete(client: Client, interaction: CommandInteraction): Promise<void> {
+async function handleAutoComplete(client: Client, interaction: AutocompleteInteraction): Promise<void> {
     const slashCommand = commands.find(c => c.name === interaction.commandName);
     if (!slashCommand) {
-        interaction.followUp({ content: "An error has occurred" });
+        interaction.respond([]);
         return;
     }
 

@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, TextChannel, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import prisma, { where, FindOrCreateUser } from "../lib/db";
 import { addExpInteraction } from '../lib/LevelSystem'
@@ -15,7 +15,7 @@ export default {
         description: 'Which user',
         required: true
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         //proposals database, or entry in user table ? 
         const user = interaction.options.get('user')?.user;
         if (user.id === interaction.user.id) return await interaction.followUp({ content: "You cannot marry yourself!", ephemeral: true })

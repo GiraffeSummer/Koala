@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import { RandomNum } from '../lib/Functions'
 
@@ -18,7 +18,7 @@ export default {
         name: 'amount',
         description: 'How many dice?'
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const dice = interaction.options.get('d')?.value as number || null
         const amount = interaction.options.get('amount')?.value as number || 1
         let out: any = { multi: (amount > 1) }

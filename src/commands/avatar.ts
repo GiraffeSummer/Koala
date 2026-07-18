@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../../src/Command";
 import theme from "../lib/theme";
 
@@ -12,7 +12,7 @@ export default {
         name: 'user',
         description: 'Which user'
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const user = interaction.options.get('user')?.user || interaction.user;
         const avatarUrl = user.avatarURL()
 

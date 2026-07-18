@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import seedrandom from 'seedrandom'
 
@@ -13,7 +13,7 @@ export default {
         description: 'What to rate',
         required: true
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const rate = interaction.options.get('rate')?.value as string || null
 
         let modString = rate.split(' ').map(x => {

@@ -115,7 +115,8 @@ export async function HandleTODButtonInteraction(client: Client, interaction: Bu
             }],
             components: components,
         }).catch(err => {
-            interaction.message.channel.send({ content: `Something went wrong!\nMake sure I have the read message history and send message permissions` })
+            if (interaction.message.channel.isSendable())
+                interaction.message.channel.send({ content: `Something went wrong!\nMake sure I have the read message history and send message permissions` })
         });
         return true;
     } else return false;

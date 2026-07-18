@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import { RandomNum } from "../lib/Functions";
 import prisma, { where } from "../lib/db";
@@ -13,7 +13,7 @@ export default {
         name: 'find',
         description: 'Look for a specific line'
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const find = interaction.options.get('find')?.value as string || null
         let line = ''
         if (find == null) {

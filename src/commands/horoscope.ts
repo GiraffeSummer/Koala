@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import fetch from '../lib/fetch'
 import theme from "../lib/theme";
@@ -64,7 +64,7 @@ export default {
             }
         ],
     }],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const sign: string = interaction.options.get('sign').value as string;
         const baseUrl = 'https://ohmanda.com/api/horoscope/'
         const body: any = (await fetch(baseUrl + sign)).data

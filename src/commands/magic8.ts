@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
+import { ChatInputCommandInteraction, Client, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
 import { RandomNum } from "../lib/Functions";
 import prisma, { where } from "../lib/db";
@@ -16,7 +16,7 @@ export default {
             required: true
         }
     ],
-    run: async (client: Client, interaction: CommandInteraction) => {
+    run: async (client: Client, interaction: ChatInputCommandInteraction) => {
         const question = interaction.options.get('question')?.value as string || null
         const count: number = await prisma.magic8.count();
         const content: string = (await prisma.magic8.findFirst({ skip: RandomNum(count), take: 1 })).message;
