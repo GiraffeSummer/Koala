@@ -13,7 +13,7 @@ export default async function (prompt: string, model: string = 'llama3.2'): Prom
     try {
 
         if (!prefetchSuccess || hasPrefetchExpired()) {
-            console.log('prefetching')
+            console.log(`prefetching at ${process.env.OLLAMA_URL}`)
             const prefetch = await fetch(`${process.env.OLLAMA_URL}/api/generate`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -52,6 +52,6 @@ export default async function (prompt: string, model: string = 'llama3.2'): Prom
     } catch (error) {
         prefetchSuccess = false;
         prefetchTime = undefined;
-        return { success: false, msg: 'Somethign went wrong' }
+        return { success: false, msg: `Somethign went wrong: ${(error as Error).message}` }
     }
 }

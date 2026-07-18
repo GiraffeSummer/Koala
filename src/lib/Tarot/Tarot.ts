@@ -22,12 +22,12 @@ export default async function (type: CardType = CardType.All, deckName: string =
     card.image = deck.filename(card);
     return card;
 }
-
+export type CardName = typeof interpretation[number]["name"]
 export interface Card {
-    fortune_telling: string[]
-    keywords: string[]
-    meanings: { light: string[], shadow: string[] }
-    name: string
+    fortune_telling: readonly string[]
+    keywords: readonly string[]
+    meanings: { light: readonly string[], shadow: readonly string[] }
+    name: CardName;
     rank: 'king' | 'queen' | 'knight' | 'page' | number
     suit: Suits
     image?: any

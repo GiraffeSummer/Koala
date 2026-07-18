@@ -1,12 +1,67 @@
 import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
-import Tarot, { CardType, defaultDeckName } from '../lib/Tarot/Tarot';
+import Tarot, { Card, CardType, defaultDeckName } from '../lib/Tarot/Tarot';
 import { decks, } from '../lib/Tarot/Decks';
 import theme from "../lib/theme";
-import { ReadingMode } from "../lib/Tarot/generatePrompt";
-import readings from '../../resources/Tarot/readings.json'
+import { ReadingMode, ReadingPosition, readings, } from "../lib/Tarot/generatePrompt";
 
-//just copy and paste this commands, it has a few things pre made so it's easy as template
+const readingTypes: Record<string, ReadingPosition[]> = {
+    single: ['generic'],
+
+    pastPresentFuture: [
+        'past',
+        'present',
+        'future',
+    ],
+
+    situationChallengeAdvice: [
+        'present',
+        'challenge',
+        'advice',
+    ],
+
+    problemCauseSolution: [
+        'challenge',
+        'past',
+        'advice',
+    ],
+
+    hiddenInfluenceAdvice: [
+        'present',
+        'hidden',
+        'advice',
+    ],
+
+    situationActionFuture: [
+        'present',
+        'advice',
+        'future',
+    ],
+
+    // More than 3 card readings, add when it looks better
+    // horseshoe: [
+    //     'past',
+    //     'present',
+    //     'hidden',
+    //     'challenge',
+    //     'advice',
+    //     'future',
+    // ],
+    // celticCrossShort: [
+    //     'present',
+    //     'challenge',
+    //     'past',
+    //     'future',
+    //     'hidden',
+    //     'advice',
+    // ],
+} as const;
+
+const toLabelCase = (value: string) =>
+    value
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(/^./, char => char.toUpperCase());
+
 export default {
     name: "tarot",
     description: "do a tarot reading",
@@ -20,6 +75,21 @@ export default {
             choices: [
                 { name: 'Short written reading', value: 'reading' },
                 { name: 'Simple card info', value: 'simple' },
+            ],
+        },
+        {
+            type: ApplicationCommandOptionType.String,
+            name: 'spread',
+            description: 'Which spread should the written reading use? For written readings only: choose the spread.',
+            choices: [
+                { name: 'Single card', value: 'single' },
+                { name: 'Past / Present / Future', value: 'pastPresentFuture' },
+                { name: 'Situation / Challenge / Advice', value: 'situationChallengeAdvice' },
+                { name: 'Problem / Cause / Solution', value: 'problemCauseSolution' },
+                { name: 'Hidden Influence / Advice', value: 'hiddenInfluenceAdvice' },
+                { name: 'Situation / Action / Future', value: 'situationActionFuture' },
+                // { name: 'Horseshoe', value: 'horseshoe' },
+                // { name: 'Short Celtic Cross', value: 'celticCrossShort' },
             ],
         },
         {
@@ -37,11 +107,11 @@ export default {
         {
             type: ApplicationCommandOptionType.String,
             name: 'interpretation',
-            description: 'How should the card be interpreted?',
+            description: 'Optional: choose the focus of the reading.',
             choices: [
                 { name: 'Balanced', value: 'mixed' },
-                { name: 'Light', value: 'light' },
-                { name: 'Shadow', value: 'shadow' },
+                { name: 'Supportive', value: 'light' },
+                { name: 'Challenging', value: 'shadow' },
             ],
         }
     ],
@@ -51,29 +121,42 @@ export default {
 
         const isInterpreting: boolean = (interaction.options.get('format')?.value as string || 'simple') == 'reading'
         const interpretation: ReadingMode = interaction.options.get('interpretation')?.value as ReadingMode || 'mixed'
+        const spread = interaction.options.get('spread')?.value as string ?? 'single';
 
-        const card = await Tarot(type, deck);
+        const readingPositions = spread in readingTypes ? readingTypes[spread] : readingTypes.single
 
-        const embeds = [{
-            title: card.name,
-            description: isInterpreting ? readings[card.name][interpretation].random() : card.fortune_telling.random(),
-            ...(!isInterpreting && {
-                fields: [
-                    { name: 'Light:', value: card.meanings.light.random() },
-                    { name: 'Shadow:', value: card.meanings.shadow.random() },
-                    { name: 'Keywords:', value: card.keywords.join(', ') },
-                ],
-            }),
+        const cards = await Promise.all(Array.from({ length: readingPositions.length }, () => Tarot(type, deck)))
+
+        const attachments = cards.map(card => new AttachmentBuilder(card.image).setName(`${card.name}.png`))
+        const embeds = cards.map((card, i) => ({
+            ...generateInterpretationEmbed({ card, isInterpreting, interpretation, position: readingPositions[i] }),
+            title: `${card.name} ${readingPositions.length > 1 ? `(${toLabelCase(readingPositions[i])})` : ''}`.trim(),
             author: {
                 name: interaction.user.username,
                 icon_url: interaction.user.avatarURL()
             },
-            image: { url: `attachment://tarot.png` },
-            color: theme.default,
-        }]
+        }))
 
         await interaction.followUp({
-            embeds, files: [new AttachmentBuilder(card.image).setName(`tarot.png`)]
+            embeds, files: attachments
         });
     }
 } as Command;
+
+export function generateInterpretationEmbed(params: { card: Card, isInterpreting: boolean, interpretation: ReadingMode, position: ReadingPosition }) {
+    const { card, isInterpreting, interpretation, position } = params;
+    return {
+        title: card.name,
+        description: isInterpreting ? readings[card.name][position][interpretation].random() : card.fortune_telling.random(),
+        ...(!isInterpreting && {
+            fields: [
+                { name: 'Light:', value: card.meanings.light.random() },
+                { name: 'Shadow:', value: card.meanings.shadow.random() },
+                { name: 'Keywords:', value: card.keywords.join(', ') },
+            ],
+        }),
+
+        thumbnail: { url: `attachment://${card.name}.png` },
+        color: theme.default,
+    }
+}

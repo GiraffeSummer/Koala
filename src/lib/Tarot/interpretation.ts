@@ -2588,4 +2588,4 @@ export default [
         "rank": "king",
         "suit": "coins"
     }
-]
+] as const

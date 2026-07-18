@@ -6,6 +6,9 @@ declare global {
     interface Array<T> {
         random(): T;
     }
+    interface ReadonlyArray<T> {
+        random(): T;
+    }
 }
 
 Array.prototype.random = function () {

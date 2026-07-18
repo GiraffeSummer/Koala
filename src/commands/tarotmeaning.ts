@@ -1,10 +1,10 @@
 import { CommandInteraction, Client, AttachmentBuilder, ApplicationCommandType, ApplicationCommandOptionType } from "discord.js";
 import { Command } from "../Command";
-import { defaultDeckName } from '../lib/Tarot/Tarot';
+import { Card, defaultDeckName } from '../lib/Tarot/Tarot';
 import { type Deck, decks, tryDeck } from '../lib/Tarot/Decks';
 import tarotInterpretation from '../lib/Tarot/interpretation';
-import theme from "../lib/theme";
-import readings from '../../resources/Tarot/readings.json'
+import {  ReadingPosition, readingPositionLabels, readings } from "../lib/Tarot/generatePrompt";
+import { generateInterpretationEmbed } from "./tarot";
 const cardNames = tarotInterpretation.map(x => x.name)
 
 export default {
@@ -31,6 +31,12 @@ export default {
         },
         {
             type: ApplicationCommandOptionType.String,
+            name: 'position',
+            description: 'How should the card result be shown?',
+            choices: Object.keys(readingPositionLabels).map(p => ({ name: readingPositionLabels[p], value: p })),
+        },
+        {
+            type: ApplicationCommandOptionType.String,
             name: 'deck',
             description: 'Which deck images to use?',
             choices: Object.keys(decks).map(key => { return { value: key, name: decks[key].name } }),
@@ -44,32 +50,24 @@ export default {
     run: async (client: Client, interaction: CommandInteraction) => {
         const cardName: string = interaction.options.get('card')?.value as string
         const deckName: string = interaction.options.get('deck')?.value as string || defaultDeckName
+        const position: ReadingPosition = interaction.options.get('position')?.value as ReadingPosition ?? 'generic'
 
         const isInterpreting: boolean = (interaction.options.get('format')?.value as string || 'simple') == 'reading'
-        const card = tarotInterpretation.find(x => x.name == cardName);
+        const card = tarotInterpretation.find(x => x.name == cardName) as Card;
 
         let deck: Deck = tryDeck(deckName);
 
         const embeds = [{
-            title: card.name,
-            description: isInterpreting ? readings[card.name]['mixed'].random() : card.fortune_telling.random(),
-            ...(!isInterpreting && {
-                fields: [
-                    { name: 'Light:', value: card.meanings.light.random() },
-                    { name: 'Shadow:', value: card.meanings.shadow.random() },
-                    { name: 'Keywords:', value: card.keywords.join(', ') },
-                ],
-            }),
+            ...generateInterpretationEmbed({ card, isInterpreting, interpretation: 'mixed', position }),
+            title: `${card.name} ${position != 'generic' ? `(${readingPositionLabels[position]})` : ''}`.trim(),
             author: {
                 name: interaction.user.username,
                 icon_url: interaction.user.avatarURL()
             },
-            image: { url: `attachment://tarot.png` },
-            color: theme.default,
         }]
 
         await interaction.followUp({
-            embeds, files: [new AttachmentBuilder(deck.filename(card)).setName(`tarot.png`)]
+            embeds, files: [new AttachmentBuilder(deck.filename(card)).setName(`${card.name}.png`)]
         });
     }
 } as Command;
