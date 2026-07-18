@@ -119,7 +119,7 @@ export default {
         const type: CardType = interaction.options.get('set')?.value as CardType || CardType.All;
         const deck: string = interaction.options.get('deck')?.value as string || defaultDeckName
 
-        const isInterpreting: boolean = (interaction.options.get('format')?.value as string || 'simple') == 'reading'
+        const isInterpreting: boolean = (interaction.options.get('format')?.value as string || 'reading') == 'reading'
         const interpretation: ReadingMode = interaction.options.get('interpretation')?.value as ReadingMode || 'mixed'
         const spread = interaction.options.get('spread')?.value as string ?? 'single';
 
@@ -131,10 +131,6 @@ export default {
         const embeds = cards.map((card, i) => ({
             ...generateInterpretationEmbed({ card, isInterpreting, interpretation, position: readingPositions[i] }),
             title: `${card.name} ${readingPositions.length > 1 ? `(${toLabelCase(readingPositions[i])})` : ''}`.trim(),
-            author: {
-                name: interaction.user.username,
-                icon_url: interaction.user.avatarURL()
-            },
         }))
 
         await interaction.followUp({

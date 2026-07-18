@@ -3,7 +3,7 @@ import { Command } from "../Command";
 import { Card, defaultDeckName } from '../lib/Tarot/Tarot';
 import { type Deck, decks, tryDeck } from '../lib/Tarot/Decks';
 import tarotInterpretation from '../lib/Tarot/interpretation';
-import {  ReadingPosition, readingPositionLabels, readings } from "../lib/Tarot/generatePrompt";
+import { ReadingPosition, readingPositionLabels, readings } from "../lib/Tarot/generatePrompt";
 import { generateInterpretationEmbed } from "./tarot";
 const cardNames = tarotInterpretation.map(x => x.name)
 
@@ -52,7 +52,7 @@ export default {
         const deckName: string = interaction.options.get('deck')?.value as string || defaultDeckName
         const position: ReadingPosition = interaction.options.get('position')?.value as ReadingPosition ?? 'generic'
 
-        const isInterpreting: boolean = (interaction.options.get('format')?.value as string || 'simple') == 'reading'
+        const isInterpreting: boolean = (interaction.options.get('format')?.value as string || 'reading') == 'reading'
         const card = tarotInterpretation.find(x => x.name == cardName) as Card;
 
         let deck: Deck = tryDeck(deckName);
@@ -60,10 +60,6 @@ export default {
         const embeds = [{
             ...generateInterpretationEmbed({ card, isInterpreting, interpretation: 'mixed', position }),
             title: `${card.name} ${position != 'generic' ? `(${readingPositionLabels[position]})` : ''}`.trim(),
-            author: {
-                name: interaction.user.username,
-                icon_url: interaction.user.avatarURL()
-            },
         }]
 
         await interaction.followUp({
