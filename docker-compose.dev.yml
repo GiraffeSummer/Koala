@@ -11,6 +11,8 @@ services:
     environment:
       - NODE_ENV=development
       - TZ=${TZ:-Europe/Amsterdam}
+    volumes:
+      - ./resources/Tarot/readings.json:/home/bun/app/resources/Tarot/readings.json:ro
     develop:
       watch:
         - action: sync+restart
@@ -20,3 +22,5 @@ services:
         - action: sync+restart
           path: ./resources
           target: /home/bun/app/resources
+          ignore:
+            - Tarot/readings.json
